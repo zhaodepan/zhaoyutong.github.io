@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>小学全科闯关乐园</title>
+<title>全学段闯关乐园</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{--primary:#4A9FF5;--primary-dark:#2E7DD1;--accent:#FF9F43;--success:#2ED573;--danger:#FF6B6B;--warning:#FFD93D;--purple:#A855F7;--bg:#F0F7FF;--card:#fff;--text:#2D3436;--text-light:#636E72;--radius:16px;--shadow:0 4px 20px rgba(74,159,245,.15)}
@@ -29,48 +29,48 @@ input,select,textarea{font-family:inherit;outline:none}
 .badge-orange{background:#FFF3E0;color:#F57C00}
 .badge-red{background:#FFEBEE;color:#D32F2F}
 .badge-purple{background:#F3E5F5;color:#7B1FA2}
-.top-bar{display:none;justify-content:space-between;align-items:center;padding:12px 16px;background:#fff;border-radius:var(--radius);margin-bottom:16px;box-shadow:var(--shadow);position:sticky;top:10px;z-index:100}
+.top-bar{display:none;justify-content:space-between;align-items:center;padding:10px 16px;background:#fff;border-radius:var(--radius);margin-bottom:16px;box-shadow:var(--shadow);position:sticky;top:10px;z-index:100;flex-wrap:wrap;gap:8px}
 .top-bar.show{display:flex}
-.stats-pills{display:flex;gap:10px;flex-wrap:wrap}
-.stat-pill{display:flex;align-items:center;gap:5px;padding:6px 12px;border-radius:20px;font-weight:600;font-size:.9rem}
+.user-pill{display:flex;align-items:center;gap:8px;padding:6px 12px;background:linear-gradient(135deg,#A855F7,#FF9F43);color:#fff;border-radius:20px;font-weight:600;cursor:pointer}
+.stats-pills{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.stat-pill{display:flex;align-items:center;gap:4px;padding:5px 10px;border-radius:16px;font-weight:600;font-size:.85rem}
 .pill-star{background:#FFF9C4;color:#F57F17}
 .pill-coin{background:#FFF3E0;color:#E65100}
 .pill-score{background:#E3F2FD;color:#1565C0}
 .hero{text-align:center;padding:28px 20px;background:linear-gradient(135deg,#4A9FF5 0%,#A855F7 100%);border-radius:24px;color:#fff;margin-bottom:20px;position:relative;overflow:hidden}
-.hero h1{font-size:1.8rem;margin-bottom:6px;text-shadow:0 2px 8px rgba(0,0,0,.15)}
-.hero p{font-size:1rem;opacity:.9;margin-bottom:16px}
-.grade-badge{display:inline-block;background:rgba(255,255,255,.25);padding:6px 16px;border-radius:20px;font-size:.95rem;font-weight:600;margin-bottom:12px}
-.mode-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin-bottom:20px}
+.hero h1{font-size:1.7rem;margin-bottom:6px;text-shadow:0 2px 8px rgba(0,0,0,.15)}
+.hero p{font-size:.95rem;opacity:.9;margin-bottom:12px}
+.grade-badge{display:inline-block;background:rgba(255,255,255,.25);padding:6px 16px;border-radius:20px;font-size:.9rem;font-weight:600;margin-bottom:10px}
+.user-switch{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.25);padding:6px 14px;border-radius:20px;font-size:.9rem;cursor:pointer;margin-bottom:10px}
+.mode-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:20px}
 .mode-card{background:#fff;border-radius:20px;padding:20px 14px;text-align:center;box-shadow:var(--shadow);cursor:pointer;transition:transform .2s;border-top:4px solid}
 .mode-card:hover{transform:translateY(-4px)}
-.mode-card .mode-icon{font-size:2.5rem;margin-bottom:8px}
-.mode-card .mode-name{font-weight:700;font-size:1.05rem;margin-bottom:4px}
-.mode-card .mode-desc{font-size:.8rem;color:var(--text-light);line-height:1.4}
+.mode-card .mode-icon{font-size:2.4rem;margin-bottom:8px}
+.mode-card .mode-name{font-weight:700;font-size:1rem;margin-bottom:4px}
+.mode-card .mode-desc{font-size:.78rem;color:var(--text-light);line-height:1.4}
 .mode-card.smart{border-color:#A855F7}
 .mode-card.full{border-color:#4A9FF5}
 .mode-card.single{border-color:#2ED573}
 .mode-card.practice{border-color:#FF9F43}
-.menu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:12px}
+.menu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:10px}
 .menu-item{background:#fff;border-radius:16px;padding:14px 10px;text-align:center;box-shadow:var(--shadow);cursor:pointer;transition:transform .2s}
 .menu-item:hover{transform:translateY(-2px)}
-.menu-item .menu-icon{font-size:1.8rem;margin-bottom:6px}
-.menu-item .menu-label{font-weight:600;font-size:.85rem}
+.menu-item .menu-icon{font-size:1.7rem;margin-bottom:6px}
+.menu-item .menu-label{font-weight:600;font-size:.82rem}
 .progress-overview{margin-top:16px}
 .progress-subject{margin-bottom:10px}
-.progress-subject .ps-head{display:flex;justify-content:space-between;font-size:.9rem;margin-bottom:4px}
+.progress-subject .ps-head{display:flex;justify-content:space-between;font-size:.85rem;margin-bottom:4px}
 .progress-bar{height:8px;background:#E0E0E0;border-radius:4px;overflow:hidden}
 .progress-fill{height:100%;border-radius:4px;transition:width .3s}
-.quiz-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:12px}
+.quiz-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:10px}
 .timer-circle{width:70px;height:70px;border-radius:50%;display:flex;align-items:center;justify-content:center;position:relative;flex-shrink:0}
 .timer-circle::before{content:'';position:absolute;width:56px;height:56px;background:#fff;border-radius:50%}
 .timer-text{position:relative;font-weight:700;font-size:.85rem}
-.timer-warning{animation:pulse 1s infinite}
-@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
 .progress-bar{height:8px;background:#E0E0E0;border-radius:4px;overflow:hidden;margin-bottom:8px}
 .progress-fill{height:100%;background:linear-gradient(90deg,var(--primary),var(--purple));border-radius:4px;transition:width .3s}
 .question-card{background:#fff;border-radius:20px;padding:24px;box-shadow:var(--shadow)}
 .question-meta{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
-.question-text{font-size:1.15rem;line-height:1.7;margin-bottom:20px;font-weight:500}
+.question-text{font-size:1.1rem;line-height:1.7;margin-bottom:20px;font-weight:500}
 .options-list{display:flex;flex-direction:column;gap:12px}
 .option-item{padding:14px 18px;border:2px solid #E0E0E0;border-radius:12px;cursor:pointer;transition:all .2s;font-size:1.05rem;display:flex;align-items:center;gap:12px}
 .option-item:hover{border-color:var(--primary);background:#F5F9FF}
@@ -90,17 +90,16 @@ input,select,textarea{font-family:inherit;outline:none}
 .quiz-actions{display:flex;gap:12px;margin-top:20px;flex-wrap:wrap}
 .mode-tag{position:absolute;top:12px;right:16px;font-size:.8rem;padding:4px 10px;border-radius:12px;background:rgba(255,255,255,.9);font-weight:600}
 .report-hero{text-align:center;padding:28px 20px;background:linear-gradient(135deg,#2ED573 0%,#4A9FF5 100%);border-radius:24px;color:#fff;margin-bottom:20px}
-.report-score{font-size:3rem;font-weight:800;margin:10px 0;text-shadow:0 2px 10px rgba(0,0,0,.15)}
+.report-score{font-size:2.8rem;font-weight:800;margin:10px 0;text-shadow:0 2px 10px rgba(0,0,0,.15)}
 .report-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:10px;margin-bottom:20px}
 .stat-card{background:#fff;border-radius:14px;padding:14px;text-align:center;box-shadow:var(--shadow)}
-.stat-card .stat-value{font-size:1.5rem;font-weight:700;color:var(--primary)}
+.stat-card .stat-value{font-size:1.4rem;font-weight:700;color:var(--primary)}
 .stat-card .stat-label{font-size:.8rem;color:var(--text-light);margin-top:4px}
 .subject-bar{display:flex;align-items:center;gap:10px;margin-bottom:10px}
 .subject-bar .sb-name{width:70px;font-weight:600;font-size:.9rem}
 .subject-bar .sb-track{flex:1;height:22px;background:#F0F0F0;border-radius:11px;overflow:hidden}
-.subject-bar .sb-fill{height:100%;border-radius:11px;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;color:#fff;font-size:.75rem;font-weight:600;transition:width .5s}
+.subject-bar .sb-fill{height:100%;border-radius:11px;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;color:#fff;font-size:.75rem;font-weight:600}
 .weak-point-item{background:#FFF8E1;border-radius:12px;padding:14px;margin-bottom:10px;border-left:4px solid var(--warning)}
-.weak-point-item .wp-subject{font-weight:700;margin-bottom:4px}
 .mastery-bar{height:8px;background:#E0E0E0;border-radius:4px;overflow:hidden;margin:6px 0}
 .mastery-fill{height:100%;background:linear-gradient(90deg,#FF6B6B,#FFD93D);border-radius:4px}
 .history-chart{background:#fff;border-radius:16px;padding:20px;box-shadow:var(--shadow);margin-bottom:16px}
@@ -111,26 +110,15 @@ input,select,textarea{font-family:inherit;outline:none}
 .chart-label{margin-top:6px;font-size:.7rem;color:var(--text-light);text-align:center}
 .history-list{display:flex;flex-direction:column;gap:8px}
 .history-item{background:#fff;border-radius:12px;padding:12px 16px;box-shadow:var(--shadow);display:flex;justify-content:space-between;align-items:center}
-.history-item .hi-date{font-weight:600;font-size:.9rem}
-.history-item .hi-detail{font-size:.8rem;color:var(--text-light);margin-top:3px}
-.history-item .hi-score{font-size:1.2rem;font-weight:700;color:var(--primary)}
 .filter-bar{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
 .filter-chip{padding:6px 14px;border-radius:20px;background:#fff;border:2px solid #E0E0E0;font-size:.85rem;cursor:pointer;transition:all .2s}
 .filter-chip.active{border-color:var(--primary);background:var(--primary);color:#fff}
 .wrong-item{background:#fff;border-radius:12px;padding:14px;box-shadow:var(--shadow);margin-bottom:10px;border-left:4px solid var(--danger)}
-.wrong-item .wi-question{font-weight:600;margin-bottom:6px;line-height:1.5;font-size:.95rem}
-.wrong-item .wi-answer{color:var(--success);font-size:.85rem;margin-bottom:4px}
-.wrong-item .wi-explanation{color:var(--text-light);font-size:.8rem;line-height:1.5}
 .reward-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:14px}
 .reward-card{background:#fff;border-radius:14px;padding:18px 10px;text-align:center;box-shadow:var(--shadow)}
-.reward-card .reward-icon{font-size:2.2rem;margin-bottom:6px}
-.reward-card .reward-name{font-weight:600;font-size:.9rem}
-.reward-card .reward-count{color:var(--accent);font-weight:700;margin-top:3px;font-size:.95rem}
 .badges-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:10px}
 .badge-card{background:#fff;border-radius:14px;padding:14px 8px;text-align:center;box-shadow:var(--shadow);opacity:.5}
 .badge-card.unlocked{opacity:1;background:linear-gradient(135deg,#FFF9C4,#FFF3E0)}
-.badge-card .badge-icon{font-size:1.8rem;margin-bottom:4px}
-.badge-card .badge-name{font-size:.75rem;font-weight:600}
 .setting-row{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid #F0F0F0;flex-wrap:wrap;gap:8px}
 .setting-row:last-child{border-bottom:none}
 .setting-label{font-weight:600}
@@ -140,70 +128,69 @@ input,select,textarea{font-family:inherit;outline:none}
 .switch::after{content:'';position:absolute;top:2px;left:2px;width:22px;height:22px;background:#fff;border-radius:50%;transition:transform .3s;box-shadow:0 2px 4px rgba(0,0,0,.2)}
 .switch.on::after{transform:translateX(24px)}
 .progress-setting{margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid #F0F0F0}
-.progress-setting:last-child{border-bottom:none}
 .review-card{background:#fff;border-radius:14px;padding:18px;box-shadow:var(--shadow);margin-bottom:14px}
-.review-section{margin-bottom:14px}
-.review-section h4{color:var(--primary);margin-bottom:6px;font-size:1rem}
-.review-section p,.review-section li{line-height:1.7}
-.review-example{background:#F5F9FF;padding:10px;border-radius:8px;margin-top:6px;font-size:.95rem}
-.review-tip{background:#FFF3E0;padding:10px;border-radius:8px;border-left:4px solid var(--accent);margin-top:6px;font-size:.9rem}
 .modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;z-index:1000;padding:20px}
 .modal-overlay.show{display:flex}
-.modal{background:#fff;border-radius:20px;padding:28px;max-width:380px;width:100%;text-align:center;animation:modalIn .3s}
+.modal{background:#fff;border-radius:20px;padding:28px;max-width:400px;width:100%;text-align:center;animation:modalIn .3s}
 @keyframes modalIn{from{transform:scale(.8);opacity:0}to{transform:scale(1);opacity:1}}
-.modal h3{margin-bottom:10px;font-size:1.2rem}
-.modal p{color:var(--text-light);margin-bottom:18px;line-height:1.6;font-size:.95rem}
 .confirm-input{width:100%;padding:10px 14px;border:2px solid #E0E0E0;border-radius:10px;font-size:1.1rem;text-align:center;margin-bottom:16px}
 .confetti{position:fixed;width:10px;height:10px;top:-10px;z-index:999;animation:confettiFall 3s linear forwards}
 @keyframes confettiFall{to{transform:translateY(100vh) rotate(720deg);opacity:0}}
 .eye-reminder{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#fff;border-radius:20px;padding:28px;box-shadow:0 10px 40px rgba(0,0,0,.2);z-index:999;text-align:center;max-width:300px;display:none}
 .eye-reminder.show{display:block}
-.mode-select-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin:16px 0}
+.mode-select-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;margin:16px 0}
 .mode-option{background:#fff;border-radius:14px;padding:16px 10px;text-align:center;box-shadow:var(--shadow);cursor:pointer;border:3px solid transparent;transition:all .2s}
 .mode-option:hover{transform:translateY(-2px)}
 .mode-option.selected{border-color:var(--primary);background:#E3F2FD}
-.mode-option .mo-icon{font-size:2rem;margin-bottom:6px}
-.mode-option .mo-name{font-weight:600;font-size:.95rem}
-.mode-option .mo-desc{font-size:.75rem;color:var(--text-light);margin-top:4px}
 .select-input{padding:8px 14px;border:2px solid #E0E0E0;border-radius:10px;font-size:.95rem}
-@media(max-width:600px){.hero h1{font-size:1.4rem}.report-score{font-size:2.2rem}.question-text{font-size:1.05rem}.mode-grid{grid-template-columns:repeat(2,1fr)}.menu-grid{grid-template-columns:repeat(3,1fr)}.top-bar{flex-direction:column;gap:8px}.stats-pills{justify-content:center}}
+.user-card{display:flex;align-items:center;gap:12px;padding:12px;background:#fff;border-radius:14px;box-shadow:var(--shadow);margin-bottom:10px}
+.user-avatar{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.8rem;background:#F0F0F0;flex-shrink:0}
+.user-info{flex:1}
+.user-name{font-weight:700}
+.user-meta{font-size:.8rem;color:var(--text-light)}
+.user-actions{display:flex;gap:6px}
+@media(max-width:600px){.hero h1{font-size:1.3rem}.report-score{font-size:2.2rem}.question-text{font-size:1rem}.mode-grid{grid-template-columns:repeat(2,1fr)}.menu-grid{grid-template-columns:repeat(3,1fr)}.top-bar{flex-direction:column;align-items:stretch}}
 .hidden{display:none!important}
-.text-center{text-align:center}
 </style>
 </head>
 <body>
 
 <div class="top-bar" id="topBar">
+  <div class="user-pill" onclick="showView('userSwitch')">
+    <span id="topAvatar">🐱</span>
+    <span id="topUserName">小朋友</span>
+    <span>切换 ▼</span>
+  </div>
   <div class="stats-pills">
     <div class="stat-pill pill-star">★ <span id="starCount">0</span></div>
     <div class="stat-pill pill-coin">● <span id="coinCount">0</span></div>
-    <div class="stat-pill pill-score">▲ <span id="totalScore">0</span></div>
+    <button class="btn btn-outline btn-sm" onclick="goHome()">首页</button>
   </div>
-  <button class="btn btn-outline btn-sm" onclick="goHome()">首页</button>
 </div>
 
+<!-- 首页 -->
 <section class="view" id="view-home">
   <div class="hero">
     <div class="grade-badge" id="heroGrade">四年级 · 上册</div>
-    <h1>🎓 小学全科闯关乐园</h1>
+    <h1>🎓 全学段闯关乐园</h1>
     <p>选择模式，开始今天的学习挑战！</p>
   </div>
   <div class="mode-grid">
     <div class="mode-card smart" onclick="startModeSelect('smart')">
       <div class="mode-icon">🧠</div><div class="mode-name">智能模式</div>
-      <div class="mode-desc">优先补薄弱知识点，自适应难度</div>
+      <div class="mode-desc">优先补薄弱知识点</div>
     </div>
     <div class="mode-card full" onclick="startModeSelect('full')">
       <div class="mode-icon">🌐</div><div class="mode-name">全科模式</div>
-      <div class="mode-desc">五科轮换，全面检测</div>
+      <div class="mode-desc">全科轮换全面检测</div>
     </div>
     <div class="mode-card single" onclick="startModeSelect('single')">
       <div class="mode-icon">📚</div><div class="mode-name">单科模式</div>
-      <div class="mode-desc">专注一个科目，按进度练习</div>
+      <div class="mode-desc">专注一个科目练习</div>
     </div>
     <div class="mode-card practice" onclick="startModeSelect('practice')">
       <div class="mode-icon">✏️</div><div class="mode-name">练习模式</div>
-      <div class="mode-desc">专项练习、错题重做、薄弱点突破</div>
+      <div class="mode-desc">错题重做薄弱突破</div>
     </div>
   </div>
   <div class="card">
@@ -215,10 +202,21 @@ input,select,textarea{font-family:inherit;outline:none}
     <div class="menu-item" onclick="showView('wrongbook')"><div class="menu-icon">📝</div><div class="menu-label">错题本</div></div>
     <div class="menu-item" onclick="showView('rewards')"><div class="menu-icon">🎁</div><div class="menu-label">奖励背包</div></div>
     <div class="menu-item" onclick="showView('qbank')"><div class="menu-icon">🗂️</div><div class="menu-label">题库管理</div></div>
-    <div class="menu-item" onclick="openParentSettings()"><div class="menu-icon">⚙️</div><div class="menu-label">家长设置</div></div>
+    <div class="menu-item" onclick="openParentSettings()"><div class="menu-icon">⚙️</div><div class="menu-label">家长后台</div></div>
   </div>
 </section>
 
+<!-- 切换小朋友 -->
+<section class="view" id="view-userSwitch">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+    <h2>👦👧 切换小朋友</h2>
+    <button class="btn btn-outline btn-sm" onclick="goHome()">返回</button>
+  </div>
+  <div id="userList"></div>
+  <button class="btn btn-primary btn-block" onclick="showAddUserModal()">➕ 添加新小朋友</button>
+</section>
+
+<!-- 模式选择 -->
 <section class="view" id="view-modeSelect">
   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
     <h2 id="modeSelectTitle">选择练习方式</h2>
@@ -227,6 +225,7 @@ input,select,textarea{font-family:inherit;outline:none}
   <div id="modeSelectContent"></div>
 </section>
 
+<!-- 答题页 -->
 <section class="view" id="view-quiz">
   <div class="quiz-header">
     <div class="timer-circle" id="timerCircle"><div class="timer-text" id="timerText">30:00</div></div>
@@ -256,6 +255,7 @@ input,select,textarea{font-family:inherit;outline:none}
   </div>
 </section>
 
+<!-- 报告页 -->
 <section class="view" id="view-report">
   <div class="report-hero">
     <h2>🎉 学习报告</h2>
@@ -275,7 +275,7 @@ input,select,textarea{font-family:inherit;outline:none}
   </div>
   <div class="card">
     <h3 style="margin-bottom:14px;">💪 薄弱知识点</h3>
-    <div id="weakPointsList"><p style="color:var(--text-light);">暂无薄弱点，继续保持！</p></div>
+    <div id="weakPointsList"></div>
   </div>
   <div class="card">
     <h3 style="margin-bottom:14px;">📚 推荐复习</h3>
@@ -287,6 +287,7 @@ input,select,textarea{font-family:inherit;outline:none}
   </div>
 </section>
 
+<!-- 历史成绩 -->
 <section class="view" id="view-history">
   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
     <h2>📈 历史成绩</h2>
@@ -299,22 +300,17 @@ input,select,textarea{font-family:inherit;outline:none}
   <div class="history-list" id="historyList"></div>
 </section>
 
+<!-- 错题本 -->
 <section class="view" id="view-wrongbook">
   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
     <h2>📝 错题本</h2>
     <button class="btn btn-outline btn-sm" onclick="goHome()">返回</button>
   </div>
-  <div class="filter-bar" id="wrongFilterBar">
-    <div class="filter-chip active" data-subject="all" onclick="filterWrong('all')">全部</div>
-    <div class="filter-chip" data-subject="语文" onclick="filterWrong('语文')">语文</div>
-    <div class="filter-chip" data-subject="数学" onclick="filterWrong('数学')">数学</div>
-    <div class="filter-chip" data-subject="英语" onclick="filterWrong('英语')">英语</div>
-    <div class="filter-chip" data-subject="科学" onclick="filterWrong('科学')">科学</div>
-    <div class="filter-chip" data-subject="道法" onclick="filterWrong('道法')">道法</div>
-  </div>
-  <div id="wrongList"><p style="color:var(--text-light);text-align:center;padding:40px;">错题本是空的，快去闯关吧！</p></div>
+  <div class="filter-bar" id="wrongFilterBar"></div>
+  <div id="wrongList"></div>
 </section>
 
+<!-- 奖励背包 -->
 <section class="view" id="view-rewards">
   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
     <h2>🎁 奖励背包</h2>
@@ -323,10 +319,10 @@ input,select,textarea{font-family:inherit;outline:none}
   <div class="card">
     <h3 style="margin-bottom:14px;">我的资产</h3>
     <div class="reward-grid">
-      <div class="reward-card"><div class="reward-icon">⭐</div><div class="reward-name">星星</div><div class="reward-count" id="rwStars">0</div></div>
-      <div class="reward-card"><div class="reward-icon">🪙</div><div class="reward-name">金币</div><div class="reward-count" id="rwCoins">0</div></div>
-      <div class="reward-card"><div class="reward-icon">🏆</div><div class="reward-name">称号</div><div class="reward-count" id="rwTitle">学习小达人</div></div>
-      <div class="reward-card"><div class="reward-icon">🐱</div><div class="reward-name">宠物</div><div class="reward-count">橘猫学伴</div></div>
+      <div class="reward-card"><div style="font-size:2rem;">⭐</div><div style="font-weight:600;font-size:.9rem;">星星</div><div style="color:var(--accent);font-weight:700;" id="rwStars">0</div></div>
+      <div class="reward-card"><div style="font-size:2rem;">🪙</div><div style="font-weight:600;font-size:.9rem;">金币</div><div style="color:var(--accent);font-weight:700;" id="rwCoins">0</div></div>
+      <div class="reward-card"><div style="font-size:2rem;">🏆</div><div style="font-weight:600;font-size:.9rem;">称号</div><div style="font-weight:600;" id="rwTitle">学习小达人</div></div>
+      <div class="reward-card"><div style="font-size:2rem;">🐱</div><div style="font-weight:600;font-size:.9rem;">宠物</div><div style="font-weight:600;">橘猫学伴</div></div>
     </div>
   </div>
   <div class="card">
@@ -335,6 +331,7 @@ input,select,textarea{font-family:inherit;outline:none}
   </div>
 </section>
 
+<!-- 题库管理 -->
 <section class="view" id="view-qbank">
   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
     <h2>🗂️ 题库管理</h2>
@@ -350,36 +347,42 @@ input,select,textarea{font-family:inherit;outline:none}
     </div>
   </div>
   <div class="card">
-    <h3 style="margin-bottom:12px;">智能重出题</h3>
+    <h3 style="margin-bottom:12px;">题库操作</h3>
     <div class="setting-row">
-      <div><div class="setting-label">智能重出题</div><div class="setting-desc">根据薄弱点自动生成新题，优化题目分配</div></div>
+      <div><div class="setting-label">智能重出题</div><div class="setting-desc">根据薄弱点自动生成新题</div></div>
       <button class="btn btn-primary btn-sm" onclick="smartRegenerate()">立即生成</button>
     </div>
     <div class="setting-row">
-      <div><div class="setting-label">导出题库</div><div class="setting-desc">将当前题库导出为JSON文件</div></div>
+      <div><div class="setting-label">导出题库</div><div class="setting-desc">导出为JSON文件</div></div>
       <button class="btn btn-outline btn-sm" onclick="exportQuestionBank()">导出</button>
     </div>
     <div class="setting-row">
-      <div><div class="setting-label">导入题库</div><div class="setting-desc">从JSON文件导入新题目</div></div>
+      <div><div class="setting-label">导入题库</div><div class="setting-desc">从JSON文件导入新题</div></div>
       <button class="btn btn-outline btn-sm" onclick="document.getElementById('qbImportFile').click()">导入</button>
       <input type="file" id="qbImportFile" accept=".json" style="display:none;" onchange="importQuestionBank(event)">
     </div>
   </div>
 </section>
 
+<!-- 家长后台 -->
 <section class="view" id="view-settings">
   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
-    <h2>⚙️ 家长设置</h2>
+    <h2>⚙️ 家长后台</h2>
     <button class="btn btn-outline btn-sm" onclick="goHome()">返回</button>
+  </div>
+  <div class="card">
+    <h3 style="margin-bottom:12px;">小朋友管理</h3>
+    <div id="settingsUserList"></div>
+    <button class="btn btn-outline btn-block btn-sm" onclick="showAddUserModal()">➕ 添加小朋友</button>
   </div>
   <div class="card">
     <h3 style="margin-bottom:12px;">年级与学期</h3>
     <div class="setting-row">
-      <div><div class="setting-label">当前年级</div><div class="setting-desc">切换年级后题目难度和单元目录自动更新</div></div>
+      <div><div class="setting-label">当前年级</div><div class="setting-desc">切换年级后题目难度自动更新</div></div>
       <select class="select-input" id="gradeSelect" onchange="changeGrade(this.value)">
-        <option value="1">一年级</option><option value="2">二年级</option>
-        <option value="3">三年级</option><option value="4" selected>四年级</option>
-        <option value="5">五年级</option><option value="6">六年级</option>
+        <option>幼儿园小班</option><option>幼儿园中班</option><option>幼儿园大班</option>
+        <option>小学一年级</option><option>小学二年级</option><option>小学三年级</option>
+        <option>小学四年级</option><option>小学五年级</option><option>小学六年级</option>
       </select>
     </div>
     <div class="setting-row">
@@ -398,30 +401,31 @@ input,select,textarea{font-family:inherit;outline:none}
     <div id="progressSettings"></div>
   </div>
   <div class="card">
-    <h3 style="margin-bottom:12px;">出题规则</h3>
+    <h3 style="margin-bottom:12px;">🔒 安全设置</h3>
     <div class="setting-row">
-      <div><div class="setting-label">允许超前学习</div><div class="setting-desc">是否可以出下一单元的题目</div></div>
-      <div class="switch" id="allowAheadSwitch" onclick="toggleAllowAhead()"></div>
+      <div><div class="setting-label">修改家长密码</div><div class="setting-desc">进入家长后台的密码，4-8位数字</div></div>
+      <button class="btn btn-outline btn-sm" onclick="changePassword()">修改密码</button>
     </div>
   </div>
   <div class="card">
     <h3 style="margin-bottom:12px;">数据管理</h3>
     <div class="setting-row">
-      <div><div class="setting-label">导出学习数据</div><div class="setting-desc">成绩、进度、错题全部导出</div></div>
-      <button class="btn btn-outline btn-sm" onclick="exportData()">导出</button>
+      <div><div class="setting-label">导出全部数据</div><div class="setting-desc">所有小朋友的数据备份</div></div>
+      <button class="btn btn-outline btn-sm" onclick="exportAllData()">导出</button>
     </div>
     <div class="setting-row">
-      <div><div class="setting-label">导入学习数据</div><div class="setting-desc">从JSON文件恢复</div></div>
+      <div><div class="setting-label">导入全部数据</div><div class="setting-desc">从JSON文件恢复</div></div>
       <button class="btn btn-outline btn-sm" onclick="document.getElementById('importFile').click()">导入</button>
-      <input type="file" id="importFile" accept=".json" style="display:none;" onchange="importData(event)">
+      <input type="file" id="importFile" accept=".json" style="display:none;" onchange="importAllData(event)">
     </div>
     <div class="setting-row">
-      <div><div class="setting-label" style="color:var(--danger);">重置所有数据</div><div class="setting-desc">清除全部记录和奖励</div></div>
-      <button class="btn btn-danger btn-sm" onclick="resetAllData()">重置</button>
+      <div><div class="setting-label" style="color:var(--danger);">重置当前小朋友</div><div class="setting-desc">清除该小朋友全部记录</div></div>
+      <button class="btn btn-danger btn-sm" onclick="resetCurrentUser()">重置</button>
     </div>
   </div>
 </section>
 
+<!-- 复习页 -->
 <section class="view" id="view-review">
   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
     <h2 id="reviewTitle">知识点复习</h2>
@@ -434,6 +438,7 @@ input,select,textarea{font-family:inherit;outline:none}
   </div>
 </section>
 
+<!-- 弹窗 -->
 <div class="modal-overlay" id="modalOverlay">
   <div class="modal">
     <div style="font-size:2.5rem;margin-bottom:12px;" id="modalIcon">🎉</div>
@@ -445,12 +450,40 @@ input,select,textarea{font-family:inherit;outline:none}
 
 <div class="modal-overlay" id="parentModal">
   <div class="modal">
-    <h3>👨‍👩‍👧 家长验证</h3>
-    <p>请计算：7 × 8 = ？</p>
-    <input type="number" class="confirm-input" id="parentConfirmInput" placeholder="输入答案">
+    <h3 id="parentModalTitle">🔐 家长验证</h3>
+    <p id="parentModalDesc">请输入家长密码进入后台</p>
+    <input type="password" class="confirm-input" id="parentConfirmInput" placeholder="输入密码" autocomplete="off">
+    <p id="parentModalHint" style="font-size:.8rem;color:var(--danger);margin-top:-8px;margin-bottom:12px;display:none;">密码错误，请重试</p>
     <div style="display:flex;gap:10px;justify-content:center;">
       <button class="btn btn-primary" onclick="checkParentConfirm()">确认</button>
       <button class="btn btn-outline" onclick="closeParentModal()">取消</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="setPwdModal">
+  <div class="modal">
+    <h3>🔑 设置家长密码</h3>
+    <p>这是你第一次进入家长后台，请设置一个密码（4-8位数字）</p>
+    <input type="password" class="confirm-input" id="newPwdInput" placeholder="设置新密码" maxlength="8">
+    <input type="password" class="confirm-input" id="confirmPwdInput" placeholder="再次确认密码" maxlength="8">
+    <p id="setPwdHint" style="font-size:.8rem;color:var(--danger);margin-top:-8px;margin-bottom:12px;display:none;"></p>
+    <div style="display:flex;gap:10px;justify-content:center;">
+      <button class="btn btn-primary" onclick="confirmSetPassword()">设置密码</button>
+      <button class="btn btn-outline" onclick="closeSetPwdModal()">取消</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="addUserModal">
+  <div class="modal">
+    <h3>👶 添加小朋友</h3>
+    <p style="margin-bottom:14px;">输入小朋友的昵称和选择头像</p>
+    <input type="text" class="confirm-input" id="newUserName" placeholder="小朋友昵称" maxlength="10">
+    <div style="display:flex;gap:8px;justify-content:center;margin-bottom:16px;flex-wrap:wrap;" id="avatarPicker"></div>
+    <div style="display:flex;gap:10px;justify-content:center;">
+      <button class="btn btn-primary" onclick="confirmAddUser()">确认添加</button>
+      <button class="btn btn-outline" onclick="closeAddUserModal()">取消</button>
     </div>
   </div>
 </div>
@@ -464,467 +497,154 @@ input,select,textarea{font-family:inherit;outline:none}
 
 <script>
 // ============================================================
-// 一、年级单元数据结构（以四年级为核心，其他年级简化）
+// 一、年级与科目数据结构
 // ============================================================
 
-const GRADE_DATA = {
-  4: {
-    '语文': {
-      '上册': [
-        { unit: 1, name: '自然之美', kps: ['边读边想象画面', '比喻句与拟人句', '感受自然之美'] },
-        { unit: 2, name: '提问策略', kps: ['从不同角度提问', '筛选有价值的问题'] },
-        { unit: 3, name: '连续观察', kps: ['连续细致观察', '写观察日记'] },
-        { unit: 4, name: '神话故事', kps: ['神话特点', '起因经过结果', '想象与夸张'] },
-        { unit: 5, name: '把事情写清楚', kps: ['按一定顺序写事', '把过程写清楚'] },
-        { unit: 6, name: '童年成长', kps: ['批注阅读', '体会人物心情'] },
-        { unit: 7, name: '家国情怀', kps: ['把握主要内容', '感受人物品质'] },
-        { unit: 8, name: '历史人物故事', kps: ['简要复述', '文言文理解'] },
-      ],
-      '下册': [
-        { unit: 1, name: '乡村生活', kps: ['抓住关键语句体会情感'] },
-        { unit: 2, name: '科普世界', kps: ['提出不懂的问题', '查阅资料'] },
-        { unit: 3, name: '现代诗', kps: ['现代诗特点', '节奏与韵律'] },
-        { unit: 4, name: '作家笔下的动物', kps: ['明贬实褒', '对比手法'] },
-        { unit: 5, name: '游记', kps: ['按游览顺序写景', '移步换景'] },
-        { unit: 6, name: '儿童成长', kps: ['长文章阅读方法', '列小标题'] },
-        { unit: 7, name: '人物品质', kps: ['从语言动作感受品质'] },
-        { unit: 8, name: '中外经典童话', kps: ['童话特点', '感受真善美'] },
-      ]
-    },
-    '数学': {
-      '上册': [
-        { unit: 1, name: '大数的认识', kps: ['数位顺序表', '读法写法', '改写与近似数', '比较大小'] },
-        { unit: 2, name: '公顷和平方千米', kps: ['面积单位换算', '实际应用'] },
-        { unit: 3, name: '角的度量', kps: ['量角器量角', '角的分类', '画指定度数的角'] },
-        { unit: 4, name: '三位数乘两位数', kps: ['笔算方法', '单价数量总价', '速度时间路程'] },
-        { unit: 5, name: '平行四边形和梯形', kps: ['平行与垂直', '高的画法', '四边形分类'] },
-        { unit: 6, name: '除数是两位数的除法', kps: ['试商方法', '调商', '除法验算'] },
-        { unit: 7, name: '条形统计图', kps: ['数据收集整理', '1格表示多个单位'] },
-        { unit: 8, name: '数学广角——优化', kps: ['统筹优化思想', '沏茶问题', '烙饼问题'] },
-      ],
-      '下册': [
-        { unit: 1, name: '四则运算', kps: ['0的运算', '混合运算顺序', '租船问题'] },
-        { unit: 2, name: '观察物体（二）', kps: ['三视图初步'] },
-        { unit: 3, name: '运算定律', kps: ['加法交换律结合律', '乘法交换律结合律', '乘法分配律', '简便计算'] },
-        { unit: 4, name: '小数的意义和性质', kps: ['小数数位', '小数点移动', '小数与单位换算', '小数近似数'] },
-        { unit: 5, name: '三角形', kps: ['三角形分类', '内角和180度', '三边关系'] },
-        { unit: 6, name: '小数的加法和减法', kps: ['小数点对齐', '小数简便计算'] },
-        { unit: 7, name: '图形的运动（二）', kps: ['轴对称图形', '平移'] },
-        { unit: 8, name: '平均数与条形统计图', kps: ['求平均数', '复式条形统计图'] },
-      ]
-    },
-    '英语': {
-      '上册': [
-        { unit: 1, name: 'My classroom', kps: ['教室物品词汇', '祈使句'] },
-        { unit: 2, name: 'My schoolbag', kps: ['书包物品词汇', '颜色+物品描述'] },
-        { unit: 3, name: 'My friends', kps: ['外貌性格词汇', 'has的用法'] },
-        { unit: 4, name: 'My home', kps: ['房间词汇', '方位介词'] },
-        { unit: 5, name: "Dinner's ready", kps: ['食物词汇', '点餐句型'] },
-        { unit: 6, name: 'Meet my family', kps: ['家庭成员词汇', '职业词汇'] },
-      ],
-      '下册': [
-        { unit: 1, name: 'My school', kps: ['学校场所词汇', '序数词'] },
-        { unit: 2, name: 'What time is it?', kps: ['时间表达', '课程名称'] },
-        { unit: 3, name: 'Weather', kps: ['天气词汇', '天气描述'] },
-        { unit: 4, name: 'At the farm', kps: ['农场动植物词汇', '复数'] },
-        { unit: 5, name: 'My clothes', kps: ['衣物词汇', '物主代词'] },
-        { unit: 6, name: 'Shopping', kps: ['购物词汇', '价格询问'] },
-      ]
-    },
-    '科学': {
-      '上册': [
-        { unit: 1, name: '声音', kps: ['振动发声', '声音传播需要介质', '音量和音高'] },
-        { unit: 2, name: '呼吸与消化', kps: ['呼吸器官', '食物营养成分', '膳食搭配'] },
-        { unit: 3, name: '运动和力', kps: ['力的作用', '摩擦力', '弹力'] },
-        { unit: 4, name: '地球与宇宙', kps: ['地球形状', '月球特征', '太阳系组成'] },
-      ],
-      '下册': [
-        { unit: 1, name: '植物的生长变化', kps: ['种子结构', '植物生长条件', '根茎叶功能'] },
-        { unit: 2, name: '电路', kps: ['电路组成', '电流路径', '导体绝缘体'] },
-        { unit: 3, name: '岩石与土壤', kps: ['岩石分类', '土壤成分', '矿物'] },
-        { unit: 4, name: '动物的一生', kps: ['完全变态发育', '生命周期'] },
-      ]
-    },
-    '道法': {
-      '上册': [
-        { unit: 1, name: '与班级共成长', kps: ['班级规则', '集体意识', '班级事务协商'] },
-        { unit: 2, name: '为父母分担', kps: ['家庭责任', '感恩父母', '主动分担家务'] },
-        { unit: 3, name: '信息万花筒', kps: ['媒介素养', '网络安全', '广告辨别'] },
-        { unit: 4, name: '让生活多一些绿色', kps: ['环境污染', '垃圾分类', '低碳生活方式'] },
-      ],
-      '下册': [
-        { unit: 1, name: '同伴与交往', kps: ['友谊', '诚信', '冲突解决'] },
-        { unit: 2, name: '做聪明的消费者', kps: ['购物常识', '理性消费', '节约意识'] },
-        { unit: 3, name: '美好生活哪里来', kps: ['劳动价值', '工农业生产', '尊重劳动者'] },
-        { unit: 4, name: '感受家乡文化', kps: ['家乡文化', '传统文化', '家乡发展'] },
-      ]
+const GRADES = ['幼儿园小班','幼儿园中班','幼儿园大班','小学一年级','小学二年级','小学三年级','小学四年级','小学五年级','小学六年级'];
+
+const GRADE_SUBJECTS = {
+  '幼儿园小班': ['语言','数学启蒙','英语启蒙','科学探索','艺术','健康','社会'],
+  '幼儿园中班': ['语言','数学启蒙','英语启蒙','科学探索','艺术','健康','社会'],
+  '幼儿园大班': ['语言','数学启蒙','英语启蒙','科学探索','艺术','健康','社会'],
+  '小学一年级': ['语文','数学','英语','科学','道法'],
+  '小学二年级': ['语文','数学','英语','科学','道法'],
+  '小学三年级': ['语文','数学','英语','科学','道法'],
+  '小学四年级': ['语文','数学','英语','科学','道法'],
+  '小学五年级': ['语文','数学','英语','科学','道法'],
+  '小学六年级': ['语文','数学','英语','科学','道法'],
+};
+
+const SUBJECT_COLORS = {
+  '语文':'#FF6B6B','数学':'#4A9FF5','英语':'#A855F7','科学':'#2ED573','道法':'#FF9F43',
+  '语言':'#FF6B6B','数学启蒙':'#4A9FF5','英语启蒙':'#A855F7','科学探索':'#2ED573',
+  '艺术':'#FF9F43','健康':'#2ED573','社会':'#A855F7'
+};
+
+// 年级单元目录（简化版，每科至少4个单元）
+function getUnits(grade, subject) {
+  const isK = grade.includes('幼儿园');
+  const units = [];
+  if (isK) {
+    // 幼儿园：每科4个单元
+    const kUnits = {
+      '语言': ['儿歌启蒙','故事欣赏','看图说话','识字游戏'],
+      '数学启蒙': ['数数游戏','比较大小','图形认知','分类排序'],
+      '英语启蒙': ['字母ABC','颜色动物','水果食物','日常问候'],
+      '科学探索': ['可爱的动物','植物朋友','天气变化','生活现象'],
+      '艺术': ['颜色认知','形状拼搭','音乐节奏','手工创作'],
+      '健康': ['生活习惯','安全常识','身体认识','饮食健康'],
+      '社会': ['我的家庭','幼儿园里','礼貌用语','团结协作'],
+    };
+    (kUnits[subject] || ['单元1','单元2','单元3','单元4']).forEach((name, i) => {
+      units.push({ unit: i+1, name: name, kps: [name+'-基础', name+'-练习'] });
+    });
+  } else {
+    // 小学：每科6-8个单元（简化）
+    const gNum = parseInt(grade.replace('小学','').replace('年级',''));
+    const numUnits = gNum <= 2 ? 6 : 8;
+    for (let i = 1; i <= numUnits; i++) {
+      units.push({
+        unit: i,
+        name: `第${i}单元`,
+        kps: [`知识点A-${i}`, `知识点B-${i}`, `知识点C-${i}`]
+      });
     }
   }
+  return units;
+}
+
+// ============================================================
+// 二、多用户数据管理
+// ============================================================
+
+const STORAGE_KEY = 'all_grade_park_v1';
+const AVATARS = ['🐱','🐶','🐰','🦊','🐼','🐨','🦁','🐯','🐸','🦄'];
+
+let appData = {
+  currentUserId: null,
+  users: [],
+  globalQuestionBank: [],
+  questionBankVersion: 'v1.0',
+  lastRegenDate: null,
+  parentPassword: null,
 };
 
-// 其他年级简化数据（复用四年级结构，难度调整）
-[1,2,3,5,6].forEach(g => {
-  GRADE_DATA[g] = JSON.parse(JSON.stringify(GRADE_DATA[4]));
-});
+let quizState = null;
+let selectedAvatar = AVATARS[0];
 
-// ============================================================
-// 二、静态题库（四年级基础题）
-// ============================================================
-
-const STATIC_QUESTIONS = [
-  // 语文
-  { id:'yw001', subject:'语文', grade:4, term:'上册', unit:1, kp:'边读边想象画面', type:'single', difficulty:1,
-    question:'"浪潮越来越近，犹如千万匹白色战马齐头并进"这句话用了什么修辞手法？',
-    options:['A. 比喻','B. 拟人','C. 夸张','D. 排比'],
-    answer:0, explanation:'把浪潮比作白色战马，是比喻句。' },
-  { id:'yw002', subject:'语文', grade:4, term:'上册', unit:1, kp:'比喻句与拟人句', type:'judge', difficulty:1,
-    question:'"当四周很安静的时候，蟋蟀就在这平台上弹琴。"这是拟人句。',
-    options:['正确','错误'],
-    answer:0, explanation:'把蟋蟀当作人来写，弹琴是人的动作，是拟人句。' },
-  { id:'yw003', subject:'语文', grade:4, term:'上册', unit:2, kp:'从不同角度提问', type:'single', difficulty:2,
-    question:'读《呼风唤雨的世纪》，下列哪个问题是针对课文内容提问的？',
-    options:['A. 为什么说20世纪是呼风唤雨的世纪？','B. 生活中还有哪些发明？','C. 作者为什么写这篇文章？','D. 未来还会有什么科技？'],
-    answer:0, explanation:'A是针对课文内容提问，B、D是联系生活提问，C是针对写法提问。' },
-  { id:'yw004', subject:'语文', grade:4, term:'上册', unit:3, kp:'连续细致观察', type:'single', difficulty:2,
-    question:'写观察日记时，下列做法正确的是？',
-    options:['A. 连续观察，记录变化','B. 只观察一次就写','C. 不需要记录真实情况','D. 只写自己想象的内容'],
-    answer:0, explanation:'观察日记需要连续观察，记录事物的变化过程。' },
-  { id:'yw005', subject:'语文', grade:4, term:'上册', unit:4, kp:'神话特点', type:'single', difficulty:1,
-    question:'神话故事的特点不包括下列哪一项？',
-    options:['A. 真实发生的事情','B. 神奇的想象','C. 鲜明的人物形象','D. 夸张的情节'],
-    answer:0, explanation:'神话是古代人民对自然现象和社会生活的天真解释和美好向往，不是真实发生的。' },
-  { id:'yw006', subject:'语文', grade:4, term:'上册', unit:5, kps:['按一定顺序写事'], type:'single', difficulty:2,
-    question:'写一件事时，按什么顺序写最清楚？',
-    options:['A. 事情发展顺序','B. 随便写','C. 只写结果','D. 只写开头'],
-    answer:0, explanation:'写事要按事情发展顺序：起因、经过、结果，这样条理清楚。' },
-
-  // 数学
-  { id:'sx001', subject:'数学', grade:4, term:'上册', unit:1, kp:'数位顺序表', type:'single', difficulty:1,
-    question:'一个数由3个千万、5个十万和7个百组成，这个数是？',
-    options:['A. 30500700','B. 35000700','C. 30050700','D. 30507000'],
-    answer:0, explanation:'3千万=30000000，5十万=500000，7百=700，合起来30500700。' },
-  { id:'sx002', subject:'数学', grade:4, term:'上册', unit:1, kp:'改写与近似数', type:'single', difficulty:2,
-    question:'把996000000改写成用"亿"作单位（保留一位小数）是？',
-    options:['A. 10.0亿','B. 9.9亿','C. 9.96亿','D. 10亿'],
-    answer:0, explanation:'996000000=9.96亿，保留一位小数看百分位是6，进一位≈10.0亿。' },
-  { id:'sx003', subject:'数学', grade:4, term:'上册', unit:4, kp:'单价数量总价', type:'single', difficulty:1,
-    question:'一个笔记本5元，买12个需要多少钱？',
-    options:['A. 60元','B. 17元','C. 50元','D. 72元'],
-    answer:0, explanation:'单价×数量=总价，5×12=60元。' },
-  { id:'sx004', subject:'数学', grade:4, term:'上册', unit:6, kp:'试商方法', type:'single', difficulty:2,
-    question:'计算272÷34时，把34看作多少来试商比较方便？',
-    options:['A. 30','B. 35','C. 40','D. 20'],
-    answer:0, explanation:'除数是两位数的除法，用"四舍五入"法把除数看作整十数来试商。34接近30，看作30试商。' },
-  { id:'sx005', subject:'数学', grade:4, term:'下册', unit:3, kp:'乘法分配律', type:'single', difficulty:2,
-    question:'25×(4+8)=25×4+25×8，运用了什么运算定律？',
-    options:['A. 乘法分配律','B. 乘法结合律','C. 乘法交换律','D. 加法结合律'],
-    answer:0, explanation:'乘法分配律：(a+b)×c=a×c+b×c。' },
-  { id:'sx006', subject:'数学', grade:4, term:'下册', unit:4, kp:'小数点移动', type:'single', difficulty:2,
-    question:'把3.5的小数点向右移动两位，得到的数是原数的多少倍？',
-    options:['A. 100倍','B. 10倍','C. 1000倍','D. 2倍'],
-    answer:0, explanation:'小数点右移两位，原数扩大100倍。3.5→350。' },
-  { id:'sx007', subject:'数学', grade:4, term:'下册', unit:5, kp:'内角和180度', type:'single', difficulty:2,
-    question:'三角形两个内角分别是35°和55°，这是什么三角形？',
-    options:['A. 直角三角形','B. 锐角三角形','C. 钝角三角形','D. 等腰三角形'],
-    answer:0, explanation:'第三个角=180°-35°-55°=90°，是直角三角形。' },
-
-  // 英语
-  { id:'yy001', subject:'英语', grade:4, term:'上册', unit:1, kp:'教室物品词汇', type:'single', difficulty:1,
-    question:'What is the meaning of "classroom"?',
-    options:['A. 教室','B. 学校','C. 家','D. 公园'],
-    answer:0, explanation:'classroom意为"教室"。' },
-  { id:'yy002', subject:'英语', grade:4, term:'上册', unit:1, kp:'祈使句', type:'single', difficulty:1,
-    question:'— Let\'s clean the classroom! — ___',
-    options:['A. OK!','B. Goodbye!','C. Thanks!','D. Sorry!'],
-    answer:0, explanation:'Let\'s...是提建议，回答用OK/Good idea等表示赞同。' },
-  { id:'yy003', subject:'英语', grade:4, term:'上册', unit:3, kp:'外貌性格词汇', type:'single', difficulty:2,
-    question:'My friend ___ long hair and big eyes.',
-    options:['A. has','B. have','C. is','D. are'],
-    answer:0, explanation:'主语my friend是第三人称单数，用has。' },
-  { id:'yy004', subject:'英语', grade:4, term:'上册', unit:4, kp:'方位介词', type:'single', difficulty:1,
-    question:'— Where is the cat? — It\'s ___ the desk.',
-    options:['A. under','B. a','C. an','D. the'],
-    answer:0, explanation:'where问地点，用方位介词回答。under the desk在桌子下面。' },
-  { id:'yy005', subject:'英语', grade:4, term:'下册', unit:2, kp:'时间表达', type:'single', difficulty:1,
-    question:'— What time is it? — ___ 9 o\'clock.',
-    options:['A. It\'s','B. Is','C. Its','D. They\'re'],
-    answer:0, explanation:'回答时间用It\'s + 时间。' },
-  { id:'yy006', subject:'英语', grade:4, term:'下册', unit:3, kp:'天气词汇', type:'single', difficulty:1,
-    question:'今天天气很热，用英语怎么说？',
-    options:['A. It\'s hot.','B. It\'s cold.','C. It\'s cool.','D. It\'s warm.'],
-    answer:0, explanation:'hot意为"热的"，cold冷的，cool凉爽的，warm温暖的。' },
-
-  // 科学
-  { id:'kx001', subject:'科学', grade:4, term:'上册', unit:1, kp:'振动发声', type:'single', difficulty:1,
-    question:'声音是由物体什么产生的？',
-    options:['A. 振动','B. 晃动','C. 敲打','D. 碰撞'],
-    answer:0, explanation:'声音是由物体振动产生的，振动停止，声音停止。' },
-  { id:'kx002', subject:'科学', grade:4, term:'上册', unit:3, kp:'摩擦力', type:'single', difficulty:2,
-    question:'下列哪种方法可以增大摩擦力？',
-    options:['A. 鞋底刻花纹','B. 给齿轮上油','C. 冰面很滑','D. 旱冰鞋装轮子'],
-    answer:0, explanation:'鞋底花纹增大接触面粗糙程度，增大摩擦力防滑。其他都是减小摩擦。' },
-  { id:'kx003', subject:'科学', grade:4, term:'下册', unit:1, kp:'种子结构', type:'single', difficulty:1,
-    question:'种子发芽需要的条件不包括？',
-    options:['A. 阳光直射','B. 水分','C. 适宜的温度','D. 空气'],
-    answer:0, explanation:'种子发芽需要水分、适宜温度、空气，不需要阳光。' },
-  { id:'kx004', subject:'科学', grade:4, term:'下册', unit:2, kp:'导体绝缘体', type:'single', difficulty:1,
-    question:'下列物体中，属于导体的是？',
-    options:['A. 铁钉','B. 塑料尺','C. 橡胶','D. 玻璃'],
-    answer:0, explanation:'金属是导体，塑料、橡胶、玻璃是绝缘体。' },
-
-  // 道法
-  { id:'df001', subject:'道法', grade:4, term:'上册', unit:1, kp:'班级规则', type:'single', difficulty:1,
-    question:'下列关于班规的说法，正确的是？',
-    options:['A. 班规是大家共同制定的，要共同遵守','B. 班规只约束同学，不约束老师','C. 班规制定了就不能改','D. 班规可有可无'],
-    answer:0, explanation:'班规是全班同学共同讨论制定的，对每个人都有约束力。' },
-  { id:'df002', subject:'道法', grade:4, term:'上册', unit:2, kp:'主动分担家务', type:'single', difficulty:1,
-    question:'爸爸妈妈工作很辛苦，我们应该怎么做？',
-    options:['A. 体谅父母，做力所能及的家务','B. 什么都让父母做','C. 只想着自己玩','D. 跟父母发脾气'],
-    answer:0, explanation:'要体谅父母辛苦，主动做家务减轻负担。' },
-  { id:'df003', subject:'道法', grade:4, term:'上册', unit:4, kp:'垃圾分类', type:'single', difficulty:1,
-    question:'废旧电池应该怎么处理？',
-    options:['A. 放到专门的回收箱','B. 扔进普通垃圾桶','C. 埋在土里','D. 扔进河里'],
-    answer:0, explanation:'废旧电池含重金属，是有害垃圾，要专门回收。' },
-  { id:'df004', subject:'道法', grade:4, term:'下册', unit:1, kp:'诚信', type:'single', difficulty:1,
-    question:'不小心打碎了教室玻璃，应该怎么做？',
-    options:['A. 主动承认错误，告诉老师','B. 偷偷跑掉','C. 说是别人打碎的','D. 装作不知道'],
-    answer:0, explanation:'做错事要勇于承认，主动承担责任。' },
-];
-
-// 复习内容数据
-const REVIEW_DATA = {
-  '数学-乘法分配律': { explanation:'乘法分配律：两个数的和与一个数相乘，可以先把它们分别与这个数相乘，再相加。即(a+b)×c=a×c+b×c。', example:'25×(4+8)=25×4+25×8=100+200=300。', tip:'易错：不要漏掉任何一项，(a-b)×c=a×c-b×c。' },
-  '数学-小数点移动': { explanation:'小数点向右移动一位，原数扩大10倍；向右移动两位，扩大100倍。向左移动则缩小。', example:'3.5→35（右移一位，×10），3.5→350（右移两位，×100）。', tip:'易错：移动位数数清楚，不够补0。' },
-  '英语-一般现在时': { explanation:'一般现在时表示经常发生的动作。第三人称单数动词加-s/-es。', example:'She goes to school every day. 否定：She doesn\'t go on Sunday.', tip:'易错：第三人称单数变化规则。' },
-  '科学-振动发声': { explanation:'声音是由物体振动产生的。振动停止，声音停止。声音传播需要介质。', example:'敲鼓时鼓面振动发声，按住鼓面声音就停了。', tip:'易错：真空不能传声。' },
-  '道法-垃圾分类': { explanation:'垃圾分类：可回收物、厨余垃圾、有害垃圾、其他垃圾。', example:'废旧电池是有害垃圾，废纸塑料是可回收物。', tip:'易错：废旧电池不能和普通垃圾一起扔。' },
-};
-
-// ============================================================
-// 三、参数化题目生成器（5个科目）
-// ============================================================
-
-// 数学生成器
-function genMathQuestion(grade, unit, kp, difficulty) {
-  const d = difficulty || 1;
-  const scale = grade * 10; // 年级越高数字越大
-  let q, options, answer, explanation;
-
-  // 四则运算
-  if (kp.includes('四则') || kp.includes('运算') || kp.includes('乘法') || kp.includes('除法')) {
-    const a = Math.floor(Math.random() * 90 * (grade/4)) + 10;
-    const b = Math.floor(Math.random() * 20 * (grade/4)) + 5;
-    const result = a * b;
-    q = `计算：${a} × ${b} = ?`;
-    options = [result, result + b, result - a, result + a].map((o, i) => `${String.fromCharCode(65+i)}. ${o}`);
-    answer = 0;
-    explanation = `${a} × ${b} = ${result}。`;
-  }
-  // 大数认识
-  else if (kp.includes('大数') || kp.includes('数位') || kp.includes('读写')) {
-    const digits = 6 + grade;
-    const num = Math.floor(Math.random() * Math.pow(10, digits));
-    q = `${num} 是几位数？`;
-    const actualDigits = num.toString().length;
-    options = [`${actualDigits}位数`, `${actualDigits-1}位数`, `${actualDigits+1}位数`, `${actualDigits+2}位数`].map((o, i) => `${String.fromCharCode(65+i)}. ${o}`);
-    answer = 0;
-    explanation = `${num} 是 ${actualDigits} 位数。`;
-  }
-  // 小数
-  else if (kp.includes('小数') || kp.includes('小数点')) {
-    const n = (Math.random() * 10).toFixed(1);
-    q = `${n} 里面有多少个 0.01？`;
-    const ans = Math.round(n * 100);
-    options = [ans, Math.round(n*10), Math.round(n*1000), Math.round(n)].map((o, i) => `${String.fromCharCode(65+i)}. ${o}`);
-    answer = 0;
-    explanation = `${n} = ${n.toFixed(2)}，所以有 ${ans} 个 0.01。`;
-  }
-  // 几何
-  else if (kp.includes('三角形') || kp.includes('角') || kp.includes('图形')) {
-    const a = Math.floor(Math.random() * 60) + 30;
-    const b = Math.floor(Math.random() * 60) + 30;
-    const c = 180 - a - b;
-    q = `三角形两个内角分别是 ${a}° 和 ${b}°，第三个角是多少度？`;
-    options = [`${c}°`, `${a+b}°`, `${180-a}°`, `${180-b}°`].map((o, i) => `${String.fromCharCode(65+i)}. ${o}`);
-    answer = 0;
-    explanation = `三角形内角和180°，第三个角=180°-${a}°-${b}°=${c}°。`;
-  }
-  // 默认：简单计算
-  else {
-    const a = Math.floor(Math.random() * 50) + 10;
-    const b = Math.floor(Math.random() * 30) + 5;
-    const result = a + b;
-    q = `计算：${a} + ${b} = ?`;
-    options = [result, result + 1, result - 1, result + 2].map((o, i) => `${String.fromCharCode(65+i)}. ${o}`);
-    answer = 0;
-    explanation = `${a} + ${b} = ${result}。`;
-  }
-
-  return {
-    id: 'gen_math_' + Date.now() + '_' + Math.floor(Math.random()*10000),
-    subject: '数学', grade: grade, term: '上册', unit: unit, kp: kp,
-    type: 'single', difficulty: d, question: q, options: options,
-    answer: answer, explanation: explanation, generated: true,
-  };
+function getCurrentUser() {
+  return appData.users.find(u => u.id === appData.currentUserId) || null;
 }
 
-// 语文生成器
-function genChineseQuestion(grade, unit, kp, difficulty) {
-  const idioms = ['画蛇添足','胸有成竹','亡羊补牢','守株待兔','拔苗助长','刻舟求剑','掩耳盗铃','狐假虎威','对牛弹琴','井底之蛙'];
-  const meanings = {
-    '画蛇添足':'做多余的事反而不好', '胸有成竹':'做事前已有周全考虑',
-    '亡羊补牢':'出了问题及时补救', '守株待兔':'不主动努力妄想侥幸',
-    '拔苗助长':'违反规律急于求成', '刻舟求剑':'办事刻板不知变通',
-    '掩耳盗铃':'自己欺骗自己', '狐假虎威':'依仗别人势力欺压人',
-    '对牛弹琴':'对不懂道理的人讲道理', '井底之蛙':'见识短浅的人',
-  };
-  const idiom = idioms[Math.floor(Math.random() * idioms.length)];
-  const correct = meanings[idiom];
-
-  let q, options, answer, explanation;
-
-  if (kp.includes('成语') || kp.includes('字词')) {
-    q = `成语"${idiom}"的意思最接近下列哪一项？`;
-    options = [correct, '努力拼搏向上', '认真仔细做事', '团结友爱互助'].map((o, i) => `${String.fromCharCode(65+i)}. ${o}`);
-    options = shuffle(options);
-    answer = options.findIndex(o => o.includes(correct));
-    explanation = `"${idiom}"：${correct}。`;
-  } else if (kp.includes('比喻') || kp.includes('修辞') || kp.includes('拟人')) {
-    q = '"桂子花开，十里飘香。"这句话用了什么修辞手法？';
-    options = ['A. 夸张', 'B. 比喻', 'C. 拟人', 'D. 排比'];
-    answer = 0;
-    explanation = '"十里飘香"夸大了香味传播距离，是夸张。';
-  } else {
-    q = '下列哪个词语是描写秋天的？';
-    options = ['A. 秋高气爽', 'B. 烈日炎炎', 'C. 春暖花开', 'D. 冰天雪地'];
-    answer = 0;
-    explanation = '秋高气爽形容秋天晴朗凉爽的天气。';
+function loadData() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) {
+      const data = JSON.parse(raw);
+      appData = { ...appData, ...data };
+    }
+  } catch(e) { console.warn('loadData error', e); }
+  // 如果没有用户，创建默认用户
+  if (appData.users.length === 0) {
+    addUser('小朋友', AVATARS[0], '小学四年级');
   }
-
-  return {
-    id: 'gen_chinese_' + Date.now() + '_' + Math.floor(Math.random()*10000),
-    subject: '语文', grade: grade, term: '上册', unit: unit, kp: kp,
-    type: 'single', difficulty: difficulty || 1, question: q, options: options,
-    answer: answer, explanation: explanation, generated: true,
-  };
 }
 
-// 英语生成器
-function genEnglishQuestion(grade, unit, kp, difficulty) {
-  const words = [
-    { en: 'apple', cn: '苹果' }, { en: 'book', cn: '书' }, { en: 'cat', cn: '猫' },
-    { en: 'dog', cn: '狗' }, { en: 'sun', cn: '太阳' }, { en: 'water', cn: '水' },
-    { en: 'school', cn: '学校' }, { en: 'teacher', cn: '老师' },
-  ];
-  const w = words[Math.floor(Math.random() * words.length)];
-
-  let q, options, answer, explanation;
-
-  if (kp.includes('词汇') || kp.includes('单词')) {
-    q = `What is the meaning of "${w.en}"?`;
-    options = [`A. ${w.cn}`, 'B. 香蕉', 'C. 书本', 'D. 桌子'];
-    answer = 0;
-    explanation = `"${w.en}" 的意思是 "${w.cn}"。`;
-  } else if (kp.includes('时态') || kp.includes('一般现在')) {
-    q = 'She ___ to school every day.';
-    options = ['A. goes', 'B. go', 'C. going', 'D. went'];
-    answer = 0;
-    explanation = '第三人称单数she，动词用第三人称单数形式goes。';
-  } else {
-    q = '— How are you? — ___';
-    options = ["A. I'm fine, thank you.", 'B. Goodbye.', 'C. Hello.', 'D. Good night.'];
-    answer = 0;
-    explanation = '"How are you?"回答常用"I\'m fine, thank you."' ;
-  }
-
-  return {
-    id: 'gen_english_' + Date.now() + '_' + Math.floor(Math.random()*10000),
-    subject: '英语', grade: grade, term: '上册', unit: unit, kp: kp,
-    type: 'single', difficulty: difficulty || 1, question: q, options: options,
-    answer: answer, explanation: explanation, generated: true,
-  };
+function saveData() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(appData));
+  } catch(e) { console.warn('saveData error', e); }
 }
 
-// 科学生成器
-function genScienceQuestion(grade, unit, kp, difficulty) {
-  let q, options, answer, explanation;
-
-  if (kp.includes('光') || kp.includes('传播')) {
-    q = '光在空气中是怎样传播的？';
-    options = ['A. 沿直线传播', 'B. 沿曲线传播', 'C. 向四面八方发散', 'D. 不确定'];
-    answer = 0;
-    explanation = '光在同种均匀介质中沿直线传播。';
-  } else if (kp.includes('电') || kp.includes('电路')) {
-    q = '下列物体中，属于导体的是？';
-    options = ['A. 铁钉', 'B. 塑料尺', 'C. 橡胶', 'D. 玻璃'];
-    answer = 0;
-    explanation = '金属是导体，塑料橡胶玻璃是绝缘体。';
-  } else if (kp.includes('力') || kp.includes('摩擦')) {
-    q = '苹果落地是因为受到了什么力？';
-    options = ['A. 重力', 'B. 弹力', 'C. 摩擦力', 'D. 浮力'];
-    answer = 0;
-    explanation = '地球上的物体都受重力作用，方向竖直向下。';
-  } else if (kp.includes('植物') || kp.includes('种子')) {
-    q = '植物进行光合作用需要的条件不包括？';
-    options = ['A. 氧气', 'B. 阳光', 'C. 二氧化碳', 'D. 水'];
-    answer = 0;
-    explanation = '光合作用需要阳光、二氧化碳和水，产生氧气。';
-  } else {
-    q = '下列哪种是可再生资源？';
-    options = ['A. 太阳能', 'B. 煤炭', 'C. 石油', 'D. 天然气'];
-    answer = 0;
-    explanation = '太阳能是可再生资源，煤炭石油天然气是不可再生资源。';
-  }
-
-  return {
-    id: 'gen_science_' + Date.now() + '_' + Math.floor(Math.random()*10000),
-    subject: '科学', grade: grade, term: '上册', unit: unit, kp: kp,
-    type: 'single', difficulty: difficulty || 1, question: q, options: options,
-    answer: answer, explanation: explanation, generated: true,
+function addUser(name, avatar, grade) {
+  const user = {
+    id: 'u_' + Date.now() + '_' + Math.floor(Math.random()*1000),
+    name: name,
+    avatar: avatar,
+    grade: grade || '小学四年级',
+    term: '上册',
+    settings: {},
+    subjects: {},
+    records: [],
+    mistakes: [],
+    mastery: {},
+    stars: 0,
+    coins: 0,
+    badges: [],
+    exposure: {},
+    createdAt: new Date().toISOString(),
   };
+  // 初始化科目设置
+  GRADE_SUBJECTS[user.grade].forEach(s => {
+    user.subjects[s] = { enabled: true, currentUnit: 1, allowAhead: false };
+  });
+  appData.users.push(user);
+  appData.currentUserId = user.id;
+  saveData();
+  return user;
 }
 
-// 道发生成器
-function genDaoFaQuestion(grade, unit, kp, difficulty) {
-  let q, options, answer, explanation;
+function switchUser(userId) {
+  appData.currentUserId = userId;
+  saveData();
+  renderHome();
+}
 
-  if (kp.includes('安全') || kp.includes('自护')) {
-    q = '过马路时，应该怎么做？';
-    options = ['A. 红灯停，绿灯行，走斑马线', 'B. 直接跑过去', 'C. 红灯也可以走', 'D. 看心情走'];
-    answer = 0;
-    explanation = '红灯停绿灯行，过马路走斑马线，一停二看三通过。';
-  } else if (kp.includes('环保') || kp.includes('环境') || kp.includes('垃圾')) {
-    q = '下列哪种行为是环保的？';
-    options = ['A. 随手关灯', 'B. 乱扔垃圾', 'C. 浪费纸张', 'D. 用一次性筷子'];
-    answer = 0;
-    explanation = '随手关灯节约用电，是环保行为。';
-  } else if (kp.includes('诚信') || kp.includes('诚实守信')) {
-    q = '不小心打碎了教室玻璃，应该怎么做？';
-    options = ['A. 主动承认错误，告诉老师', 'B. 偷偷跑掉', 'C. 说是别人打碎的', 'D. 装作不知道'];
-    answer = 0;
-    explanation = '做错事要勇于承认，主动承担责任。';
-  } else if (kp.includes('规则') || kp.includes('班级') || kp.includes('校园')) {
-    q = '在课堂上，下列哪种行为是正确的？';
-    options = ['A. 举手发言', 'B. 随便讲话', 'C. 做小动作', 'D. 吃零食'];
-    answer = 0;
-    explanation = '课堂上举手发言是正确的做法。';
-  } else {
-    q = '爸爸妈妈工作很辛苦，我们应该怎么做？';
-    options = ['A. 体谅父母，做力所能及的家务', 'B. 什么都让父母做', 'C. 只想着自己玩', 'D. 跟父母发脾气'];
-    answer = 0;
-    explanation = '要体谅父母辛苦，主动做家务。';
+function deleteUser(userId) {
+  if (!confirm('确定要删除这个小朋友的所有数据吗？此操作不可恢复！')) return;
+  appData.users = appData.users.filter(u => u.id !== userId);
+  if (appData.currentUserId === userId) {
+    appData.currentUserId = appData.users[0] ? appData.users[0].id : null;
+    if (!appData.currentUserId && appData.users.length === 0) {
+      addUser('小朋友', AVATARS[0], '小学四年级');
+    }
   }
-
-  return {
-    id: 'gen_daofa_' + Date.now() + '_' + Math.floor(Math.random()*10000),
-    subject: '道法', grade: grade, term: '上册', unit: unit, kp: kp,
-    type: 'single', difficulty: difficulty || 1, question: q, options: options,
-    answer: answer, explanation: explanation, generated: true,
-  };
+  saveData();
+  renderSettings();
 }
 
 // ============================================================
-// 四、工具函数
+// 三、参数化题目生成器（自动生成3000+题）
 // ============================================================
 
 function shuffle(arr) {
@@ -936,106 +656,173 @@ function shuffle(arr) {
   return a;
 }
 
-function getSubjectColor(s) {
-  const map = { '语文':'#FF6B6B', '数学':'#4A9FF5', '英语':'#A855F7', '科学':'#2ED573', '道法':'#FF9F43' };
-  return map[s] || '#4A9FF5';
+// 生成一道数学题
+function genMathQ(grade, unit, kp, difficulty) {
+  const gNum = parseInt(grade.replace('小学','').replace('年级','')) || 2;
+  const maxNum = Math.pow(10, Math.min(gNum, 4));
+  const a = Math.floor(Math.random() * maxNum) + 1;
+  const b = Math.floor(Math.random() * maxNum) + 1;
+  const ops = ['+','-','×'];
+  const op = ops[Math.floor(Math.random() * ops.length)];
+  let result, question;
+  if (op === '+') { result = a + b; question = `计算：${a} + ${b} = ?`; }
+  else if (op === '-') { result = Math.max(a, b) - Math.min(a, b); question = `计算：${Math.max(a, b)} - ${Math.min(a, b)} = ?`; }
+  else { result = a * b; question = `计算：${a} × ${b} = ?`; }
+  const wrong = shuffle([result + 1, result - 1, result + Math.floor(result/2) + 1]).slice(0, 3).filter((v,i,arr) => arr.indexOf(v) === i && v !== result && v > 0);
+  while (wrong.length < 3) wrong.push(result + wrong.length + 1);
+  const options = shuffle([result, ...wrong]).map((v, i) => `${String.fromCharCode(65+i)}. ${v}`);
+  const answer = options.findIndex(o => o.includes(result));
+  return {
+    id: 'math_' + Date.now() + '_' + Math.floor(Math.random()*99999),
+    subject: grade.includes('幼儿') ? '数学启蒙' : '数学',
+    grade: grade, unit: unit, kp: kp, type: 'single', difficulty: difficulty,
+    question: question, options: options, answer: answer,
+    explanation: `${question} 答案是 ${result}。`, generated: true,
+  };
 }
 
-function playSound(type) {
-  try {
-    const ctx = new (window.AudioContext || window.webkitAudioContext)();
-    const osc = ctx.createOscillator();
-    const gain = ctx.createGain();
-    osc.connect(gain); gain.connect(ctx.destination);
-    if (type === 'correct') {
-      osc.frequency.value = 600; osc.type = 'sine';
-      gain.gain.setValueAtTime(0.1, ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.3);
-      osc.start(ctx.currentTime); osc.stop(ctx.currentTime + 0.3);
-    } else if (type === 'wrong') {
-      osc.frequency.value = 200; osc.type = 'sawtooth';
-      gain.gain.setValueAtTime(0.1, ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.4);
-      osc.start(ctx.currentTime); osc.stop(ctx.currentTime + 0.4);
-    } else if (type === 'reward') {
-      osc.frequency.value = 800; osc.type = 'sine';
-      gain.gain.setValueAtTime(0.1, ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.5);
-      osc.start(ctx.currentTime); osc.stop(ctx.currentTime + 0.5);
-    }
-  } catch(e) {}
+// 生成一道语文题
+function genChineseQ(grade, unit, kp, difficulty) {
+  const idioms = ['画蛇添足','亡羊补牢','守株待兔','拔苗助长','刻舟求剑','掩耳盗铃','狐假虎威','对牛弹琴','井底之蛙','胸有成竹'];
+  const idiom = idioms[Math.floor(Math.random() * idioms.length)];
+  const meanings = {
+    '画蛇添足':'做多余的事反而不好','亡羊补牢':'出了问题及时补救','守株待兔':'不主动努力妄想侥幸',
+    '拔苗助长':'违反规律急于求成','刻舟求剑':'办事刻板不知变通','掩耳盗铃':'自己欺骗自己',
+    '狐假虎威':'依仗别人势力欺压人','对牛弹琴':'对不懂道理的人讲道理','井底之蛙':'见识短浅的人','胸有成竹':'做事前已有周全考虑',
+  };
+  const correct = meanings[idiom];
+  const options = shuffle([correct, '努力拼搏向上', '认真仔细做事', '团结友爱互助']).map((v, i) => `${String.fromCharCode(65+i)}. ${v}`);
+  const answer = options.findIndex(o => o.includes(correct));
+  const isK = grade.includes('幼儿');
+  return {
+    id: 'chn_' + Date.now() + '_' + Math.floor(Math.random()*99999),
+    subject: isK ? '语言' : '语文',
+    grade: grade, unit: unit, kp: kp, type: 'single', difficulty: difficulty,
+    question: isK ? '这个成语的意思是什么？' : `成语"${idiom}"的意思最接近下列哪一项？`,
+    options: options, answer: answer,
+    explanation: `"${idiom}"：${correct}。`, generated: true,
+  };
 }
 
-function showConfetti() {
-  const colors = ['#FF6B6B','#4A9FF5','#FFD93D','#2ED573','#A855F7','#FF9F43'];
-  for (let i = 0; i < 30; i++) {
-    const c = document.createElement('div');
-    c.className = 'confetti';
-    c.style.left = Math.random() * 100 + 'vw';
-    c.style.background = colors[Math.floor(Math.random() * colors.length)];
-    c.style.animationDelay = Math.random() * 0.5 + 's';
-    c.style.animationDuration = (2 + Math.random() * 2) + 's';
-    document.body.appendChild(c);
-    setTimeout(() => c.remove(), 4000);
-  }
+// 生成一道英语题
+function genEnglishQ(grade, unit, kp, difficulty) {
+  const words = [
+    { en: 'apple', cn: '苹果' }, { en: 'book', cn: '书' }, { en: 'cat', cn: '猫' },
+    { en: 'dog', cn: '狗' }, { en: 'sun', cn: '太阳' }, { en: 'water', cn: '水' },
+    { en: 'school', cn: '学校' }, { en: 'teacher', cn: '老师' }, { en: 'red', cn: '红色' },
+    { en: 'blue', cn: '蓝色' }, { en: 'big', cn: '大的' }, { en: 'small', cn: '小的' },
+  ];
+  const w = words[Math.floor(Math.random() * words.length)];
+  const options = shuffle([w.cn, '香蕉', '桌子', '椅子']).map((v, i) => `${String.fromCharCode(65+i)}. ${v}`);
+  const answer = options.findIndex(o => o.includes(w.cn));
+  const isK = grade.includes('幼儿');
+  return {
+    id: 'eng_' + Date.now() + '_' + Math.floor(Math.random()*99999),
+    subject: isK ? '英语启蒙' : '英语',
+    grade: grade, unit: unit, kp: kp, type: 'single', difficulty: difficulty,
+    question: isK ? `What's this?` : `What is the meaning of "${w.en}"?`,
+    options: options, answer: answer,
+    explanation: `"${w.en}" 的意思是 "${w.cn}"。`, generated: true,
+  };
 }
 
-// ============================================================
-// 五、状态管理与数据持久化
-// ============================================================
+// 生成一道科学题
+function genScienceQ(grade, unit, kp, difficulty) {
+  const questions = [
+    { q: '光在空气中是怎样传播的？', opts: ['沿直线传播','沿曲线传播','向四面八方发散','不确定'], ans: 0, exp: '光在同种均匀介质中沿直线传播。' },
+    { q: '苹果落地是因为受到了什么力？', opts: ['重力','弹力','摩擦力','浮力'], ans: 0, exp: '地球上的物体都受重力作用。' },
+    { q: '植物进行光合作用需要什么？', opts: ['阳光','黑暗','冰','冷风'], ans: 0, exp: '光合作用需要阳光、二氧化碳和水。' },
+    { q: '下列哪个是导体？', opts: ['铁钉','塑料','橡胶','玻璃'], ans: 0, exp: '金属是导体，塑料橡胶玻璃是绝缘体。' },
+    { q: '声音是怎么产生的？', opts: ['物体振动','风吹','太阳照射','水流动'], ans: 0, exp: '声音是由物体振动产生的。' },
+    { q: '一天有几个小时？', opts: ['24小时','12小时','36小时','48小时'], ans: 0, exp: '一天有24小时。' },
+    { q: '下列哪个是可再生资源？', opts: ['太阳能','煤炭','石油','天然气'], ans: 0, exp: '太阳能是可再生资源。' },
+    { q: '水烧开了会变成什么？', opts: ['水蒸气','冰','雪','霜'], ans: 0, exp: '水烧开变成水蒸气，是汽化现象。' },
+  ];
+  const item = questions[Math.floor(Math.random() * questions.length)];
+  const options = shuffle(item.opts).map((v, i) => `${String.fromCharCode(65+i)}. ${v}`);
+  const answer = options.findIndex(o => o.includes(item.opts[item.ans]));
+  const isK = grade.includes('幼儿');
+  return {
+    id: 'sci_' + Date.now() + '_' + Math.floor(Math.random()*99999),
+    subject: isK ? '科学探索' : '科学',
+    grade: grade, unit: unit, kp: kp, type: 'single', difficulty: difficulty,
+    question: item.q, options: options, answer: answer, explanation: item.exp, generated: true,
+  };
+}
 
-const STORAGE_KEY = 'grade4_learning_park_v2';
+// 生成一道道法/社会题
+function genDaoFaQ(grade, unit, kp, difficulty) {
+  const questions = [
+    { q: '过马路时应该怎么做？', opts: ['红灯停绿灯行走斑马线','直接跑过去','红灯也可以走','看心情走'], ans: 0, exp: '红灯停绿灯行，走斑马线。' },
+    { q: '下列哪种行为是环保的？', opts: ['随手关灯','乱扔垃圾','浪费纸张','用一次性筷子'], ans: 0, exp: '随手关灯节约用电。' },
+    { q: '打碎了教室玻璃应该怎么做？', opts: ['主动告诉老师','偷偷跑掉','说是别人打的','装作不知道'], ans: 0, exp: '做错事要勇于承认。' },
+    { q: '课堂上应该怎么做？', opts: ['举手发言','随便讲话','做小动作','吃零食'], ans: 0, exp: '课堂上举手发言是正确的。' },
+    { q: '爸爸妈妈辛苦时我们应该？', opts: ['体谅父母做力所能及的家务','什么都不做','只想着自己玩','跟父母发脾气'], ans: 0, exp: '要体谅父母，主动分担家务。' },
+    { q: '废旧电池应该怎么处理？', opts: ['专门回收','扔普通垃圾桶','埋土里','扔河里'], ans: 0, exp: '废旧电池是有害垃圾，要专门回收。' },
+    { q: '和同学发生矛盾应该？', opts: ['好好沟通解决','打架','告诉老师','不理他'], ans: 0, exp: '同学之间要友好相处，好好沟通。' },
+    { q: '吃饭前应该做什么？', opts: ['洗手','跑步','睡觉','唱歌'], ans: 0, exp: '吃饭前要洗手，讲卫生。' },
+  ];
+  const item = questions[Math.floor(Math.random() * questions.length)];
+  const options = shuffle(item.opts).map((v, i) => `${String.fromCharCode(65+i)}. ${v}`);
+  const answer = options.findIndex(o => o.includes(item.opts[item.ans]));
+  const isK = grade.includes('幼儿');
+  return {
+    id: 'dof_' + Date.now() + '_' + Math.floor(Math.random()*99999),
+    subject: isK ? '社会' : '道法',
+    grade: grade, unit: unit, kp: kp, type: 'single', difficulty: difficulty,
+    question: item.q, options: options, answer: answer, explanation: item.exp, generated: true,
+  };
+}
 
-let appState = {
-  grade: 4,
-  term: '上册',
-  subjects: {
-    '语文': { enabled: true, currentUnit: 3, allowAhead: false },
-    '数学': { enabled: true, currentUnit: 4, allowAhead: false },
-    '英语': { enabled: true, currentUnit: 2, allowAhead: false },
-    '科学': { enabled: true, currentUnit: 1, allowAhead: false },
-    '道法': { enabled: true, currentUnit: 1, allowAhead: false },
-  },
-  stars: 0,
-  coins: 0,
-  totalScore: 0,
-  badges: [],
-  history: [],
-  wrongBook: [],
-  mastery: {}, // subject-kp: 0-100
-  exposures: {}, // qid: count
-  qbank: [], // 本地题库（含生成题）
-  qbankVersion: 'v1.0',
-  lastRegenDate: null,
-  title: '学习小达人',
-};
+// 根据科目生成题目
+function genQuestion(grade, subject, unit, kp, difficulty) {
+  if (subject.includes('数学')) return genMathQ(grade, unit, kp, difficulty);
+  if (subject.includes('语文') || subject === '语言') return genChineseQ(grade, unit, kp, difficulty);
+  if (subject.includes('英语')) return genEnglishQ(grade, unit, kp, difficulty);
+  if (subject.includes('科学')) return genScienceQ(grade, unit, kp, difficulty);
+  if (subject === '道法' || subject === '社会' || subject === '健康' || subject === '艺术') return genDaoFaQ(grade, unit, kp, difficulty);
+  return genMathQ(grade, unit, kp, difficulty);
+}
 
-let quizState = null; // 答题进行中的状态
+// 批量生成题库（确保至少3000题）
+function generateFullBank() {
+  const bank = [];
+  const target = 3000;
+  const perGrade = Math.ceil(target / GRADES.length);
 
-function loadData() {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (raw) {
-      const data = JSON.parse(raw);
-      appState = { ...appState, ...data };
-      // 合并科目设置
-      if (data.subjects) {
-        Object.keys(data.subjects).forEach(k => {
-          appState.subjects[k] = { ...appState.subjects[k], ...data.subjects[k] };
+  GRADES.forEach(grade => {
+    const subjects = GRADE_SUBJECTS[grade];
+    const perSubject = Math.ceil(perGrade / subjects.length);
+    subjects.forEach(subject => {
+      const units = getUnits(grade, subject);
+      units.forEach(unit => {
+        unit.kps.forEach(kp => {
+          // 每个知识点生成5-8道题
+          const count = 5 + Math.floor(Math.random() * 4);
+          for (let i = 0; i < count && bank.length < target; i++) {
+            const q = genQuestion(grade, subject, unit.unit, kp, Math.floor(Math.random()*3)+1);
+            bank.push(q);
+          }
         });
-      }
-    }
-  } catch(e) { console.warn('loadData error', e); }
-}
+      });
+    });
+  });
 
-function saveData() {
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
-  } catch(e) { console.warn('saveData error', e); }
+  // 如果还不够，继续生成
+  while (bank.length < target) {
+    const grade = GRADES[Math.floor(Math.random() * GRADES.length)];
+    const subject = GRADE_SUBJECTS[grade][Math.floor(Math.random() * GRADE_SUBJECTS[grade].length)];
+    const units = getUnits(grade, subject);
+    const unit = units[Math.floor(Math.random() * units.length)];
+    const kp = unit.kps[Math.floor(Math.random() * unit.kps.length)];
+    bank.push(genQuestion(grade, subject, unit.unit, kp, Math.floor(Math.random()*3)+1));
+  }
+
+  return bank;
 }
 
 // ============================================================
-// 六、视图切换
+// 四、视图切换与首页渲染
 // ============================================================
 
 function showView(name) {
@@ -1043,7 +830,7 @@ function showView(name) {
   const el = document.getElementById('view-' + name);
   if (el) el.classList.add('active');
   const topBar = document.getElementById('topBar');
-  if (['home','history','wrongbook','rewards','qbank','settings','review'].includes(name)) {
+  if (['home','history','wrongbook','rewards','qbank','settings','review','userSwitch'].includes(name)) {
     topBar.classList.add('show');
   } else {
     topBar.classList.remove('show');
@@ -1054,6 +841,7 @@ function showView(name) {
   if (name === 'rewards') renderRewards();
   if (name === 'qbank') renderQBank();
   if (name === 'settings') renderSettings();
+  if (name === 'userSwitch') renderUserSwitch();
   window.scrollTo(0, 0);
 }
 
@@ -1064,226 +852,198 @@ function goHome() {
 }
 
 function renderHome() {
-  document.getElementById('heroGrade').textContent = `${appState.grade}年级 · ${appState.term}`;
-  document.getElementById('starCount').textContent = appState.stars;
-  document.getElementById('coinCount').textContent = appState.coins;
-  document.getElementById('totalScore').textContent = appState.totalScore;
-  renderProgressOverview();
-}
+  const user = getCurrentUser();
+  if (!user) return;
+  document.getElementById('topAvatar').textContent = user.avatar;
+  document.getElementById('topUserName').textContent = user.name;
+  document.getElementById('heroGrade').textContent = `${user.grade} · ${user.term}`;
+  document.getElementById('starCount').textContent = user.stars;
+  document.getElementById('coinCount').textContent = user.coins;
 
-function renderProgressOverview() {
+  // 进度概览
   const container = document.getElementById('progressOverview');
-  const subjects = Object.keys(appState.subjects);
+  const subjects = Object.keys(user.subjects);
   container.innerHTML = subjects.map(s => {
-    const subj = appState.subjects[s];
+    const subj = user.subjects[s];
     if (!subj.enabled) return '';
-    const gradeData = GRADE_DATA[appState.grade];
-    const termData = gradeData[s] ? gradeData[s][appState.term] : [];
-    const totalUnits = termData.length;
+    const units = getUnits(user.grade, s);
+    const totalUnits = units.length;
     const pct = Math.min(100, Math.round((subj.currentUnit / Math.max(totalUnits,1)) * 100));
     return `<div class="progress-subject">
       <div class="ps-head"><span>${s}</span><span>第${subj.currentUnit}单元 / 共${totalUnits}单元</span></div>
-      <div class="progress-bar"><div class="progress-fill" style="width:${pct}%;background:${getSubjectColor(s)}"></div></div>
+      <div class="progress-bar"><div class="progress-fill" style="width:${pct}%;background:${SUBJECT_COLORS[s]||'#4A9FF5'}"></div></div>
     </div>`;
   }).join('');
 }
 
 // ============================================================
-// 七、出题引擎
+// 五、多用户切换与添加
 // ============================================================
 
-// 获取某科当前进度内的所有知识点
-function getKPsForSubject(subject) {
-  const gradeData = GRADE_DATA[appState.grade];
-  if (!gradeData || !gradeData[subject]) return [];
-  const termData = gradeData[subject][appState.term] || [];
-  const subj = appState.subjects[subject];
-  const result = [];
-  termData.forEach((u, idx) => {
-    if (idx < subj.currentUnit - 1 || (idx === subj.currentUnit - 1)) {
-      u.kps.forEach(kp => {
-        result.push({ unit: u.unit, kp: kp });
-      });
-    }
-  });
-  return result;
+function renderUserSwitch() {
+  const container = document.getElementById('userList');
+  container.innerHTML = appData.users.map(u => `
+    <div class="user-card">
+      <div class="user-avatar">${u.avatar}</div>
+      <div class="user-info">
+        <div class="user-name">${u.name}</div>
+        <div class="user-meta">${u.grade} · ${u.term} · ${u.stars}⭐</div>
+      </div>
+      <div class="user-actions">
+        <button class="btn btn-primary btn-sm" onclick="switchUser('${u.id}')">
+          ${u.id === appData.currentUserId ? '当前' : '切换'}
+        </button>
+        <button class="btn btn-danger btn-sm" onclick="deleteUser('${u.id}')">删除</button>
+      </div>
+    </div>
+  `).join('');
 }
 
-// 获取掌握度
-function getMastery(subject, kp) {
+function showAddUserModal() {
+  selectedAvatar = AVATARS[0];
+  document.getElementById('newUserName').value = '';
+  document.getElementById('avatarPicker').innerHTML = AVATARS.map((a, i) =>
+    `<div style="width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;cursor:pointer;border:3px solid ${i===0?'var(--primary)':'#E0E0E0'};" onclick="pickAvatar('${a}', this)">${a}</div>`
+  ).join('');
+  document.getElementById('addUserModal').classList.add('show');
+}
+
+function pickAvatar(avatar, el) {
+  selectedAvatar = avatar;
+  document.querySelectorAll('#avatarPicker > div').forEach(d => d.style.border = '3px solid #E0E0E0');
+  el.style.border = '3px solid var(--primary)';
+}
+
+function closeAddUserModal() {
+  document.getElementById('addUserModal').classList.remove('show');
+}
+
+function confirmAddUser() {
+  const name = document.getElementById('newUserName').value.trim();
+  if (!name) { alert('请输入昵称'); return; }
+  addUser(name, selectedAvatar, '小学四年级');
+  closeAddUserModal();
+  showView('userSwitch');
+}
+
+// ============================================================
+// 六、出题引擎
+// ============================================================
+
+function getMastery(user, subject, kp) {
   const key = subject + '|' + kp;
-  return appState.mastery[key] !== undefined ? appState.mastery[key] : 50;
+  return user.mastery[key] !== undefined ? user.mastery[key] : 50;
 }
 
-function setMastery(subject, kp, val) {
+function setMastery(user, subject, kp, val) {
   const key = subject + '|' + kp;
-  appState.mastery[key] = Math.max(0, Math.min(100, val));
+  user.mastery[key] = Math.max(0, Math.min(100, val));
 }
 
-// 智能重出题算法
-function smartRegenerate() {
-  const subjects = Object.keys(appState.subjects).filter(s => appState.subjects[s].enabled);
-  const newQuestions = [];
-  const genCountPerSubject = Math.max(3, Math.floor(20 / subjects.length));
-
-  subjects.forEach(subject => {
-    const kps = getKPsForSubject(subject);
-    if (kps.length === 0) return;
-
-    // 计算每个知识点的优先级分数
-    const scoredKPs = kps.map(k => {
-      const mastery = getMastery(subject, k.kp);
-      const weakQs = appState.wrongBook.filter(w => w.subject === subject && w.kp === k.kp);
-      const errorRate = weakQs.length / Math.max(1, (weakQs.length + 5));
-      const priority = (100 - mastery) * 0.4 + errorRate * 30 + 10;
-      return { ...k, priority, mastery };
-    });
-
-    // 按优先级排序
-    scoredKPs.sort((a, b) => b.priority - a.priority);
-
-    // 为前几个高优先级知识点生成新题
-    scoredKPs.slice(0, genCountPerSubject).forEach(k => {
-      const difficulty = k.mastery < 40 ? 1 : (k.mastery < 70 ? 2 : 3);
-      let q;
-      if (subject === '数学') q = genMathQuestion(appState.grade, k.unit, k.kp, difficulty);
-      else if (subject === '语文') q = genChineseQuestion(appState.grade, k.unit, k.kp, difficulty);
-      else if (subject === '英语') q = genEnglishQuestion(appState.grade, k.unit, k.kp, difficulty);
-      else if (subject === '科学') q = genScienceQuestion(appState.grade, k.unit, k.kp, difficulty);
-      else q = genDaoFaQuestion(appState.grade, k.unit, k.kp, difficulty);
-      newQuestions.push(q);
-    });
-  });
-
-  // 加入本地题库（去重）
-  const existingIds = new Set([...STATIC_QUESTIONS, ...appState.qbank].map(q => q.id));
-  newQuestions.forEach(q => {
-    if (!existingIds.has(q.id)) {
-      appState.qbank.push(q);
-      existingIds.add(q.id);
-    }
-  });
-
-  appState.qbankVersion = 'v' + new Date().toISOString().slice(0,10).replace(/-/g,'') + '_' + Math.floor(Math.random()*1000);
-  appState.lastRegenDate = new Date().toDateString();
-  saveData();
-
-  showModal('🎯', '智能重出题完成！', `本次生成了 ${newQuestions.length} 道新题，已加入题库。`);
-  return newQuestions.length;
-}
-
-// 按模式抽题
+// 从题库中抽题
 function pickQuestions(mode, options = {}) {
-  const allQuestions = [...STATIC_QUESTIONS, ...appState.qbank];
-  const enabledSubjects = Object.keys(appState.subjects).filter(s => appState.subjects[s].enabled);
+  const user = getCurrentUser();
+  if (!user) return [];
+  const bank = appData.globalQuestionBank;
+  const enabledSubjects = Object.keys(user.subjects).filter(s => user.subjects[s].enabled);
   const result = [];
   const seenIds = new Set();
+  const targetCount = options.count || 20;
+
+  // 筛选当前年级科目的题目
+  let pool = bank.filter(q =>
+    q.grade === user.grade &&
+    enabledSubjects.includes(q.subject) &&
+    user.subjects[q.subject].currentUnit >= q.unit
+  );
 
   if (mode === 'smart') {
     // 智能模式：60%薄弱，30%已掌握，10%新学
-    const targetCount = options.count || 20;
     const weakPool = [], goodPool = [], newPool = [];
-
-    enabledSubjects.forEach(s => {
-      const kps = getKPsForSubject(s);
-      kps.forEach(k => {
-        const qs = allQuestions.filter(q => q.subject === s && q.unit === k.unit && q.kp === k.kp && !seenIds.has(q.id));
-        if (qs.length === 0) {
-          // 题库不足，生成
-          const m = getMastery(s, k.kp);
-          let genQ;
-          if (s === '数学') genQ = genMathQuestion(appState.grade, k.unit, k.kp, m<40?1:2);
-          else if (s === '语文') genQ = genChineseQuestion(appState.grade, k.unit, k.kp, m<40?1:2);
-          else if (s === '英语') genQ = genEnglishQuestion(appState.grade, k.unit, k.kp, m<40?1:2);
-          else if (s === '科学') genQ = genScienceQuestion(appState.grade, k.unit, k.kp, m<40?1:2);
-          else genQ = genDaoFaQuestion(appState.grade, k.unit, k.kp, m<40?1:2);
-          qs.push(genQ);
-        }
-        qs.forEach(q => {
-          const m = getMastery(s, k.kp);
-          if (m < 70) weakPool.push(q);
-          else if (m >= 80 && m <= 95) goodPool.push(q);
-          else newPool.push(q);
-        });
-      });
+    pool.forEach(q => {
+      const m = getMastery(user, q.subject, q.kp);
+      if (m < 70) weakPool.push(q);
+      else if (m >= 80) goodPool.push(q);
+      else newPool.push(q);
     });
-
     const weakCount = Math.floor(targetCount * 0.6);
     const goodCount = Math.floor(targetCount * 0.3);
-    const newCount = targetCount - weakCount - goodCount;
-
     shuffle(weakPool).slice(0, weakCount).forEach(q => { result.push(q); seenIds.add(q.id); });
     shuffle(goodPool).slice(0, goodCount).forEach(q => { if(!seenIds.has(q.id)){result.push(q); seenIds.add(q.id);} });
-    shuffle(newPool).slice(0, newCount).forEach(q => { if(!seenIds.has(q.id)){result.push(q); seenIds.add(q.id);} });
-
-    // 补齐
-    while (result.length < targetCount) {
-      const pool = shuffle(allQuestions.filter(q => !seenIds.has(q.id) && enabledSubjects.includes(q.subject)));
-      if (pool.length === 0) break;
-      result.push(pool[0]);
-      seenIds.add(pool[0].id);
-    }
+    shuffle(newPool).forEach(q => { if(!seenIds.has(q.id) && result.length < targetCount){result.push(q); seenIds.add(q.id);} });
   }
   else if (mode === 'full') {
-    // 全科模式：每科至少1题，不连续同科
-    const targetCount = options.count || 20;
-    const perSubject = Math.ceil(targetCount / enabledSubjects.length);
+    // 全科模式
     enabledSubjects.forEach(s => {
-      const pool = shuffle(allQuestions.filter(q => q.subject === s && !seenIds.has(q.id)));
-      pool.slice(0, perSubject).forEach(q => { result.push(q); seenIds.add(q.id); });
+      const sp = shuffle(pool.filter(q => q.subject === s && !seenIds.has(q.id)));
+      sp.slice(0, Math.ceil(targetCount / enabledSubjects.length)).forEach(q => { result.push(q); seenIds.add(q.id); });
     });
-    // 打乱
     result.sort(() => Math.random() - 0.5);
   }
   else if (mode === 'single') {
-    // 单科模式
     const subject = options.subject;
-    const targetCount = options.count || 15;
-    const pool = shuffle(allQuestions.filter(q => q.subject === subject && !seenIds.has(q.id)));
-    pool.slice(0, targetCount).forEach(q => result.push(q));
-    // 不足则生成
-    while (result.length < targetCount) {
-      const kps = getKPsForSubject(subject);
-      const k = kps[Math.floor(Math.random() * kps.length)];
-      let genQ;
-      if (subject === '数学') genQ = genMathQuestion(appState.grade, k.unit, k.kp, 2);
-      else if (subject === '语文') genQ = genChineseQuestion(appState.grade, k.unit, k.kp, 2);
-      else if (subject === '英语') genQ = genEnglishQuestion(appState.grade, k.unit, k.kp, 2);
-      else if (subject === '科学') genQ = genScienceQuestion(appState.grade, k.unit, k.kp, 2);
-      else genQ = genDaoFaQuestion(appState.grade, k.unit, k.kp, 2);
-      result.push(genQ);
-    }
+    const sp = shuffle(pool.filter(q => q.subject === subject));
+    sp.slice(0, targetCount).forEach(q => result.push(q));
   }
   else if (mode === 'practice') {
-    // 练习模式
-    const targetCount = options.count || 10;
-    let pool = allQuestions.filter(q => !seenIds.has(q.id));
     if (options.subject) pool = pool.filter(q => q.subject === options.subject);
-    if (options.kp) pool = pool.filter(q => q.kp === options.kp);
-    if (options.wrongOnly) pool = pool.filter(q => appState.wrongBook.some(w => w.id === q.id));
-    pool = shuffle(pool);
-    pool.slice(0, targetCount).forEach(q => result.push(q));
-    // 不足则生成
-    while (result.length < targetCount) {
-      const subj = options.subject || enabledSubjects[0];
-      const kps = getKPsForSubject(subj);
-      const k = kps[Math.floor(Math.random() * kps.length)];
-      let genQ;
-      if (subj === '数学') genQ = genMathQuestion(appState.grade, k.unit, k.kp, 2);
-      else if (subj === '语文') genQ = genChineseQuestion(appState.grade, k.unit, k.kp, 2);
-      else if (subj === '英语') genQ = genEnglishQuestion(appState.grade, k.unit, k.kp, 2);
-      else if (subj === '科学') genQ = genScienceQuestion(appState.grade, k.unit, k.kp, 2);
-      else genQ = genDaoFaQuestion(appState.grade, k.unit, k.kp, 2);
-      result.push(genQ);
-    }
+    if (options.wrongOnly) pool = pool.filter(q => user.mistakes.some(m => m.id === q.id));
+    shuffle(pool).slice(0, targetCount).forEach(q => result.push(q));
   }
 
-  return result.slice(0, options.count || result.length);
+  // 如果题库不足，生成新题
+  while (result.length < targetCount) {
+    const subject = enabledSubjects[Math.floor(Math.random() * enabledSubjects.length)];
+    const units = getUnits(user.grade, subject);
+    const unit = units[Math.floor(Math.random() * units.length)];
+    const kp = unit.kps[Math.floor(Math.random() * unit.kps.length)];
+    const q = genQuestion(user.grade, subject, unit.unit, kp, Math.floor(Math.random()*3)+1);
+    result.push(q);
+    appData.globalQuestionBank.push(q);
+  }
+
+  return result.slice(0, targetCount);
+}
+
+// 智能重出题
+function smartRegenerate() {
+  const user = getCurrentUser();
+  if (!user) return 0;
+  const enabledSubjects = Object.keys(user.subjects).filter(s => user.subjects[s].enabled);
+  let newCount = 0;
+
+  enabledSubjects.forEach(subject => {
+    const units = getUnits(user.grade, subject);
+    units.forEach(unit => {
+      unit.kps.forEach(kp => {
+        const mastery = getMastery(user, subject, kp);
+        // 掌握度低的多生成题
+        if (mastery < 70) {
+          for (let i = 0; i < 2; i++) {
+            const q = genQuestion(user.grade, subject, unit.unit, kp, mastery < 40 ? 1 : 2);
+            appData.globalQuestionBank.push(q);
+            newCount++;
+          }
+        }
+      });
+    });
+  });
+
+  appData.questionBankVersion = 'v' + new Date().toISOString().slice(0,10).replace(/-/g,'') + '_' + Math.floor(Math.random()*1000);
+  appData.lastRegenDate = new Date().toDateString();
+  saveData();
+
+  showModal('🎯', '智能重出题完成！', `本次生成了 ${newCount} 道新题，题库总数 ${appData.globalQuestionBank.length} 道。`);
+  return newCount;
 }
 
 // ============================================================
-// 八、模式选择与开始答题
+// 七、答题流程
 // ============================================================
+
+let timerInterval = null;
+let timerEndTime = null;
+let lastEyeReminder = 0;
 
 function startModeSelect(mode) {
   quizState = { mode: mode };
@@ -1292,25 +1052,26 @@ function startModeSelect(mode) {
 
   if (mode === 'single') {
     title.textContent = '单科模式 - 选择科目';
-    const subjects = Object.keys(appState.subjects).filter(s => appState.subjects[s].enabled);
+    const user = getCurrentUser();
+    const subjects = Object.keys(user.subjects).filter(s => user.subjects[s].enabled);
     container.innerHTML = `<div class="mode-select-grid">` +
       subjects.map(s => `<div class="mode-option" onclick="startSingleMode('${s}')">
-        <div class="mo-icon" style="color:${getSubjectColor(s)}">📚</div>
+        <div style="font-size:2rem;">📚</div>
         <div class="mo-name">${s}</div>
-        <div class="mo-desc">第${appState.subjects[s].currentUnit}单元</div>
+        <div class="mo-desc">第${user.subjects[s].currentUnit}单元</div>
       </div>`).join('') + `</div>`;
   } else if (mode === 'practice') {
     title.textContent = '练习模式 - 选择范围';
     container.innerHTML = `
       <div class="mode-select-grid">
         <div class="mode-option" onclick="startPractice('all')">
-          <div class="mo-icon">🌐</div><div class="mo-name">全科练习</div><div class="mo-desc">所有科目随机</div>
+          <div style="font-size:2rem;">🌐</div><div class="mo-name">全科练习</div>
         </div>
         <div class="mode-option" onclick="startPractice('wrong')">
-          <div class="mo-icon">📝</div><div class="mo-name">错题重做</div><div class="mo-desc">重做错题本</div>
+          <div style="font-size:2rem;">📝</div><div class="mo-name">错题重做</div>
         </div>
         <div class="mode-option" onclick="startPractice('weak')">
-          <div class="mo-icon">💪</div><div class="mo-name">薄弱点突破</div><div class="mo-desc">针对薄弱知识点</div>
+          <div style="font-size:2rem;">💪</div><div class="mo-name">薄弱突破</div>
         </div>
       </div>
       <div class="card">
@@ -1323,7 +1084,6 @@ function startModeSelect(mode) {
       </div>`;
     practiceCount = 10;
   } else {
-    // smart / full 直接开始
     const label = mode === 'smart' ? '智能模式' : '全科模式';
     startQuiz(mode, { count: 20, duration: 30 });
     return;
@@ -1343,24 +1103,15 @@ function startSingleMode(subject) {
 }
 
 function startPractice(type) {
-  const opts = { count: practiceCount, duration: 0 }; // 练习模式不限时
+  const opts = { count: practiceCount, duration: 0 };
   if (type === 'wrong') opts.wrongOnly = true;
-  else if (type === 'weak') opts.weakOnly = true;
   startQuiz('practice', opts);
 }
-
-// ============================================================
-// 九、答题流程
-// ============================================================
-
-let timerInterval = null;
-let timerEndTime = null;
-let lastEyeReminder = 0;
 
 function startQuiz(mode, options) {
   const questions = pickQuestions(mode, options);
   if (questions.length === 0) {
-    showModal('⚠️', '没有题目', '当前范围内暂无题目，请先在家长设置中调整进度或生成新题。');
+    showModal('⚠️', '没有题目', '当前范围内暂无题目，请先在家长后台生成新题。');
     return;
   }
 
@@ -1370,12 +1121,9 @@ function startQuiz(mode, options) {
     currentIndex: 0,
     score: 0,
     correctCount: 0,
-    wrongIds: [],
     startTime: Date.now(),
     duration: options.duration || 30,
     subjectScores: {},
-    consecutiveCorrect: 0,
-    consecutiveWrong: 0,
     selectedOption: null,
     subject: options.subject,
   };
@@ -1397,10 +1145,10 @@ function renderQuestion() {
   document.getElementById('qIndex').textContent = quizState.currentIndex + 1;
   document.getElementById('qTotal').textContent = quizState.questions.length;
   document.getElementById('qSubject').textContent = q.subject;
-  document.getElementById('qSubject').style.background = getSubjectColor(q.subject) + '20';
-  document.getElementById('qSubject').style.color = getSubjectColor(q.subject);
+  document.getElementById('qSubject').style.background = (SUBJECT_COLORS[q.subject]||'#4A9FF5') + '20';
+  document.getElementById('qSubject').style.color = SUBJECT_COLORS[q.subject] || '#4A9FF5';
   document.getElementById('qKP').textContent = q.kp;
-  document.getElementById('qType').textContent = q.type === 'judge' ? '判断题' : '单选题';
+  document.getElementById('qType').textContent = '单选题';
   document.getElementById('qText').textContent = q.question;
 
   const optionsEl = document.getElementById('qOptions');
@@ -1415,8 +1163,7 @@ function renderQuestion() {
   document.getElementById('submitBtn').classList.remove('hidden');
   document.getElementById('nextBtn').classList.add('hidden');
 
-  // 进度条
-  const pct = ((quizState.currentIndex) / quizState.questions.length) * 100;
+  const pct = (quizState.currentIndex / quizState.questions.length) * 100;
   document.getElementById('progressFill').style.width = pct + '%';
 }
 
@@ -1432,60 +1179,47 @@ function submitAnswer() {
     showModal('💡', '提示', '请先选择一个答案哦！');
     return;
   }
+  const user = getCurrentUser();
   const q = quizState.questions[quizState.currentIndex];
   const isCorrect = quizState.selectedOption === q.answer;
 
-  // 显示对错
   document.querySelectorAll('.option-item').forEach((el, i) => {
     el.classList.remove('selected');
     if (i === q.answer) el.classList.add('correct');
     if (i === quizState.selectedOption && !isCorrect) el.classList.add('wrong');
   });
 
-  // 反馈
   const panel = document.getElementById('feedbackPanel');
   panel.className = 'feedback-panel show ' + (isCorrect ? 'correct' : 'wrong');
   document.getElementById('feedbackTitle').textContent = isCorrect ? '✅ 回答正确！' : '❌ 回答错误';
   document.getElementById('feedbackExplanation').textContent = q.explanation;
 
-  // 更新得分
   if (isCorrect) {
     quizState.score += 10;
     quizState.correctCount++;
-    quizState.consecutiveCorrect++;
-    quizState.consecutiveWrong = 0;
     playSound('correct');
-    // 更新掌握度
-    const m = getMastery(q.subject, q.kp);
-    setMastery(q.subject, q.kp, m + 5);
+    setMastery(user, q.subject, q.kp, getMastery(user, q.subject, q.kp) + 5);
   } else {
-    quizState.consecutiveWrong++;
-    quizState.consecutiveCorrect = 0;
     playSound('wrong');
-    // 错题加入错题本
-    if (!appState.wrongBook.some(w => w.id === q.id)) {
-      appState.wrongBook.push({
+    if (!user.mistakes.some(w => w.id === q.id)) {
+      user.mistakes.push({
         id: q.id, subject: q.subject, kp: q.kp,
         question: q.question, options: q.options, answer: q.answer,
         explanation: q.explanation, time: new Date().toISOString(),
       });
     }
-    // 降低掌握度
-    const m = getMastery(q.subject, q.kp);
-    setMastery(q.subject, q.kp, m - 8);
+    setMastery(user, q.subject, q.kp, getMastery(user, q.subject, q.kp) - 8);
   }
 
-  // 科目得分统计
   if (!quizState.subjectScores[q.subject]) quizState.subjectScores[q.subject] = { correct: 0, total: 0 };
   quizState.subjectScores[q.subject].total++;
   if (isCorrect) quizState.subjectScores[q.subject].correct++;
 
-  // 题目曝光
-  appState.exposures[q.id] = (appState.exposures[q.id] || 0) + 1;
+  appData.exposure[q.id] = (appData.exposure[q.id] || 0) + 1;
 
-  // 按钮切换
   document.getElementById('submitBtn').classList.add('hidden');
   document.getElementById('nextBtn').classList.remove('hidden');
+  saveData();
 }
 
 function nextQuestion() {
@@ -1494,7 +1228,6 @@ function nextQuestion() {
     endQuiz();
   } else {
     renderQuestion();
-    // 检查休息提醒（每5分钟）
     const elapsed = (Date.now() - quizState.startTime) / 60000;
     if (elapsed - lastEyeReminder >= 5 && elapsed >= 5) {
       lastEyeReminder = elapsed;
@@ -1503,7 +1236,6 @@ function nextQuestion() {
   }
 }
 
-// 倒计时
 function startTimer(minutes) {
   stopTimer();
   if (!minutes || minutes <= 0) {
@@ -1526,20 +1258,15 @@ function updateTimerDisplay() {
   const mins = Math.floor(remain / 60000);
   const secs = Math.floor((remain % 60000) / 1000);
   document.getElementById('timerText').textContent = `${mins}:${secs.toString().padStart(2,'0')}`;
-
   const totalSec = quizState.duration * 60;
   const remainSec = Math.floor(remain / 1000);
   const pct = remainSec / totalSec;
   const color = pct > 0.2 ? '#4A9FF5' : '#FF6B6B';
   document.getElementById('timerCircle').style.background = `conic-gradient(${color} ${pct*360}deg, #E0E0E0 0deg)`;
-
   if (remain <= 300000 && remain > 295000) {
-    // 最后5分钟提醒
     showModal('⏰', '时间提醒', '还剩5分钟啦，加油！');
   }
-  if (remain <= 0) {
-    endQuiz();
-  }
+  if (remain <= 0) endQuiz();
 }
 
 function showEyeReminder() {
@@ -1550,31 +1277,27 @@ function dismissEyeReminder() {
 }
 
 // ============================================================
-// 十、结束答题与学习报告
+// 八、结束答题与学习报告
 // ============================================================
 
 function endQuiz() {
   stopTimer();
   if (!quizState) return;
+  const user = getCurrentUser();
 
   const totalQs = quizState.currentIndex;
   const accuracy = totalQs > 0 ? Math.round((quizState.correctCount / totalQs) * 100) : 0;
   const timeUsed = Math.round((Date.now() - quizState.startTime) / 60000 * 10) / 10;
 
-  // 识别薄弱点
-  const weakPoints = identifyWeakPoints();
-
-  // 计算奖励
-  let starsEarned = 0;
-  let coinsEarned = 0;
-  if (quizState.mode !== 'practice' && timeUsed >= 25) starsEarned++; // 完成30分钟
+  // 奖励计算
+  let starsEarned = 0, coinsEarned = 0;
+  if (quizState.mode !== 'practice' && timeUsed >= 25) starsEarned++;
   if (accuracy >= 80) starsEarned++;
-  if (weakPoints.length > 0) coinsEarned += 10;
+  if (accuracy >= 90) coinsEarned += 10;
   if (quizState.mode === 'practice' && accuracy >= 90) coinsEarned += 20;
 
-  appState.stars += starsEarned;
-  appState.coins += coinsEarned;
-  appState.totalScore += quizState.score;
+  user.stars += starsEarned;
+  user.coins += coinsEarned;
 
   // 记录历史
   const record = {
@@ -1585,13 +1308,11 @@ function endQuiz() {
     questions: totalQs,
     timeUsed: timeUsed,
     subjectScores: quizState.subjectScores,
-    weakPoints: weakPoints,
     starsEarned: starsEarned,
     coinsEarned: coinsEarned,
   };
-  appState.history.unshift(record);
-  if (appState.history.length > 50) appState.history = appState.history.slice(0, 50);
-
+  user.records.unshift(record);
+  if (user.records.length > 50) user.records = user.records.slice(0, 50);
   saveData();
 
   // 渲染报告
@@ -1616,23 +1337,23 @@ function endQuiz() {
       const acc = Math.round((ss.correct / ss.total) * 100);
       return `<div class="subject-bar">
         <div class="sb-name">${s}</div>
-        <div class="sb-track"><div class="sb-fill" style="width:${acc}%;background:${getSubjectColor(s)}">${acc}%</div></div>
+        <div class="sb-track"><div class="sb-fill" style="width:${acc}%;background:${SUBJECT_COLORS[s]||'#4A9FF5'}">${acc}%</div></div>
       </div>`;
     }).join('');
   }
 
   // 薄弱点
+  const weakPoints = identifyWeakPoints(user);
   const wpContainer = document.getElementById('weakPointsList');
   if (weakPoints.length === 0) {
     wpContainer.innerHTML = '<p style="color:var(--text-light);">太棒了！本次没有明显薄弱点，继续保持！</p>';
   } else {
     wpContainer.innerHTML = weakPoints.map(wp => {
-      const m = getMastery(wp.subject, wp.kp);
+      const m = getMastery(user, wp.subject, wp.kp);
       return `<div class="weak-point-item">
-        <div class="wp-subject">${wp.subject} · ${wp.kp}</div>
-        <div style="font-size:.85rem;color:var(--text-light);margin-bottom:6px;">正确率：${wp.accuracy}% · 错题${wp.wrongCount}次</div>
+        <div style="font-weight:700;margin-bottom:4px;">${wp.subject} · ${wp.kp}</div>
+        <div style="font-size:.85rem;color:var(--text-light);margin-bottom:6px;">掌握度：${m}%</div>
         <div class="mastery-bar"><div class="mastery-fill" style="width:${m}%"></div></div>
-        <div style="font-size:.8rem;">掌握度：${m}%</div>
       </div>`;
     }).join('');
   }
@@ -1647,7 +1368,6 @@ function endQuiz() {
     ).join('');
   }
 
-  // 奖励动画
   if (starsEarned > 0 || coinsEarned > 0) {
     setTimeout(() => {
       showConfetti();
@@ -1658,89 +1378,67 @@ function endQuiz() {
   quizState = null;
 }
 
-// 识别薄弱点
-function identifyWeakPoints() {
+function identifyWeakPoints(user) {
   const weakMap = {};
-  // 统计错题本中的薄弱知识点
-  appState.wrongBook.forEach(w => {
+  user.mistakes.forEach(w => {
     const key = w.subject + '|' + w.kp;
-    if (!weakMap[key]) weakMap[key] = { subject: w.subject, kp: w.kp, wrongCount: 0, accuracy: 100 };
+    if (!weakMap[key]) weakMap[key] = { subject: w.subject, kp: w.kp, wrongCount: 0 };
     weakMap[key].wrongCount++;
   });
-  // 结合掌握度
-  Object.keys(appState.mastery).forEach(key => {
-    const m = appState.mastery[key];
+  Object.keys(user.mastery).forEach(key => {
+    const m = user.mastery[key];
     if (m < 70) {
       const [subject, kp] = key.split('|');
-      if (!weakMap[key]) weakMap[key] = { subject, kp, wrongCount: 0, accuracy: Math.round(m) };
-      weakMap[key].accuracy = Math.round(m);
+      if (!weakMap[key]) weakMap[key] = { subject, kp, wrongCount: 0 };
     }
   });
-  // 筛选薄弱点：掌握度<70 或 错题>=2
-  const result = Object.values(weakMap).filter(wp =>
-    getMastery(wp.subject, wp.kp) < 70 || wp.wrongCount >= 2
-  );
-  return result.slice(0, 5);
+  return Object.values(weakMap).filter(wp =>
+    getMastery(user, wp.subject, wp.kp) < 70 || wp.wrongCount >= 2
+  ).slice(0, 5);
 }
 
 // ============================================================
-// 十一、复习页
+// 九、复习页
 // ============================================================
 
 let reviewTarget = null;
 
 function startReview(subject, kp) {
   reviewTarget = { subject, kp };
-  const content = document.getElementById('reviewContent');
-  const key = subject + '-' + kp;
-  const data = REVIEW_DATA[key];
-
+  const user = getCurrentUser();
+  const m = getMastery(user, subject, kp);
   document.getElementById('reviewTitle').textContent = `📖 ${subject} - ${kp}`;
-
-  let html = '';
-  if (data) {
-    html = `<div class="review-card">
-      <div class="review-section"><h4>📝 知识点讲解</h4><p>${data.explanation}</p></div>
-      <div class="review-section"><h4>💡 例题</h4><div class="review-example">${data.example}</div></div>
-      <div class="review-section"><h4>⚠️ 易错提醒</h4><div class="review-tip">${data.tip}</div></div>
-    </div>`;
-  } else {
-    // 通用复习内容
-    const m = getMastery(subject, kp);
-    html = `<div class="review-card">
-      <div class="review-section"><h4>📝 知识点：${kp}</h4>
-        <p>这是你目前掌握度为 ${m}% 的知识点。通过练习可以提升掌握度。</p>
-        <div class="mastery-bar" style="margin-top:10px;"><div class="mastery-fill" style="width:${m}%"></div></div>
+  document.getElementById('reviewContent').innerHTML = `
+    <div class="review-card">
+      <div style="margin-bottom:12px;">
+        <h4>📝 知识点：${kp}</h4>
+        <p style="color:var(--text-light);margin-top:6px;">当前掌握度：${m}%</p>
+        <div class="mastery-bar" style="margin-top:8px;"><div class="mastery-fill" style="width:${m}%"></div></div>
       </div>
-      <div class="review-section"><h4>💪 提升方法</h4>
-        <ul style="padding-left:20px;line-height:2;">
+      <div style="margin-bottom:12px;">
+        <h4>💪 提升方法</h4>
+        <ul style="padding-left:20px;line-height:2;margin-top:6px;">
           <li>先阅读课本相关内容</li>
           <li>完成下面的练习题</li>
           <li>错题反复练习直到掌握</li>
         </ul>
       </div>
     </div>`;
-  }
-  content.innerHTML = html;
   showView('review');
 }
 
 function startPracticeFromReview() {
   if (!reviewTarget) return;
-  startQuiz('practice', {
-    subject: reviewTarget.subject,
-    kp: reviewTarget.kp,
-    count: 10,
-    duration: 0,
-  });
+  startQuiz('practice', { subject: reviewTarget.subject, count: 10, duration: 0 });
 }
 
 // ============================================================
-// 十二、历史成绩、错题本、奖励背包渲染
+// 十、历史成绩、错题本、奖励背包
 // ============================================================
 
 function renderHistory() {
-  const records = appState.history.slice(0, 7);
+  const user = getCurrentUser();
+  const records = user.records.slice(0, 7);
   const chart = document.getElementById('chartContainer');
   const list = document.getElementById('historyList');
 
@@ -1750,8 +1448,7 @@ function renderHistory() {
     return;
   }
 
-  // 柱状图
-  chart.innerHTML = records.map((r, i) => {
+  chart.innerHTML = records.map(r => {
     const date = new Date(r.date);
     const label = `${date.getMonth()+1}/${date.getDate()}`;
     return `<div class="chart-bar-wrap">
@@ -1762,93 +1459,109 @@ function renderHistory() {
     </div>`;
   }).join('');
 
-  // 列表
   list.innerHTML = records.map(r => {
     const date = new Date(r.date);
     const modeText = r.mode === 'smart' ? '智能' : r.mode === 'full' ? '全科' : r.mode === 'single' ? '单科' : '练习';
     return `<div class="history-item">
       <div>
-        <div class="hi-date">${date.getFullYear()}-${(date.getMonth()+1).toString().padStart(2,'0')}-${date.getDate().toString().padStart(2,'0')}</div>
-        <div class="hi-detail">${modeText}模式 · 正确率${r.accuracy}% · ${r.questions}题 · ${r.timeUsed}分钟</div>
+        <div style="font-weight:600;">${date.getFullYear()}-${(date.getMonth()+1).toString().padStart(2,'0')}-${date.getDate().toString().padStart(2,'0')}</div>
+        <div style="font-size:.8rem;color:var(--text-light);margin-top:3px;">${modeText}模式 · 正确率${r.accuracy}% · ${r.questions}题</div>
       </div>
-      <div class="hi-score">${r.score}分</div>
+      <div style="font-size:1.2rem;font-weight:700;color:var(--primary);">${r.score}分</div>
     </div>`;
   }).join('');
 }
 
 function renderWrongBook() {
+  const user = getCurrentUser();
   const container = document.getElementById('wrongList');
-  if (appState.wrongBook.length === 0) {
+  const filterBar = document.getElementById('wrongFilterBar');
+
+  const subjects = ['全部', ...new Set(user.mistakes.map(m => m.subject))];
+  filterBar.innerHTML = subjects.map((s, i) =>
+    `<div class="filter-chip ${i===0?'active':''}" data-subject="${s}" onclick="filterWrong('${s}', this)">${s}</div>`
+  ).join('');
+
+  if (user.mistakes.length === 0) {
     container.innerHTML = '<p style="color:var(--text-light);text-align:center;padding:40px;">错题本是空的，快去闯关吧！</p>';
     return;
   }
-  container.innerHTML = appState.wrongBook.map(w =>
+  container.innerHTML = user.mistakes.slice(0, 50).map(w =>
     `<div class="wrong-item">
-      <div class="wi-question">【${w.subject}】${w.question}</div>
-      <div class="wi-answer">✅ 正确答案：${w.options[w.answer]}</div>
-      <div class="wi-explanation">💡 ${w.explanation}</div>
+      <div style="font-weight:600;margin-bottom:6px;line-height:1.5;font-size:.95rem;">【${w.subject}】${w.question}</div>
+      <div style="color:var(--success);font-size:.85rem;margin-bottom:4px;">✅ 正确答案：${w.options[w.answer]}</div>
+      <div style="color:var(--text-light);font-size:.8rem;line-height:1.5;">💡 ${w.explanation}</div>
     </div>`
   ).join('');
 }
 
-function filterWrong(subject) {
+function filterWrong(subject, el) {
   document.querySelectorAll('#wrongFilterBar .filter-chip').forEach(c => c.classList.remove('active'));
-  event.target.classList.add('active');
+  el.classList.add('active');
+  const user = getCurrentUser();
   const container = document.getElementById('wrongList');
-  let list = appState.wrongBook;
-  if (subject !== 'all') list = list.filter(w => w.subject === subject);
+  let list = user.mistakes;
+  if (subject !== '全部') list = list.filter(w => w.subject === subject);
   if (list.length === 0) {
     container.innerHTML = '<p style="color:var(--text-light);text-align:center;padding:40px;">暂无错题</p>';
   } else {
     container.innerHTML = list.map(w =>
       `<div class="wrong-item">
-        <div class="wi-question">【${w.subject}】${w.question}</div>
-        <div class="wi-answer">✅ 正确答案：${w.options[w.answer]}</div>
-        <div class="wi-explanation">💡 ${w.explanation}</div>
+        <div style="font-weight:600;margin-bottom:6px;line-height:1.5;font-size:.95rem;">【${w.subject}】${w.question}</div>
+        <div style="color:var(--success);font-size:.85rem;margin-bottom:4px;">✅ 正确答案：${w.options[w.answer]}</div>
+        <div style="color:var(--text-light);font-size:.8rem;line-height:1.5;">💡 ${w.explanation}</div>
       </div>`
     ).join('');
   }
 }
 
 function renderRewards() {
-  document.getElementById('rwStars').textContent = appState.stars;
-  document.getElementById('rwCoins').textContent = appState.coins;
-  document.getElementById('rwTitle').textContent = appState.title;
+  const user = getCurrentUser();
+  document.getElementById('rwStars').textContent = user.stars;
+  document.getElementById('rwCoins').textContent = user.coins;
 
   const badges = [
-    { icon: '⭐', name: '初露锋芒', condition: '完成首次学习' },
-    { icon: '🌟', name: '学习之星', condition: '累计10颗星星' },
-    { icon: '🏅', name: '坚持之星', condition: '连续3天打卡' },
-    { icon: '🎯', name: '百发百中', condition: '正确率100%' },
-    { icon: '💪', name: '错题克星', condition: '重做20道错题' },
-    { icon: '📚', name: '博学多才', condition: '五科都学过' },
+    { icon: '⭐', name: '初露锋芒', threshold: 2 },
+    { icon: '🌟', name: '学习之星', threshold: 10 },
+    { icon: '🏅', name: '坚持之星', threshold: 20 },
+    { icon: '🎯', name: '百发百中', threshold: 30 },
+    { icon: '💪', name: '错题克星', threshold: 40 },
+    { icon: '📚', name: '博学多才', threshold: 50 },
   ];
-  const grid = document.getElementById('badgesGrid');
-  grid.innerHTML = badges.map((b, i) => {
-    const unlocked = appState.stars >= (i+1) * 2;
-    return `<div class="badge-card ${unlocked?'unlocked':''}">
-      <div class="badge-icon">${b.icon}</div>
-      <div class="badge-name">${b.name}</div>
-    </div>`;
-  }).join('');
+  document.getElementById('badgesGrid').innerHTML = badges.map(b =>
+    `<div class="badge-card ${user.stars >= b.threshold?'unlocked':''}">
+      <div style="font-size:1.8rem;margin-bottom:4px;">${b.icon}</div>
+      <div style="font-size:.75rem;font-weight:600;">${b.name}</div>
+    </div>`
+  ).join('');
 }
 
 // ============================================================
-// 十三、家长设置与题库管理
+// 十一、家长后台与题库管理
 // ============================================================
 
 function openParentSettings() {
+  // 如果还没设置过密码，先引导设置密码
+  if (!appData.parentPassword) {
+    openSetPwdModal();
+    return;
+  }
   document.getElementById('parentConfirmInput').value = '';
+  document.getElementById('parentModalHint').style.display = 'none';
+  document.getElementById('parentModalTitle').textContent = '🔐 家长验证';
+  document.getElementById('parentModalDesc').textContent = '请输入家长密码进入后台';
   document.getElementById('parentModal').classList.add('show');
 }
 
 function checkParentConfirm() {
-  const val = parseInt(document.getElementById('parentConfirmInput').value);
-  if (val === 56) {
+  const val = document.getElementById('parentConfirmInput').value;
+  if (val === appData.parentPassword) {
     closeParentModal();
     showView('settings');
   } else {
-    showModal('❌', '答案错误', '7×8=56哦，再想想~');
+    document.getElementById('parentModalHint').style.display = 'block';
+    document.getElementById('parentConfirmInput').value = '';
+    document.getElementById('parentConfirmInput').focus();
   }
 }
 
@@ -1856,14 +1569,86 @@ function closeParentModal() {
   document.getElementById('parentModal').classList.remove('show');
 }
 
+// 设置密码弹窗
+function openSetPwdModal() {
+  document.getElementById('newPwdInput').value = '';
+  document.getElementById('confirmPwdInput').value = '';
+  document.getElementById('setPwdHint').style.display = 'none';
+  document.getElementById('setPwdModal').classList.add('show');
+}
+
+function closeSetPwdModal() {
+  document.getElementById('setPwdModal').classList.remove('show');
+}
+
+function confirmSetPassword() {
+  const p1 = document.getElementById('newPwdInput').value;
+  const p2 = document.getElementById('confirmPwdInput').value;
+  const hint = document.getElementById('setPwdHint');
+
+  if (!p1 || p1.length < 4) {
+    hint.textContent = '密码至少4位数字';
+    hint.style.display = 'block';
+    return;
+  }
+  if (p1 !== p2) {
+    hint.textContent = '两次输入的密码不一致';
+    hint.style.display = 'block';
+    return;
+  }
+  appData.parentPassword = p1;
+  saveData();
+  closeSetPwdModal();
+  showModal('✅', '密码设置成功', '以后进入家长后台需要输入这个密码。');
+  showView('settings');
+}
+
+// 修改密码（在家长后台里调用）
+function changePassword() {
+  const oldPwd = prompt('请输入当前密码：');
+  if (oldPwd !== appData.parentPassword) {
+    alert('当前密码错误！');
+    return;
+  }
+  const newPwd = prompt('请输入新密码（至少4位）：');
+  if (!newPwd || newPwd.length < 4) {
+    alert('新密码至少4位！');
+    return;
+  }
+  const confirmPwd = prompt('请再次输入新密码：');
+  if (newPwd !== confirmPwd) {
+    alert('两次输入不一致！');
+    return;
+  }
+  appData.parentPassword = newPwd;
+  saveData();
+  alert('密码修改成功！');
+}
+
 function renderSettings() {
-  document.getElementById('gradeSelect').value = appState.grade;
-  document.getElementById('termSelect').value = appState.term;
+  const user = getCurrentUser();
+  document.getElementById('gradeSelect').value = user.grade;
+  document.getElementById('termSelect').value = user.term;
+
+  // 小朋友列表
+  const userList = document.getElementById('settingsUserList');
+  userList.innerHTML = appData.users.map(u => `
+    <div class="user-card" style="margin-bottom:8px;">
+      <div class="user-avatar">${u.avatar}</div>
+      <div class="user-info">
+        <div class="user-name">${u.name} ${u.id === appData.currentUserId ? '<span class="badge badge-green">当前</span>' : ''}</div>
+        <div class="user-meta">${u.grade} · ${u.stars}⭐</div>
+      </div>
+      <div class="user-actions">
+        ${u.id !== appData.currentUserId ? `<button class="btn btn-primary btn-sm" onclick="switchUser('${u.id}')">切换</button>` : ''}
+      </div>
+    </div>
+  `).join('');
 
   // 科目开关
   const subjContainer = document.getElementById('subjectSettings');
-  subjContainer.innerHTML = Object.keys(appState.subjects).map(s => {
-    const subj = appState.subjects[s];
+  subjContainer.innerHTML = Object.keys(user.subjects).map(s => {
+    const subj = user.subjects[s];
     return `<div class="setting-row">
       <div><div class="setting-label">${s}</div><div class="setting-desc">第${subj.currentUnit}单元</div></div>
       <div class="switch ${subj.enabled?'on':''}" onclick="toggleSubject('${s}')"></div>
@@ -1872,75 +1657,66 @@ function renderSettings() {
 
   // 学习进度
   const progContainer = document.getElementById('progressSettings');
-  progContainer.innerHTML = Object.keys(appState.subjects).map(s => {
-    const subj = appState.subjects[s];
+  progContainer.innerHTML = Object.keys(user.subjects).map(s => {
+    const subj = user.subjects[s];
     if (!subj.enabled) return '';
-    const gradeData = GRADE_DATA[appState.grade];
-    const termData = gradeData[s] ? gradeData[s][appState.term] : [];
+    const units = getUnits(user.grade, s);
     return `<div class="progress-setting">
-      <div style="font-weight:700;margin-bottom:8px;color:${getSubjectColor(s)}">${s}</div>
+      <div style="font-weight:700;margin-bottom:8px;color:${SUBJECT_COLORS[s]||'#4A9FF5'}">${s}</div>
       <div class="setting-row">
         <div class="setting-label">当前单元</div>
         <select class="select-input" onchange="changeUnit('${s}', this.value)">
-          ${termData.map((u, i) => `<option value="${i+1}" ${i+1===subj.currentUnit?'selected':''}>第${u.unit}单元 ${u.name}</option>`).join('')}
+          ${units.map((u, i) => `<option value="${i+1}" ${i+1===subj.currentUnit?'selected':''}>第${u.unit}单元 ${u.name}</option>`).join('')}
         </select>
       </div>
     </div>`;
   }).join('');
-
-  // 允许超前
-  const allowAhead = appState.subjects['数学'].allowAhead;
-  document.getElementById('allowAheadSwitch').className = 'switch ' + (allowAhead ? 'on' : '');
 }
 
 function toggleSubject(subject) {
-  appState.subjects[subject].enabled = !appState.subjects[subject].enabled;
+  const user = getCurrentUser();
+  user.subjects[subject].enabled = !user.subjects[subject].enabled;
   saveData();
   renderSettings();
 }
 
 function changeUnit(subject, unit) {
-  appState.subjects[subject].currentUnit = parseInt(unit);
+  const user = getCurrentUser();
+  user.subjects[subject].currentUnit = parseInt(unit);
   saveData();
 }
 
-function toggleAllowAhead() {
-  Object.keys(appState.subjects).forEach(s => {
-    appState.subjects[s].allowAhead = !appState.subjects[s].allowAhead;
+function changeGrade(g) {
+  const user = getCurrentUser();
+  user.grade = g;
+  // 重新初始化科目
+  const oldSubjects = user.subjects;
+  user.subjects = {};
+  GRADE_SUBJECTS[g].forEach(s => {
+    user.subjects[s] = oldSubjects[s] || { enabled: true, currentUnit: 1, allowAhead: false };
   });
   saveData();
   renderSettings();
 }
 
-function changeGrade(g) {
-  appState.grade = parseInt(g);
-  saveData();
-  renderSettings();
-}
-
 function changeTerm(t) {
-  appState.term = t;
+  const user = getCurrentUser();
+  user.term = t;
   saveData();
-  renderSettings();
 }
 
 function renderQBank() {
-  const total = STATIC_QUESTIONS.length + appState.qbank.length;
-  const seen = Object.keys(appState.exposures).length;
-  document.getElementById('qbTotal').textContent = total;
-  document.getElementById('qbSeen').textContent = seen;
-  document.getElementById('qbNew').textContent = total - seen;
-  document.getElementById('qbVer').textContent = appState.qbankVersion;
+  document.getElementById('qbTotal').textContent = appData.globalQuestionBank.length;
+  document.getElementById('qbSeen').textContent = Object.keys(appData.exposure).length;
+  document.getElementById('qbNew').textContent = appData.globalQuestionBank.length - Object.keys(appData.exposure).length;
+  document.getElementById('qbVer').textContent = appData.questionBankVersion;
 }
 
 function exportQuestionBank() {
-  const data = { bank: [...STATIC_QUESTIONS, ...appState.qbank], version: appState.qbankVersion };
-  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const blob = new Blob([JSON.stringify(appData.globalQuestionBank, null, 2)], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
-  a.href = url;
-  a.download = 'question_bank.json';
-  a.click();
+  a.href = url; a.download = 'question_bank.json'; a.click();
   URL.revokeObjectURL(url);
 }
 
@@ -1951,46 +1727,39 @@ function importQuestionBank(event) {
   reader.onload = function(e) {
     try {
       const data = JSON.parse(e.target.result);
-      if (data.bank && Array.isArray(data.bank)) {
-        const existingIds = new Set(appState.qbank.map(q => q.id));
+      if (Array.isArray(data)) {
+        const existingIds = new Set(appData.globalQuestionBank.map(q => q.id));
         let added = 0;
-        data.bank.forEach(q => {
-          if (!existingIds.has(q.id)) {
-            appState.qbank.push(q);
-            added++;
-          }
-        });
+        data.forEach(q => { if (!existingIds.has(q.id)) { appData.globalQuestionBank.push(q); added++; } });
         saveData();
         showModal('✅', '导入成功', `成功导入 ${added} 道新题！`);
       }
     } catch(err) {
-      showModal('❌', '导入失败', '文件格式不正确，请检查JSON格式。');
+      showModal('❌', '导入失败', '文件格式不正确。');
     }
   };
   reader.readAsText(file);
   event.target.value = '';
 }
 
-function exportData() {
-  const blob = new Blob([JSON.stringify(appState, null, 2)], { type: 'application/json' });
+function exportAllData() {
+  const blob = new Blob([JSON.stringify(appData, null, 2)], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
-  a.href = url;
-  a.download = 'learning_data.json';
-  a.click();
+  a.href = url; a.download = 'all_learning_data.json'; a.click();
   URL.revokeObjectURL(url);
 }
 
-function importData(event) {
+function importAllData(event) {
   const file = event.target.files[0];
   if (!file) return;
   const reader = new FileReader();
   reader.onload = function(e) {
     try {
       const data = JSON.parse(e.target.result);
-      appState = { ...appState, ...data };
+      appData = { ...appData, ...data };
       saveData();
-      showModal('✅', '导入成功', '学习数据已恢复！');
+      showModal('✅', '导入成功', '数据已恢复！');
       renderHome();
     } catch(err) {
       showModal('❌', '导入失败', '文件格式不正确。');
@@ -2000,15 +1769,60 @@ function importData(event) {
   event.target.value = '';
 }
 
-function resetAllData() {
-  if (confirm('确定要重置所有数据吗？这将清除全部成绩、错题和奖励！')) {
-    localStorage.removeItem(STORAGE_KEY);
-    location.reload();
+function resetCurrentUser() {
+  const user = getCurrentUser();
+  if (!confirm(`确定要重置 ${user.name} 的所有数据吗？`)) return;
+  user.records = [];
+  user.mistakes = [];
+  user.mastery = {};
+  user.stars = 0;
+  user.coins = 0;
+  user.badges = [];
+  user.exposure = {};
+  saveData();
+  showModal('✅', '重置完成', `${user.name} 的数据已重置。`);
+}
+
+// ============================================================
+// 十二、音效与动画
+// ============================================================
+
+function playSound(type) {
+  try {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.connect(gain); gain.connect(ctx.destination);
+    if (type === 'correct') {
+      osc.frequency.value = 600; osc.type = 'sine';
+      gain.gain.setValueAtTime(0.1, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.3);
+      osc.start(ctx.currentTime); osc.stop(ctx.currentTime + 0.3);
+    } else if (type === 'wrong') {
+      osc.frequency.value = 200; osc.type = 'sawtooth';
+      gain.gain.setValueAtTime(0.1, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.4);
+      osc.start(ctx.currentTime); osc.stop(ctx.currentTime + 0.4);
+    }
+  } catch(e) {}
+}
+
+function showConfetti() {
+  const colors = ['#FF6B6B','#4A9FF5','#FFD93D','#2ED573','#A855F7','#FF9F43'];
+  for (let i = 0; i < 30; i++) {
+    const c = document.createElement('div');
+    c.className = 'confetti';
+    c.style.left = Math.random() * 100 + 'vw';
+    c.style.background = colors[Math.floor(Math.random() * colors.length)];
+    c.style.animationDelay = Math.random() * 0.5 + 's';
+    c.style.animationDuration = (2 + Math.random() * 2) + 's';
+    document.body.appendChild(c);
+    setTimeout(() => c.remove(), 4000);
   }
 }
 
 // ============================================================
-// 十四、弹窗与初始化
+// 十三、弹窗与初始化
 // ============================================================
 
 function showModal(icon, title, text) {
@@ -2025,9 +1839,16 @@ function closeModal() {
 function init() {
   loadData();
 
+  // 如果题库为空，生成完整题库（3000+题）
+  if (!appData.globalQuestionBank || appData.globalQuestionBank.length < 3000) {
+    appData.globalQuestionBank = generateFullBank();
+    appData.questionBankVersion = 'v' + new Date().toISOString().slice(0,10).replace(/-/g,'') + '_auto';
+    saveData();
+  }
+
   // 每日首次自动重出题
   const today = new Date().toDateString();
-  if (appState.lastRegenDate !== today) {
+  if (appData.lastRegenDate !== today) {
     smartRegenerate();
   }
 
