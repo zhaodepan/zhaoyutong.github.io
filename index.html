@@ -3,29 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>四年级全科闯关乐园</title>
+<title>小学全科闯关乐园</title>
 <style>
-/* ========== 基础重置 ========== */
 *{margin:0;padding:0;box-sizing:border-box}
-:root{
-  --primary:#4A9FF5;--primary-dark:#2E7DD1;--accent:#FF9F43;
-  --success:#2ED573;--danger:#FF6B6B;--warning:#FFD93D;--purple:#A855F7;
-  --bg:#F0F7FF;--card:#fff;--text:#2D3436;--text-light:#636E72;
-  --radius:16px;--shadow:0 4px 20px rgba(74,159,245,.15);
-}
+:root{--primary:#4A9FF5;--primary-dark:#2E7DD1;--accent:#FF9F43;--success:#2ED573;--danger:#FF6B6B;--warning:#FFD93D;--purple:#A855F7;--bg:#F0F7FF;--card:#fff;--text:#2D3436;--text-light:#636E72;--radius:16px;--shadow:0 4px 20px rgba(74,159,245,.15)}
 html{font-size:16px}
 body{font-family:"PingFang SC","Microsoft YaHei",sans-serif;background:linear-gradient(135deg,#E8F4FD 0%,#F0F7FF 50%,#FFF5E6 100%);color:var(--text);min-height:100vh;overflow-x:hidden}
 button{font-family:inherit;cursor:pointer;border:none;outline:none}
 input,select,textarea{font-family:inherit;outline:none}
-
-/* ========== 通用组件 ========== */
 .view{display:none;min-height:100vh;padding:16px;max-width:900px;margin:0 auto}
 .view.active{display:block}
 .card{background:var(--card);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);margin-bottom:16px}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 24px;border-radius:50px;font-size:1.05rem;font-weight:600;transition:all .2s;min-height:48px;border:none}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 24px;border-radius:50px;font-size:1.05rem;font-weight:600;transition:all .2s;min-height:48px}
 .btn:active{transform:scale(.96)}
 .btn-primary{background:var(--primary);color:#fff}
-.btn-primary:hover{background:var(--primary-dark)}
 .btn-accent{background:var(--accent);color:#fff}
 .btn-success{background:var(--success);color:#fff}
 .btn-danger{background:var(--danger);color:#fff}
@@ -38,8 +29,6 @@ input,select,textarea{font-family:inherit;outline:none}
 .badge-orange{background:#FFF3E0;color:#F57C00}
 .badge-red{background:#FFEBEE;color:#D32F2F}
 .badge-purple{background:#F3E5F5;color:#7B1FA2}
-
-/* ========== 顶部栏 ========== */
 .top-bar{display:none;justify-content:space-between;align-items:center;padding:12px 16px;background:#fff;border-radius:var(--radius);margin-bottom:16px;box-shadow:var(--shadow);position:sticky;top:10px;z-index:100}
 .top-bar.show{display:flex}
 .stats-pills{display:flex;gap:10px;flex-wrap:wrap}
@@ -47,11 +36,10 @@ input,select,textarea{font-family:inherit;outline:none}
 .pill-star{background:#FFF9C4;color:#F57F17}
 .pill-coin{background:#FFF3E0;color:#E65100}
 .pill-score{background:#E3F2FD;color:#1565C0}
-
-/* ========== 首页 ========== */
 .hero{text-align:center;padding:28px 20px;background:linear-gradient(135deg,#4A9FF5 0%,#A855F7 100%);border-radius:24px;color:#fff;margin-bottom:20px;position:relative;overflow:hidden}
 .hero h1{font-size:1.8rem;margin-bottom:6px;text-shadow:0 2px 8px rgba(0,0,0,.15)}
 .hero p{font-size:1rem;opacity:.9;margin-bottom:16px}
+.grade-badge{display:inline-block;background:rgba(255,255,255,.25);padding:6px 16px;border-radius:20px;font-size:.95rem;font-weight:600;margin-bottom:12px}
 .mode-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin-bottom:20px}
 .mode-card{background:#fff;border-radius:20px;padding:20px 14px;text-align:center;box-shadow:var(--shadow);cursor:pointer;transition:transform .2s;border-top:4px solid}
 .mode-card:hover{transform:translateY(-4px)}
@@ -62,20 +50,16 @@ input,select,textarea{font-family:inherit;outline:none}
 .mode-card.full{border-color:#4A9FF5}
 .mode-card.single{border-color:#2ED573}
 .mode-card.practice{border-color:#FF9F43}
-
-.menu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px}
-.menu-item{background:#fff;border-radius:16px;padding:14px;text-align:center;box-shadow:var(--shadow);cursor:pointer;transition:transform .2s}
+.menu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:12px}
+.menu-item{background:#fff;border-radius:16px;padding:14px 10px;text-align:center;box-shadow:var(--shadow);cursor:pointer;transition:transform .2s}
 .menu-item:hover{transform:translateY(-2px)}
 .menu-item .menu-icon{font-size:1.8rem;margin-bottom:6px}
-.menu-item .menu-label{font-weight:600;font-size:.9rem}
-
+.menu-item .menu-label{font-weight:600;font-size:.85rem}
 .progress-overview{margin-top:16px}
 .progress-subject{margin-bottom:10px}
 .progress-subject .ps-head{display:flex;justify-content:space-between;font-size:.9rem;margin-bottom:4px}
 .progress-bar{height:8px;background:#E0E0E0;border-radius:4px;overflow:hidden}
 .progress-fill{height:100%;border-radius:4px;transition:width .3s}
-
-/* ========== 答题页 ========== */
 .quiz-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:12px}
 .timer-circle{width:70px;height:70px;border-radius:50%;display:flex;align-items:center;justify-content:center;position:relative;flex-shrink:0}
 .timer-circle::before{content:'';position:absolute;width:56px;height:56px;background:#fff;border-radius:50%}
@@ -105,8 +89,6 @@ input,select,textarea{font-family:inherit;outline:none}
 .feedback-explanation{line-height:1.6;color:var(--text-light)}
 .quiz-actions{display:flex;gap:12px;margin-top:20px;flex-wrap:wrap}
 .mode-tag{position:absolute;top:12px;right:16px;font-size:.8rem;padding:4px 10px;border-radius:12px;background:rgba(255,255,255,.9);font-weight:600}
-
-/* ========== 报告页 ========== */
 .report-hero{text-align:center;padding:28px 20px;background:linear-gradient(135deg,#2ED573 0%,#4A9FF5 100%);border-radius:24px;color:#fff;margin-bottom:20px}
 .report-score{font-size:3rem;font-weight:800;margin:10px 0;text-shadow:0 2px 10px rgba(0,0,0,.15)}
 .report-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:10px;margin-bottom:20px}
@@ -121,8 +103,6 @@ input,select,textarea{font-family:inherit;outline:none}
 .weak-point-item .wp-subject{font-weight:700;margin-bottom:4px}
 .mastery-bar{height:8px;background:#E0E0E0;border-radius:4px;overflow:hidden;margin:6px 0}
 .mastery-fill{height:100%;background:linear-gradient(90deg,#FF6B6B,#FFD93D);border-radius:4px}
-
-/* ========== 历史页 ========== */
 .history-chart{background:#fff;border-radius:16px;padding:20px;box-shadow:var(--shadow);margin-bottom:16px}
 .chart-container{height:180px;display:flex;align-items:flex-end;gap:10px;padding-top:20px;border-bottom:2px solid #E0E0E0}
 .chart-bar-wrap{flex:1;display:flex;flex-direction:column;align-items:center;height:100%;justify-content:flex-end}
@@ -134,8 +114,6 @@ input,select,textarea{font-family:inherit;outline:none}
 .history-item .hi-date{font-weight:600;font-size:.9rem}
 .history-item .hi-detail{font-size:.8rem;color:var(--text-light);margin-top:3px}
 .history-item .hi-score{font-size:1.2rem;font-weight:700;color:var(--primary)}
-
-/* ========== 错题本 ========== */
 .filter-bar{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
 .filter-chip{padding:6px 14px;border-radius:20px;background:#fff;border:2px solid #E0E0E0;font-size:.85rem;cursor:pointer;transition:all .2s}
 .filter-chip.active{border-color:var(--primary);background:var(--primary);color:#fff}
@@ -143,8 +121,6 @@ input,select,textarea{font-family:inherit;outline:none}
 .wrong-item .wi-question{font-weight:600;margin-bottom:6px;line-height:1.5;font-size:.95rem}
 .wrong-item .wi-answer{color:var(--success);font-size:.85rem;margin-bottom:4px}
 .wrong-item .wi-explanation{color:var(--text-light);font-size:.8rem;line-height:1.5}
-
-/* ========== 奖励背包 ========== */
 .reward-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:14px}
 .reward-card{background:#fff;border-radius:14px;padding:18px 10px;text-align:center;box-shadow:var(--shadow)}
 .reward-card .reward-icon{font-size:2.2rem;margin-bottom:6px}
@@ -155,8 +131,6 @@ input,select,textarea{font-family:inherit;outline:none}
 .badge-card.unlocked{opacity:1;background:linear-gradient(135deg,#FFF9C4,#FFF3E0)}
 .badge-card .badge-icon{font-size:1.8rem;margin-bottom:4px}
 .badge-card .badge-name{font-size:.75rem;font-weight:600}
-
-/* ========== 家长设置 ========== */
 .setting-row{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid #F0F0F0;flex-wrap:wrap;gap:8px}
 .setting-row:last-child{border-bottom:none}
 .setting-label{font-weight:600}
@@ -167,20 +141,12 @@ input,select,textarea{font-family:inherit;outline:none}
 .switch.on::after{transform:translateX(24px)}
 .progress-setting{margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid #F0F0F0}
 .progress-setting:last-child{border-bottom:none}
-.unit-list{margin-top:10px;padding-left:12px}
-.unit-item{display:flex;justify-content:space-between;align-items:center;padding:6px 0;font-size:.9rem}
-.unit-item .unit-name{flex:1}
-.unit-item .unit-status{font-size:.8rem;color:var(--text-light)}
-
-/* ========== 复习/练习页 ========== */
 .review-card{background:#fff;border-radius:14px;padding:18px;box-shadow:var(--shadow);margin-bottom:14px}
 .review-section{margin-bottom:14px}
 .review-section h4{color:var(--primary);margin-bottom:6px;font-size:1rem}
 .review-section p,.review-section li{line-height:1.7}
 .review-example{background:#F5F9FF;padding:10px;border-radius:8px;margin-top:6px;font-size:.95rem}
 .review-tip{background:#FFF3E0;padding:10px;border-radius:8px;border-left:4px solid var(--accent);margin-top:6px;font-size:.9rem}
-
-/* ========== 弹窗 ========== */
 .modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;z-index:1000;padding:20px}
 .modal-overlay.show{display:flex}
 .modal{background:#fff;border-radius:20px;padding:28px;max-width:380px;width:100%;text-align:center;animation:modalIn .3s}
@@ -188,16 +154,10 @@ input,select,textarea{font-family:inherit;outline:none}
 .modal h3{margin-bottom:10px;font-size:1.2rem}
 .modal p{color:var(--text-light);margin-bottom:18px;line-height:1.6;font-size:.95rem}
 .confirm-input{width:100%;padding:10px 14px;border:2px solid #E0E0E0;border-radius:10px;font-size:1.1rem;text-align:center;margin-bottom:16px}
-
-/* 撒花 */
 .confetti{position:fixed;width:10px;height:10px;top:-10px;z-index:999;animation:confettiFall 3s linear forwards}
 @keyframes confettiFall{to{transform:translateY(100vh) rotate(720deg);opacity:0}}
-
-/* 休息提醒 */
 .eye-reminder{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#fff;border-radius:20px;padding:28px;box-shadow:0 10px 40px rgba(0,0,0,.2);z-index:999;text-align:center;max-width:300px;display:none}
 .eye-reminder.show{display:block}
-
-/* 模式选择 */
 .mode-select-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin:16px 0}
 .mode-option{background:#fff;border-radius:14px;padding:16px 10px;text-align:center;box-shadow:var(--shadow);cursor:pointer;border:3px solid transparent;transition:all .2s}
 .mode-option:hover{transform:translateY(-2px)}
@@ -205,29 +165,14 @@ input,select,textarea{font-family:inherit;outline:none}
 .mode-option .mo-icon{font-size:2rem;margin-bottom:6px}
 .mode-option .mo-name{font-weight:600;font-size:.95rem}
 .mode-option .mo-desc{font-size:.75rem;color:var(--text-light);margin-top:4px}
-
-/* 题库管理 */
-.qbank-stat{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:10px;margin-bottom:16px}
-
-/* 响应式 */
-@media(max-width:600px){
-  .hero h1{font-size:1.4rem}
-  .report-score{font-size:2.2rem}
-  .question-text{font-size:1.05rem}
-  .mode-grid{grid-template-columns:repeat(2,1fr)}
-  .menu-grid{grid-template-columns:repeat(3,1fr)}
-  .top-bar{flex-direction:column;gap:8px}
-  .stats-pills{justify-content:center}
-}
+.select-input{padding:8px 14px;border:2px solid #E0E0E0;border-radius:10px;font-size:.95rem}
+@media(max-width:600px){.hero h1{font-size:1.4rem}.report-score{font-size:2.2rem}.question-text{font-size:1.05rem}.mode-grid{grid-template-columns:repeat(2,1fr)}.menu-grid{grid-template-columns:repeat(3,1fr)}.top-bar{flex-direction:column;gap:8px}.stats-pills{justify-content:center}}
 .hidden{display:none!important}
 .text-center{text-align:center}
-.mt-2{margin-top:16px}
-.mb-2{margin-bottom:16px}
 </style>
 </head>
 <body>
 
-<!-- 顶部公共栏 -->
 <div class="top-bar" id="topBar">
   <div class="stats-pills">
     <div class="stat-pill pill-star">★ <span id="starCount">0</span></div>
@@ -237,75 +182,54 @@ input,select,textarea{font-family:inherit;outline:none}
   <button class="btn btn-outline btn-sm" onclick="goHome()">首页</button>
 </div>
 
-<!-- ===== 视图：首页 ===== -->
 <section class="view" id="view-home">
   <div class="hero">
-    <h1>🎓 四年级全科闯关乐园</h1>
+    <div class="grade-badge" id="heroGrade">四年级 · 上册</div>
+    <h1>🎓 小学全科闯关乐园</h1>
     <p>选择模式，开始今天的学习挑战！</p>
   </div>
-
   <div class="mode-grid">
     <div class="mode-card smart" onclick="startModeSelect('smart')">
-      <div class="mode-icon">🧠</div>
-      <div class="mode-name">智能模式</div>
-      <div class="mode-desc">优先补薄弱知识点，自适应难度，越学越聪明</div>
+      <div class="mode-icon">🧠</div><div class="mode-name">智能模式</div>
+      <div class="mode-desc">优先补薄弱知识点，自适应难度</div>
     </div>
     <div class="mode-card full" onclick="startModeSelect('full')">
-      <div class="mode-icon">🌐</div>
-      <div class="mode-name">全科模式</div>
-      <div class="mode-desc">语文数学英语科学道法，五科轮换全面练习</div>
+      <div class="mode-icon">🌐</div><div class="mode-name">全科模式</div>
+      <div class="mode-desc">五科轮换，全面检测</div>
     </div>
     <div class="mode-card single" onclick="startModeSelect('single')">
-      <div class="mode-icon">📚</div>
-      <div class="mode-name">单科模式</div>
-      <div class="mode-desc">专注一个科目，按学习进度针对性练习</div>
+      <div class="mode-icon">📚</div><div class="mode-name">单科模式</div>
+      <div class="mode-desc">专注一个科目，按进度练习</div>
     </div>
     <div class="mode-card practice" onclick="startModeSelect('practice')">
-      <div class="mode-icon">✏️</div>
-      <div class="mode-name">练习模式</div>
-      <div class="mode-desc">专项练习、错题重做、薄弱点突破，自由刷题</div>
+      <div class="mode-icon">✏️</div><div class="mode-name">练习模式</div>
+      <div class="mode-desc">专项练习、错题重做、薄弱点突破</div>
     </div>
   </div>
-
   <div class="card">
     <h3 style="margin-bottom:12px;">📊 各科学习进度</h3>
     <div class="progress-overview" id="progressOverview"></div>
   </div>
-
   <div class="menu-grid">
-    <div class="menu-item" onclick="showView('history')">
-      <div class="menu-icon">📈</div><div class="menu-label">历史成绩</div>
-    </div>
-    <div class="menu-item" onclick="showView('wrongbook')">
-      <div class="menu-icon">📝</div><div class="menu-label">错题本</div>
-    </div>
-    <div class="menu-item" onclick="showView('rewards')">
-      <div class="menu-icon">🎁</div><div class="menu-label">奖励背包</div>
-    </div>
-    <div class="menu-item" onclick="showView('qbank')">
-      <div class="menu-icon">🗂️</div><div class="menu-label">题库管理</div>
-    </div>
-    <div class="menu-item" onclick="openParentSettings()">
-      <div class="menu-icon">⚙️</div><div class="menu-label">家长设置</div>
-    </div>
+    <div class="menu-item" onclick="showView('history')"><div class="menu-icon">📈</div><div class="menu-label">历史成绩</div></div>
+    <div class="menu-item" onclick="showView('wrongbook')"><div class="menu-icon">📝</div><div class="menu-label">错题本</div></div>
+    <div class="menu-item" onclick="showView('rewards')"><div class="menu-icon">🎁</div><div class="menu-label">奖励背包</div></div>
+    <div class="menu-item" onclick="showView('qbank')"><div class="menu-icon">🗂️</div><div class="menu-label">题库管理</div></div>
+    <div class="menu-item" onclick="openParentSettings()"><div class="menu-icon">⚙️</div><div class="menu-label">家长设置</div></div>
   </div>
 </section>
 
-<!-- ===== 视图：模式选择（练习用） ===== -->
 <section class="view" id="view-modeSelect">
-  <div class="flex-between mb-2" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
     <h2 id="modeSelectTitle">选择练习方式</h2>
     <button class="btn btn-outline btn-sm" onclick="goHome()">返回</button>
   </div>
   <div id="modeSelectContent"></div>
 </section>
 
-<!-- ===== 视图：答题页 ===== -->
 <section class="view" id="view-quiz">
   <div class="quiz-header">
-    <div class="timer-circle" id="timerCircle">
-      <div class="timer-text" id="timerText">30:00</div>
-    </div>
+    <div class="timer-circle" id="timerCircle"><div class="timer-text" id="timerText">30:00</div></div>
     <div style="flex:1;min-width:120px;">
       <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
       <div style="font-size:.85rem;color:var(--text-light);">第 <span id="qIndex">1</span> 题 / 共 <span id="qTotal">-</span> 题</div>
@@ -318,7 +242,6 @@ input,select,textarea{font-family:inherit;outline:none}
       <span class="badge badge-blue" id="qSubject">语文</span>
       <span class="badge badge-purple" id="qKP">字词</span>
       <span class="badge badge-orange" id="qType">单选题</span>
-      <span class="badge badge-green hidden" id="qDiff">难度:中</span>
     </div>
     <div class="question-text" id="qText">题目内容</div>
     <div class="options-list" id="qOptions"></div>
@@ -333,7 +256,6 @@ input,select,textarea{font-family:inherit;outline:none}
   </div>
 </section>
 
-<!-- ===== 视图：报告页 ===== -->
 <section class="view" id="view-report">
   <div class="report-hero">
     <h2>🎉 学习报告</h2>
@@ -365,7 +287,6 @@ input,select,textarea{font-family:inherit;outline:none}
   </div>
 </section>
 
-<!-- ===== 视图：历史页 ===== -->
 <section class="view" id="view-history">
   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
     <h2>📈 历史成绩</h2>
@@ -378,7 +299,6 @@ input,select,textarea{font-family:inherit;outline:none}
   <div class="history-list" id="historyList"></div>
 </section>
 
-<!-- ===== 视图：错题本 ===== -->
 <section class="view" id="view-wrongbook">
   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
     <h2>📝 错题本</h2>
@@ -395,7 +315,6 @@ input,select,textarea{font-family:inherit;outline:none}
   <div id="wrongList"><p style="color:var(--text-light);text-align:center;padding:40px;">错题本是空的，快去闯关吧！</p></div>
 </section>
 
-<!-- ===== 视图：奖励背包 ===== -->
 <section class="view" id="view-rewards">
   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
     <h2>🎁 奖励背包</h2>
@@ -416,7 +335,6 @@ input,select,textarea{font-family:inherit;outline:none}
   </div>
 </section>
 
-<!-- ===== 视图：题库管理 ===== -->
 <section class="view" id="view-qbank">
   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
     <h2>🗂️ 题库管理</h2>
@@ -424,7 +342,7 @@ input,select,textarea{font-family:inherit;outline:none}
   </div>
   <div class="card">
     <h3 style="margin-bottom:12px;">题库概况</h3>
-    <div class="qbank-stat">
+    <div class="report-stats">
       <div class="stat-card"><div class="stat-value" id="qbTotal">0</div><div class="stat-label">总题数</div></div>
       <div class="stat-card"><div class="stat-value" id="qbSeen">0</div><div class="stat-label">已做过</div></div>
       <div class="stat-card"><div class="stat-value" id="qbNew">0</div><div class="stat-label">未做过</div></div>
@@ -432,10 +350,10 @@ input,select,textarea{font-family:inherit;outline:none}
     </div>
   </div>
   <div class="card">
-    <h3 style="margin-bottom:12px;">题目更新</h3>
+    <h3 style="margin-bottom:12px;">智能重出题</h3>
     <div class="setting-row">
-      <div><div class="setting-label">生成每日新题</div><div class="setting-desc">从模板生成一批新题加入题库</div></div>
-      <button class="btn btn-primary btn-sm" onclick="generateDailyQuestions()">生成新题</button>
+      <div><div class="setting-label">智能重出题</div><div class="setting-desc">根据薄弱点自动生成新题，优化题目分配</div></div>
+      <button class="btn btn-primary btn-sm" onclick="smartRegenerate()">立即生成</button>
     </div>
     <div class="setting-row">
       <div><div class="setting-label">导出题库</div><div class="setting-desc">将当前题库导出为JSON文件</div></div>
@@ -449,11 +367,27 @@ input,select,textarea{font-family:inherit;outline:none}
   </div>
 </section>
 
-<!-- ===== 视图：家长设置 ===== -->
 <section class="view" id="view-settings">
   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
     <h2>⚙️ 家长设置</h2>
     <button class="btn btn-outline btn-sm" onclick="goHome()">返回</button>
+  </div>
+  <div class="card">
+    <h3 style="margin-bottom:12px;">年级与学期</h3>
+    <div class="setting-row">
+      <div><div class="setting-label">当前年级</div><div class="setting-desc">切换年级后题目难度和单元目录自动更新</div></div>
+      <select class="select-input" id="gradeSelect" onchange="changeGrade(this.value)">
+        <option value="1">一年级</option><option value="2">二年级</option>
+        <option value="3">三年级</option><option value="4" selected>四年级</option>
+        <option value="5">五年级</option><option value="6">六年级</option>
+      </select>
+    </div>
+    <div class="setting-row">
+      <div><div class="setting-label">当前学期</div><div class="setting-desc">上册/下册</div></div>
+      <select class="select-input" id="termSelect" onchange="changeTerm(this.value)">
+        <option value="上册" selected>上册</option><option value="下册">下册</option>
+      </select>
+    </div>
   </div>
   <div class="card">
     <h3 style="margin-bottom:12px;">科目开关</h3>
@@ -468,10 +402,6 @@ input,select,textarea{font-family:inherit;outline:none}
     <div class="setting-row">
       <div><div class="setting-label">允许超前学习</div><div class="setting-desc">是否可以出下一单元的题目</div></div>
       <div class="switch" id="allowAheadSwitch" onclick="toggleAllowAhead()"></div>
-    </div>
-    <div class="setting-row">
-      <div><div class="setting-label">只考当前单元</div><div class="setting-desc">关闭后会加入旧知识复习题</div></div>
-      <div class="switch" id="onlyCurrentSwitch" onclick="toggleOnlyCurrent()"></div>
     </div>
   </div>
   <div class="card">
@@ -492,7 +422,6 @@ input,select,textarea{font-family:inherit;outline:none}
   </div>
 </section>
 
-<!-- ===== 视图：复习页 ===== -->
 <section class="view" id="view-review">
   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
     <h2 id="reviewTitle">知识点复习</h2>
@@ -505,7 +434,6 @@ input,select,textarea{font-family:inherit;outline:none}
   </div>
 </section>
 
-<!-- 弹窗 -->
 <div class="modal-overlay" id="modalOverlay">
   <div class="modal">
     <div style="font-size:2.5rem;margin-bottom:12px;" id="modalIcon">🎉</div>
@@ -515,7 +443,6 @@ input,select,textarea{font-family:inherit;outline:none}
   </div>
 </div>
 
-<!-- 家长验证弹窗 -->
 <div class="modal-overlay" id="parentModal">
   <div class="modal">
     <h3>👨‍👩‍👧 家长验证</h3>
@@ -528,7 +455,6 @@ input,select,textarea{font-family:inherit;outline:none}
   </div>
 </div>
 
-<!-- 休息提醒 -->
 <div class="eye-reminder" id="eyeReminder">
   <div style="font-size:2.5rem;margin-bottom:12px;">👀</div>
   <h3 style="margin-bottom:8px;">该休息眼睛啦！</h3>
@@ -538,1000 +464,1028 @@ input,select,textarea{font-family:inherit;outline:none}
 
 <script>
 // ============================================================
-// 一、题库数据（静态题 + 知识点元数据）
+// 一、年级单元数据结构（以四年级为核心，其他年级简化）
 // ============================================================
 
-// 科目元数据：学期、单元、知识点
-const SUBJECT_META = {
-  '语文': {
-    units: [
-      { id: 1, name: '第一单元', kps: ['字词基础', '成语积累', '古诗诵读'] },
-      { id: 2, name: '第二单元', kps: ['标点符号', '病句修改', '修辞手法'] },
-      { id: 3, name: '第三单元', kps: ['阅读理解', '写作小练笔'] },
-    ]
-  },
-  '数学': {
-    units: [
-      { id: 1, name: '第一单元', kps: ['大数认识', '四则运算'] },
-      { id: 2, name: '第二单元', kps: ['运算定律', '小数认识'] },
-      { id: 3, name: '第三单元', kps: ['分数初步', '几何图形'] },
-      { id: 4, name: '第四单元', kps: ['周长与面积', '统计应用'] },
-    ]
-  },
-  '英语': {
-    units: [
-      { id: 1, name: '第一单元', kps: ['基础词汇', '日常对话'] },
-      { id: 2, name: '第二单元', kps: ['一般现在时', '现在进行时'] },
-      { id: 3, name: '第三单元', kps: ['一般过去时', '句型转换'] },
-    ]
-  },
-  '科学': {
-    units: [
-      { id: 1, name: '第一单元', kps: ['植物与动物', '物质变化'] },
-      { id: 2, name: '第二单元', kps: ['光的传播', '简单电路'] },
-      { id: 3, name: '第三单元', kps: ['力与运动', '地球与宇宙'] },
-    ]
-  },
-  '道法': {
-    units: [
-      { id: 1, name: '第一单元', kps: ['校园规则', '安全自护'] },
-      { id: 2, name: '第二单元', kps: ['家庭与社会', '环境保护'] },
-      { id: 3, name: '第三单元', kps: ['诚实守信', '法律常识'] },
-    ]
-  },
+const GRADE_DATA = {
+  4: {
+    '语文': {
+      '上册': [
+        { unit: 1, name: '自然之美', kps: ['边读边想象画面', '比喻句与拟人句', '感受自然之美'] },
+        { unit: 2, name: '提问策略', kps: ['从不同角度提问', '筛选有价值的问题'] },
+        { unit: 3, name: '连续观察', kps: ['连续细致观察', '写观察日记'] },
+        { unit: 4, name: '神话故事', kps: ['神话特点', '起因经过结果', '想象与夸张'] },
+        { unit: 5, name: '把事情写清楚', kps: ['按一定顺序写事', '把过程写清楚'] },
+        { unit: 6, name: '童年成长', kps: ['批注阅读', '体会人物心情'] },
+        { unit: 7, name: '家国情怀', kps: ['把握主要内容', '感受人物品质'] },
+        { unit: 8, name: '历史人物故事', kps: ['简要复述', '文言文理解'] },
+      ],
+      '下册': [
+        { unit: 1, name: '乡村生活', kps: ['抓住关键语句体会情感'] },
+        { unit: 2, name: '科普世界', kps: ['提出不懂的问题', '查阅资料'] },
+        { unit: 3, name: '现代诗', kps: ['现代诗特点', '节奏与韵律'] },
+        { unit: 4, name: '作家笔下的动物', kps: ['明贬实褒', '对比手法'] },
+        { unit: 5, name: '游记', kps: ['按游览顺序写景', '移步换景'] },
+        { unit: 6, name: '儿童成长', kps: ['长文章阅读方法', '列小标题'] },
+        { unit: 7, name: '人物品质', kps: ['从语言动作感受品质'] },
+        { unit: 8, name: '中外经典童话', kps: ['童话特点', '感受真善美'] },
+      ]
+    },
+    '数学': {
+      '上册': [
+        { unit: 1, name: '大数的认识', kps: ['数位顺序表', '读法写法', '改写与近似数', '比较大小'] },
+        { unit: 2, name: '公顷和平方千米', kps: ['面积单位换算', '实际应用'] },
+        { unit: 3, name: '角的度量', kps: ['量角器量角', '角的分类', '画指定度数的角'] },
+        { unit: 4, name: '三位数乘两位数', kps: ['笔算方法', '单价数量总价', '速度时间路程'] },
+        { unit: 5, name: '平行四边形和梯形', kps: ['平行与垂直', '高的画法', '四边形分类'] },
+        { unit: 6, name: '除数是两位数的除法', kps: ['试商方法', '调商', '除法验算'] },
+        { unit: 7, name: '条形统计图', kps: ['数据收集整理', '1格表示多个单位'] },
+        { unit: 8, name: '数学广角——优化', kps: ['统筹优化思想', '沏茶问题', '烙饼问题'] },
+      ],
+      '下册': [
+        { unit: 1, name: '四则运算', kps: ['0的运算', '混合运算顺序', '租船问题'] },
+        { unit: 2, name: '观察物体（二）', kps: ['三视图初步'] },
+        { unit: 3, name: '运算定律', kps: ['加法交换律结合律', '乘法交换律结合律', '乘法分配律', '简便计算'] },
+        { unit: 4, name: '小数的意义和性质', kps: ['小数数位', '小数点移动', '小数与单位换算', '小数近似数'] },
+        { unit: 5, name: '三角形', kps: ['三角形分类', '内角和180度', '三边关系'] },
+        { unit: 6, name: '小数的加法和减法', kps: ['小数点对齐', '小数简便计算'] },
+        { unit: 7, name: '图形的运动（二）', kps: ['轴对称图形', '平移'] },
+        { unit: 8, name: '平均数与条形统计图', kps: ['求平均数', '复式条形统计图'] },
+      ]
+    },
+    '英语': {
+      '上册': [
+        { unit: 1, name: 'My classroom', kps: ['教室物品词汇', '祈使句'] },
+        { unit: 2, name: 'My schoolbag', kps: ['书包物品词汇', '颜色+物品描述'] },
+        { unit: 3, name: 'My friends', kps: ['外貌性格词汇', 'has的用法'] },
+        { unit: 4, name: 'My home', kps: ['房间词汇', '方位介词'] },
+        { unit: 5, name: "Dinner's ready", kps: ['食物词汇', '点餐句型'] },
+        { unit: 6, name: 'Meet my family', kps: ['家庭成员词汇', '职业词汇'] },
+      ],
+      '下册': [
+        { unit: 1, name: 'My school', kps: ['学校场所词汇', '序数词'] },
+        { unit: 2, name: 'What time is it?', kps: ['时间表达', '课程名称'] },
+        { unit: 3, name: 'Weather', kps: ['天气词汇', '天气描述'] },
+        { unit: 4, name: 'At the farm', kps: ['农场动植物词汇', '复数'] },
+        { unit: 5, name: 'My clothes', kps: ['衣物词汇', '物主代词'] },
+        { unit: 6, name: 'Shopping', kps: ['购物词汇', '价格询问'] },
+      ]
+    },
+    '科学': {
+      '上册': [
+        { unit: 1, name: '声音', kps: ['振动发声', '声音传播需要介质', '音量和音高'] },
+        { unit: 2, name: '呼吸与消化', kps: ['呼吸器官', '食物营养成分', '膳食搭配'] },
+        { unit: 3, name: '运动和力', kps: ['力的作用', '摩擦力', '弹力'] },
+        { unit: 4, name: '地球与宇宙', kps: ['地球形状', '月球特征', '太阳系组成'] },
+      ],
+      '下册': [
+        { unit: 1, name: '植物的生长变化', kps: ['种子结构', '植物生长条件', '根茎叶功能'] },
+        { unit: 2, name: '电路', kps: ['电路组成', '电流路径', '导体绝缘体'] },
+        { unit: 3, name: '岩石与土壤', kps: ['岩石分类', '土壤成分', '矿物'] },
+        { unit: 4, name: '动物的一生', kps: ['完全变态发育', '生命周期'] },
+      ]
+    },
+    '道法': {
+      '上册': [
+        { unit: 1, name: '与班级共成长', kps: ['班级规则', '集体意识', '班级事务协商'] },
+        { unit: 2, name: '为父母分担', kps: ['家庭责任', '感恩父母', '主动分担家务'] },
+        { unit: 3, name: '信息万花筒', kps: ['媒介素养', '网络安全', '广告辨别'] },
+        { unit: 4, name: '让生活多一些绿色', kps: ['环境污染', '垃圾分类', '低碳生活方式'] },
+      ],
+      '下册': [
+        { unit: 1, name: '同伴与交往', kps: ['友谊', '诚信', '冲突解决'] },
+        { unit: 2, name: '做聪明的消费者', kps: ['购物常识', '理性消费', '节约意识'] },
+        { unit: 3, name: '美好生活哪里来', kps: ['劳动价值', '工农业生产', '尊重劳动者'] },
+        { unit: 4, name: '感受家乡文化', kps: ['家乡文化', '传统文化', '家乡发展'] },
+      ]
+    }
+  }
 };
 
-// 静态题库（每科基础题，加上生成器可以无限扩展）
-const STATIC_QUESTIONS = [
-  // ===== 语文 =====
-  { id:'yw001', subject:'语文', unit:1, kp:'字词基础', type:'single', difficulty:1,
-    question:'下列词语中，没有错别字的一组是？',
-    options:['A. 拔地而起 望而生畏','B. 拨地而起 望而生畏','C. 拔地而起 忘而生畏','D. 拨地而起 忘而生畏'],
-    answer:0, explanation:'"拔地而起"形容山峰陡然矗立，"望而生畏"表示看见了就害怕。正确答案是A。' },
-  { id:'yw002', subject:'语文', unit:1, kp:'字词基础', type:'single', difficulty:1,
-    question:'"匀"字用音序查字法，应先查音序___？',
-    options:['A. Y','B. R','C. U','D. N'],
-    answer:0, explanation:'音序查字法先查拼音首字母大写，"匀"读yún，音序是Y。' },
-  { id:'yw003', subject:'语文', unit:1, kp:'字词基础', type:'judge', difficulty:1,
-    question:'"呼风唤雨"这个词语中，"唤"是叫喊的意思。',
-    options:['正确','错误'],
-    answer:0, explanation:'"呼风唤雨"中"唤"是呼叫、叫喊的意思。' },
-  { id:'yw004', subject:'语文', unit:1, kp:'成语积累', type:'single', difficulty:1,
-    question:'"画蛇添足"这个成语告诉我们什么道理？',
-    options:['A. 做多余的事反而不好','B. 画画要认真','C. 蛇本来没有脚','D. 做事要创新'],
-    answer:0, explanation:'"画蛇添足"比喻做了多余的事，非但无益，反而不合适。' },
-  { id:'yw005', subject:'语文', unit:1, kp:'成语积累', type:'single', difficulty:2,
-    question:'下列哪个成语是形容人特别多的？',
-    options:['A. 人山人海','B. 一鸣惊人','C. 一丝不苟','D. 亡羊补牢'],
-    answer:0, explanation:'"人山人海"形容人聚集得非常多。' },
-  { id:'yw006', subject:'语文', unit:1, kp:'成语积累', type:'judge', difficulty:1,
-    question:'"胸有成竹"是说做事之前已经有全面的考虑和把握。',
-    options:['正确','错误'],
-    answer:0, explanation:'"胸有成竹"比喻做事之前已经拿定主意，有完整的谋划。' },
-  { id:'yw007', subject:'语文', unit:1, kp:'古诗诵读', type:'single', difficulty:1,
-    question:'"不识庐山真面目"的下一句是？',
-    options:['A. 只缘身在此山中','B. 遥看瀑布挂前川','C. 远近高低各不同','D. 疑是银河落九天'],
-    answer:0, explanation:'出自苏轼《题西林壁》：不识庐山真面目，只缘身在此山中。' },
-  { id:'yw008', subject:'语文', unit:1, kp:'古诗诵读', type:'single', difficulty:2,
-    question:'"劝君更尽一杯酒"的下一句是？',
-    options:['A. 西出阳关无故人','B. 天下谁人不识君','C. 唯见长江天际流','D. 平明送客楚山孤'],
-    answer:0, explanation:'出自王维《送元二使安西》：劝君更尽一杯酒，西出阳关无故人。' },
-  { id:'yw009', subject:'语文', unit:2, kp:'标点符号', type:'single', difficulty:1,
-    question:'下列句子中，标点符号使用正确的是？',
-    options:['A. 你看过《西游记》这本书吗？','B. 你看过"西游记"这本书吗？','C. 你看过（西游记）这本书吗？','D. 你看过[西游记]这本书吗？'],
-    answer:0, explanation:'书名、篇名用书名号《》标示。' },
-  { id:'yw010', subject:'语文', unit:2, kp:'修辞手法', type:'single', difficulty:2,
-    question:'"桂子花开，十里飘香。"这句话用了什么修辞手法？',
-    options:['A. 夸张','B. 比喻','C. 拟人','D. 排比'],
-    answer:0, explanation:'"十里飘香"夸大了香味传播距离，运用了夸张。' },
+// 其他年级简化数据（复用四年级结构，难度调整）
+[1,2,3,5,6].forEach(g => {
+  GRADE_DATA[g] = JSON.parse(JSON.stringify(GRADE_DATA[4]));
+});
 
-  // ===== 数学 =====
-  { id:'sx001', subject:'数学', unit:1, kp:'大数认识', type:'single', difficulty:1,
+// ============================================================
+// 二、静态题库（四年级基础题）
+// ============================================================
+
+const STATIC_QUESTIONS = [
+  // 语文
+  { id:'yw001', subject:'语文', grade:4, term:'上册', unit:1, kp:'边读边想象画面', type:'single', difficulty:1,
+    question:'"浪潮越来越近，犹如千万匹白色战马齐头并进"这句话用了什么修辞手法？',
+    options:['A. 比喻','B. 拟人','C. 夸张','D. 排比'],
+    answer:0, explanation:'把浪潮比作白色战马，是比喻句。' },
+  { id:'yw002', subject:'语文', grade:4, term:'上册', unit:1, kp:'比喻句与拟人句', type:'judge', difficulty:1,
+    question:'"当四周很安静的时候，蟋蟀就在这平台上弹琴。"这是拟人句。',
+    options:['正确','错误'],
+    answer:0, explanation:'把蟋蟀当作人来写，弹琴是人的动作，是拟人句。' },
+  { id:'yw003', subject:'语文', grade:4, term:'上册', unit:2, kp:'从不同角度提问', type:'single', difficulty:2,
+    question:'读《呼风唤雨的世纪》，下列哪个问题是针对课文内容提问的？',
+    options:['A. 为什么说20世纪是呼风唤雨的世纪？','B. 生活中还有哪些发明？','C. 作者为什么写这篇文章？','D. 未来还会有什么科技？'],
+    answer:0, explanation:'A是针对课文内容提问，B、D是联系生活提问，C是针对写法提问。' },
+  { id:'yw004', subject:'语文', grade:4, term:'上册', unit:3, kp:'连续细致观察', type:'single', difficulty:2,
+    question:'写观察日记时，下列做法正确的是？',
+    options:['A. 连续观察，记录变化','B. 只观察一次就写','C. 不需要记录真实情况','D. 只写自己想象的内容'],
+    answer:0, explanation:'观察日记需要连续观察，记录事物的变化过程。' },
+  { id:'yw005', subject:'语文', grade:4, term:'上册', unit:4, kp:'神话特点', type:'single', difficulty:1,
+    question:'神话故事的特点不包括下列哪一项？',
+    options:['A. 真实发生的事情','B. 神奇的想象','C. 鲜明的人物形象','D. 夸张的情节'],
+    answer:0, explanation:'神话是古代人民对自然现象和社会生活的天真解释和美好向往，不是真实发生的。' },
+  { id:'yw006', subject:'语文', grade:4, term:'上册', unit:5, kps:['按一定顺序写事'], type:'single', difficulty:2,
+    question:'写一件事时，按什么顺序写最清楚？',
+    options:['A. 事情发展顺序','B. 随便写','C. 只写结果','D. 只写开头'],
+    answer:0, explanation:'写事要按事情发展顺序：起因、经过、结果，这样条理清楚。' },
+
+  // 数学
+  { id:'sx001', subject:'数学', grade:4, term:'上册', unit:1, kp:'数位顺序表', type:'single', difficulty:1,
     question:'一个数由3个千万、5个十万和7个百组成，这个数是？',
     options:['A. 30500700','B. 35000700','C. 30050700','D. 30507000'],
     answer:0, explanation:'3千万=30000000，5十万=500000，7百=700，合起来30500700。' },
-  { id:'sx002', subject:'数学', unit:1, kp:'大数认识', type:'single', difficulty:2,
+  { id:'sx002', subject:'数学', grade:4, term:'上册', unit:1, kp:'改写与近似数', type:'single', difficulty:2,
     question:'把996000000改写成用"亿"作单位（保留一位小数）是？',
     options:['A. 10.0亿','B. 9.9亿','C. 9.96亿','D. 10亿'],
     answer:0, explanation:'996000000=9.96亿，保留一位小数看百分位是6，进一位≈10.0亿。' },
-  { id:'sx003', subject:'数学', unit:1, kp:'四则运算', type:'single', difficulty:2,
-    question:'计算：125 × 8 ÷ 125 × 8 = ?',
-    options:['A. 64','B. 1','C. 16','D. 640'],
-    answer:0, explanation:'乘除同级从左到右：125×8=1000，1000÷125=8，8×8=64。' },
-  { id:'sx004', subject:'数学', unit:1, kp:'四则运算', type:'judge', difficulty:1,
-    question:'在没有括号的算式里，只有加减法要从左往右按顺序计算。',
-    options:['正确','错误'],
-    answer:0, explanation:'同级运算按从左到右的顺序计算。' },
-  { id:'sx005', subject:'数学', unit:2, kp:'运算定律', type:'single', difficulty:2,
+  { id:'sx003', subject:'数学', grade:4, term:'上册', unit:4, kp:'单价数量总价', type:'single', difficulty:1,
+    question:'一个笔记本5元，买12个需要多少钱？',
+    options:['A. 60元','B. 17元','C. 50元','D. 72元'],
+    answer:0, explanation:'单价×数量=总价，5×12=60元。' },
+  { id:'sx004', subject:'数学', grade:4, term:'上册', unit:6, kp:'试商方法', type:'single', difficulty:2,
+    question:'计算272÷34时，把34看作多少来试商比较方便？',
+    options:['A. 30','B. 35','C. 40','D. 20'],
+    answer:0, explanation:'除数是两位数的除法，用"四舍五入"法把除数看作整十数来试商。34接近30，看作30试商。' },
+  { id:'sx005', subject:'数学', grade:4, term:'下册', unit:3, kp:'乘法分配律', type:'single', difficulty:2,
     question:'25×(4+8)=25×4+25×8，运用了什么运算定律？',
     options:['A. 乘法分配律','B. 乘法结合律','C. 乘法交换律','D. 加法结合律'],
     answer:0, explanation:'乘法分配律：(a+b)×c=a×c+b×c。' },
-  { id:'sx006', subject:'数学', unit:2, kp:'小数认识', type:'single', difficulty:1,
-    question:'0.7里面有多少个0.01？',
-    options:['A. 70','B. 7','C. 700','D. 0.7'],
-    answer:0, explanation:'0.7=0.70，所以有70个0.01。' },
-  { id:'sx007', subject:'数学', unit:2, kp:'小数认识', type:'single', difficulty:2,
+  { id:'sx006', subject:'数学', grade:4, term:'下册', unit:4, kp:'小数点移动', type:'single', difficulty:2,
     question:'把3.5的小数点向右移动两位，得到的数是原数的多少倍？',
     options:['A. 100倍','B. 10倍','C. 1000倍','D. 2倍'],
     answer:0, explanation:'小数点右移两位，原数扩大100倍。3.5→350。' },
-  { id:'sx008', subject:'数学', unit:3, kp:'分数初步', type:'judge', difficulty:2,
-    question:'把一个蛋糕分成4份，每份是这个蛋糕的1/4。',
-    options:['正确','错误'],
-    answer:1, explanation:'分数要求"平均分"，题目没说平均分，每份不一定是1/4。' },
-  { id:'sx009', subject:'数学', unit:3, kp:'几何图形', type:'single', difficulty:2,
+  { id:'sx007', subject:'数学', grade:4, term:'下册', unit:5, kp:'内角和180度', type:'single', difficulty:2,
     question:'三角形两个内角分别是35°和55°，这是什么三角形？',
     options:['A. 直角三角形','B. 锐角三角形','C. 钝角三角形','D. 等腰三角形'],
     answer:0, explanation:'第三个角=180°-35°-55°=90°，是直角三角形。' },
-  { id:'sx010', subject:'数学', unit:4, kp:'周长与面积', type:'single', difficulty:2,
-    question:'正方形边长6厘米，它的周长和面积相比？',
-    options:['A. 无法比较','B. 周长大','C. 面积大','D. 一样大'],
-    answer:0, explanation:'周长和面积是不同类的量，单位不同，无法比较大小。' },
 
-  // ===== 英语 =====
-  { id:'yy001', subject:'英语', unit:1, kp:'基础词汇', type:'single', difficulty:1,
-    question:'What is the meaning of "beautiful"?',
-    options:['A. 美丽的','B. 丑陋的','C. 大的','D. 小的'],
-    answer:0, explanation:'"beautiful"意为"美丽的、漂亮的"。' },
-  { id:'yy002', subject:'英语', unit:1, kp:'基础词汇', type:'single', difficulty:2,
-    question:'I have ___ apple and ___ banana.',
-    options:['A. an; a','B. a; an','C. an; an','D. a; a'],
-    answer:0, explanation:'元音音素开头用an，辅音音素开头用a。apple用an，banana用a。' },
-  { id:'yy003', subject:'英语', unit:1, kp:'日常对话', type:'single', difficulty:1,
-    question:'— How are you? — ___',
-    options:["A. I'm fine, thank you.",'B. Goodbye.','C. Hello.','D. Nice to meet you.'],
-    answer:0, explanation:'"How are you?"回答常用"I\'m fine, thank you."' },
-  { id:'yy004', subject:'英语', unit:1, kp:'日常对话', type:'single', difficulty:1,
-    question:'想知道现在几点了，应该问：___',
-    options:['A. What time is it?','B. What day is it?','C. How old are you?','D. How much is it?'],
-    answer:0, explanation:'"What time is it?"问时间。What day问星期，How old问年龄，How much问价格。' },
-  { id:'yy005', subject:'英语', unit:2, kp:'一般现在时', type:'single', difficulty:2,
-    question:'She ___ to school every day.',
-    options:['A. goes','B. go','C. going','D. went'],
-    answer:0, explanation:'第三人称单数she，动词加-es，go→goes。' },
-  { id:'yy006', subject:'英语', unit:2, kp:'一般现在时', type:'judge', difficulty:2,
-    question:'He don\'t like apples. 这句话语法正确。',
-    options:['正确','错误'],
-    answer:1, explanation:'第三人称单数否定用doesn\'t，正确：He doesn\'t like apples.' },
-  { id:'yy007', subject:'英语', unit:2, kp:'现在进行时', type:'single', difficulty:2,
-    question:'Look! The boys ___ football on the playground.',
-    options:['A. are playing','B. play','C. plays','D. played'],
-    answer:0, explanation:'现在进行时be+doing，主语boys复数，用are playing。' },
-  { id:'yy008', subject:'英语', unit:3, kp:'一般过去时', type:'single', difficulty:2,
-    question:'I ___ to the park yesterday.',
-    options:['A. went','B. go','C. goes','D. going'],
-    answer:0, explanation:'yesterday是过去时间，go的过去式是went。' },
-  { id:'yy009', subject:'英语', unit:3, kp:'句型转换', type:'single', difficulty:1,
-    question:'— ___ is that man? — He is my teacher.',
-    options:['A. Who','B. What','C. Where','D. How'],
-    answer:0, explanation:'答句回答身份，问句用Who提问。' },
-  { id:'yy010', subject:'英语', unit:1, kp:'基础词汇', type:'judge', difficulty:1,
-    question:'"Monday"是星期一的意思。',
-    options:['正确','错误'],
-    answer:0, explanation:'Monday意为星期一。' },
+  // 英语
+  { id:'yy001', subject:'英语', grade:4, term:'上册', unit:1, kp:'教室物品词汇', type:'single', difficulty:1,
+    question:'What is the meaning of "classroom"?',
+    options:['A. 教室','B. 学校','C. 家','D. 公园'],
+    answer:0, explanation:'classroom意为"教室"。' },
+  { id:'yy002', subject:'英语', grade:4, term:'上册', unit:1, kp:'祈使句', type:'single', difficulty:1,
+    question:'— Let\'s clean the classroom! — ___',
+    options:['A. OK!','B. Goodbye!','C. Thanks!','D. Sorry!'],
+    answer:0, explanation:'Let\'s...是提建议，回答用OK/Good idea等表示赞同。' },
+  { id:'yy003', subject:'英语', grade:4, term:'上册', unit:3, kp:'外貌性格词汇', type:'single', difficulty:2,
+    question:'My friend ___ long hair and big eyes.',
+    options:['A. has','B. have','C. is','D. are'],
+    answer:0, explanation:'主语my friend是第三人称单数，用has。' },
+  { id:'yy004', subject:'英语', grade:4, term:'上册', unit:4, kp:'方位介词', type:'single', difficulty:1,
+    question:'— Where is the cat? — It\'s ___ the desk.',
+    options:['A. under','B. a','C. an','D. the'],
+    answer:0, explanation:'where问地点，用方位介词回答。under the desk在桌子下面。' },
+  { id:'yy005', subject:'英语', grade:4, term:'下册', unit:2, kp:'时间表达', type:'single', difficulty:1,
+    question:'— What time is it? — ___ 9 o\'clock.',
+    options:['A. It\'s','B. Is','C. Its','D. They\'re'],
+    answer:0, explanation:'回答时间用It\'s + 时间。' },
+  { id:'yy006', subject:'英语', grade:4, term:'下册', unit:3, kp:'天气词汇', type:'single', difficulty:1,
+    question:'今天天气很热，用英语怎么说？',
+    options:['A. It\'s hot.','B. It\'s cold.','C. It\'s cool.','D. It\'s warm.'],
+    answer:0, explanation:'hot意为"热的"，cold冷的，cool凉爽的，warm温暖的。' },
 
-  // ===== 科学 =====
-  { id:'kx001', subject:'科学', unit:1, kp:'植物与动物', type:'single', difficulty:1,
-    question:'植物进行光合作用需要的条件不包括？',
-    options:['A. 氧气','B. 阳光','C. 二氧化碳','D. 水'],
-    answer:0, explanation:'光合作用需要阳光、二氧化碳和水，产生氧气。' },
-  { id:'kx002', subject:'科学', unit:1, kp:'植物与动物', type:'single', difficulty:2,
-    question:'蚕的一生要经历几个阶段？',
-    options:['A. 4个','B. 3个','C. 5个','D. 2个'],
-    answer:0, explanation:'蚕经历卵、幼虫、蛹、成虫四个阶段，完全变态发育。' },
-  { id:'kx003', subject:'科学', unit:1, kp:'物质变化', type:'single', difficulty:2,
-    question:'下列哪种变化属于化学变化？',
-    options:['A. 铁生锈','B. 冰融化','C. 玻璃破碎','D. 水蒸发'],
-    answer:0, explanation:'铁生锈生成新物质铁锈，是化学变化。其他都是物理变化。' },
-  { id:'kx004', subject:'科学', unit:1, kp:'物质变化', type:'single', difficulty:2,
-    question:'把盐从水中分离出来，最合适的方法是？',
-    options:['A. 蒸发','B. 过滤','C. 沉淀','D. 搅拌'],
-    answer:0, explanation:'溶解的盐通过加热蒸发水分分离。过滤只能分离不溶物。' },
-  { id:'kx005', subject:'科学', unit:2, kp:'光的传播', type:'single', difficulty:1,
-    question:'光在空气中是怎样传播的？',
-    options:['A. 沿直线传播','B. 沿曲线传播','C. 向四面八方发散','D. 不确定'],
-    answer:0, explanation:'光在同种均匀介质中沿直线传播。影子、小孔成像都是例子。' },
-  { id:'kx006', subject:'科学', unit:2, kp:'光的传播', type:'single', difficulty:2,
-    question:'我们能看到本身不发光的物体，是因为？',
-    options:['A. 物体反射的光进入眼睛','B. 物体发出的光进入眼睛','C. 眼睛发出的光照到物体上','D. 光穿过了物体'],
-    answer:0, explanation:'不发光的物体表面反射光源的光，反射光进入眼睛。' },
-  { id:'kx007', subject:'科学', unit:2, kp:'简单电路', type:'single', difficulty:1,
+  // 科学
+  { id:'kx001', subject:'科学', grade:4, term:'上册', unit:1, kp:'振动发声', type:'single', difficulty:1,
+    question:'声音是由物体什么产生的？',
+    options:['A. 振动','B. 晃动','C. 敲打','D. 碰撞'],
+    answer:0, explanation:'声音是由物体振动产生的，振动停止，声音停止。' },
+  { id:'kx002', subject:'科学', grade:4, term:'上册', unit:3, kp:'摩擦力', type:'single', difficulty:2,
+    question:'下列哪种方法可以增大摩擦力？',
+    options:['A. 鞋底刻花纹','B. 给齿轮上油','C. 冰面很滑','D. 旱冰鞋装轮子'],
+    answer:0, explanation:'鞋底花纹增大接触面粗糙程度，增大摩擦力防滑。其他都是减小摩擦。' },
+  { id:'kx003', subject:'科学', grade:4, term:'下册', unit:1, kp:'种子结构', type:'single', difficulty:1,
+    question:'种子发芽需要的条件不包括？',
+    options:['A. 阳光直射','B. 水分','C. 适宜的温度','D. 空气'],
+    answer:0, explanation:'种子发芽需要水分、适宜温度、空气，不需要阳光。' },
+  { id:'kx004', subject:'科学', grade:4, term:'下册', unit:2, kp:'导体绝缘体', type:'single', difficulty:1,
     question:'下列物体中，属于导体的是？',
     options:['A. 铁钉','B. 塑料尺','C. 橡胶','D. 玻璃'],
     answer:0, explanation:'金属是导体，塑料、橡胶、玻璃是绝缘体。' },
-  { id:'kx008', subject:'科学', unit:3, kp:'力与运动', type:'single', difficulty:1,
-    question:'苹果落地是因为受到了什么力？',
-    options:['A. 重力','B. 弹力','C. 摩擦力','D. 浮力'],
-    answer:0, explanation:'地球上的物体都受重力作用，方向竖直向下。' },
-  { id:'kx009', subject:'科学', unit:3, kp:'地球与宇宙', type:'judge', difficulty:1,
-    question:'地球是太阳系的一颗行星。',
-    options:['正确','错误'],
-    answer:0, explanation:'太阳系有八大行星，地球是其中之一。' },
-  { id:'kx010', subject:'科学', unit:2, kp:'光的传播', type:'judge', difficulty:1,
-    question:'镜子能成像，是因为光的反射。',
-    options:['正确','错误'],
-    answer:0, explanation:'平面镜成像是由于光的反射形成的。' },
 
-  // ===== 道法 =====
-  { id:'df001', subject:'道法', unit:1, kp:'校园规则', type:'single', difficulty:1,
-    question:'在课堂上，下列哪种行为是正确的？',
-    options:['A. 举手发言','B. 随便讲话','C. 做小动作','D. 吃零食'],
-    answer:0, explanation:'课堂上举手发言是正确的做法。' },
-  { id:'df002', subject:'道法', unit:1, kp:'校园规则', type:'single', difficulty:1,
-    question:'看到同学不小心摔倒了，你应该怎么做？',
-    options:['A. 马上扶他起来并询问','B. 装作没看见','C. 嘲笑他','D. 走开不管'],
-    answer:0, explanation:'同学之间要互相关心、互相帮助。' },
-  { id:'df003', subject:'道法', unit:1, kp:'安全自护', type:'single', difficulty:2,
-    question:'发生地震时，在教室里应该怎么做？',
-    options:['A. 迅速躲到课桌下，护住头部','B. 立刻跑出教室','C. 站在窗边看外面','D. 大哭大叫'],
-    answer:0, explanation:'地震时先躲在结实的课桌下护头，等震动停止再有序撤离。' },
-  { id:'df004', subject:'道法', unit:1, kp:'安全自护', type:'single', difficulty:1,
-    question:'过马路时，应该看什么信号灯？',
-    options:['A. 红灯停，绿灯行','B. 直接跑过去','C. 红灯也可以走','D. 看心情走'],
-    answer:0, explanation:'红灯停绿灯行，过马路走斑马线，一停二看三通过。' },
-  { id:'df005', subject:'道法', unit:1, kp:'安全自护', type:'judge', difficulty:2,
-    question:'独自在家时，有人敲门说"我是修水管的"，可以马上开门。',
-    options:['正确','错误'],
-    answer:1, explanation:'独自在家不要随便给陌生人开门。' },
-  { id:'df006', subject:'道法', unit:2, kp:'家庭与社会', type:'single', difficulty:1,
+  // 道法
+  { id:'df001', subject:'道法', grade:4, term:'上册', unit:1, kp:'班级规则', type:'single', difficulty:1,
+    question:'下列关于班规的说法，正确的是？',
+    options:['A. 班规是大家共同制定的，要共同遵守','B. 班规只约束同学，不约束老师','C. 班规制定了就不能改','D. 班规可有可无'],
+    answer:0, explanation:'班规是全班同学共同讨论制定的，对每个人都有约束力。' },
+  { id:'df002', subject:'道法', grade:4, term:'上册', unit:2, kp:'主动分担家务', type:'single', difficulty:1,
     question:'爸爸妈妈工作很辛苦，我们应该怎么做？',
     options:['A. 体谅父母，做力所能及的家务','B. 什么都让父母做','C. 只想着自己玩','D. 跟父母发脾气'],
     answer:0, explanation:'要体谅父母辛苦，主动做家务减轻负担。' },
-  { id:'df007', subject:'道法', unit:2, kp:'环境保护', type:'single', difficulty:1,
-    question:'下列哪种行为是环保的？',
-    options:['A. 随手关灯','B. 乱扔垃圾','C. 浪费纸张','D. 用一次性筷子'],
-    answer:0, explanation:'随手关灯节约用电，是环保行为。' },
-  { id:'df008', subject:'道法', unit:2, kp:'环境保护', type:'single', difficulty:2,
+  { id:'df003', subject:'道法', grade:4, term:'上册', unit:4, kp:'垃圾分类', type:'single', difficulty:1,
     question:'废旧电池应该怎么处理？',
     options:['A. 放到专门的回收箱','B. 扔进普通垃圾桶','C. 埋在土里','D. 扔进河里'],
     answer:0, explanation:'废旧电池含重金属，是有害垃圾，要专门回收。' },
-  { id:'df009', subject:'道法', unit:3, kp:'诚实守信', type:'single', difficulty:1,
+  { id:'df004', subject:'道法', grade:4, term:'下册', unit:1, kp:'诚信', type:'single', difficulty:1,
     question:'不小心打碎了教室玻璃，应该怎么做？',
     options:['A. 主动承认错误，告诉老师','B. 偷偷跑掉','C. 说是别人打碎的','D. 装作不知道'],
     answer:0, explanation:'做错事要勇于承认，主动承担责任。' },
-  { id:'df010', subject:'道法', unit:2, kp:'环境保护', type:'judge', difficulty:1,
-    question:'垃圾分类可以让资源回收再利用。',
-    options:['正确','错误'],
-    answer:0, explanation:'垃圾分类让有用资源回收再利用，减少污染。' },
 ];
 
 // 复习内容数据
 const REVIEW_DATA = {
-  '语文-字词基础': { explanation:'字词是语文基础。四年级要掌握多音字、形近字、近义词反义词，以及查字典方法。', example:'音序查字法：先查拼音首字母大写，再查音节。部首查字法：先查部首，再查剩余笔画。', tip:'易错：注意"拔"和"拨"的区别，"拔"是提手旁加"犮"。' },
-  '语文-成语积累': { explanation:'成语是长期形成的固定短语，每个成语都有特定含义和来源。', example:'"画蛇添足"比喻做多余的事反而弄巧成拙；"胸有成竹"比喻做事前已有周全考虑。', tip:'易错：不要望文生义，要结合故事背景理解真正含义。' },
-  '语文-古诗诵读': { explanation:'古诗是中华文化瑰宝。要背诵必背古诗，理解诗句意思，体会诗人感情。', example:'《题西林壁》苏轼：横看成岭侧成峰，远近高低各不同。不识庐山真面目，只缘身在此山中。', tip:'易错：注意诗句中易错字，如"缘"不要写成"原"。' },
-  '数学-大数认识': { explanation:'大数认识包括亿以内和亿以上数的读写、比较大小、改写和求近似数。', example:'30500700读作：三千零五十万零七百。每级末尾的0不读，其他数位连续0只读一个零。', tip:'易错：改写用"亿"作单位时要数对位数；求近似数要看清保留几位。' },
-  '数学-四则运算': { explanation:'运算顺序：先乘除后加减；有括号先算括号里的；同级运算从左到右。', example:'125×8÷125×8，乘除同级从左到右：1000÷125×8=64。', tip:'易错：不要被数字迷惑，严格按运算顺序计算。' },
-  '数学-运算定律': { explanation:'运算定律：加法交换律、结合律，乘法交换律、结合律、分配律。', example:'25×(4+8)=25×4+25×8=300，乘法分配律简便计算。', tip:'易错：乘法分配律不要漏掉任何一项，(a-b)×c=a×c-b×c。' },
-  '英语-一般现在时': { explanation:'一般现在时表示经常发生的动作或存在的状态。第三人称单数动词加-s/-es。', example:'She goes to school every day. 否定：She doesn\'t go on Sunday.', tip:'易错：第三人称单数变化规则：一般加-s；s/x/ch/sh/o结尾加-es。' },
-  '科学-植物与动物': { explanation:'植物通过光合作用制造养分释放氧气。动物一生经历不同阶段，蚕是完全变态发育。', example:'光合作用：二氧化碳+水→有机物+氧气（条件：光、叶绿体）。', tip:'易错：光合作用需要光，呼吸作用不需要光。' },
-  '道法-安全自护': { explanation:'掌握基本安全自护知识：交通安全、消防安全、地震避险、防拐骗等。', example:'火警119，报警110，急救120。地震先躲安全角落护头。', tip:'易错：独自在家不给陌生人开门；过马路走斑马线。' },
+  '数学-乘法分配律': { explanation:'乘法分配律：两个数的和与一个数相乘，可以先把它们分别与这个数相乘，再相加。即(a+b)×c=a×c+b×c。', example:'25×(4+8)=25×4+25×8=100+200=300。', tip:'易错：不要漏掉任何一项，(a-b)×c=a×c-b×c。' },
+  '数学-小数点移动': { explanation:'小数点向右移动一位，原数扩大10倍；向右移动两位，扩大100倍。向左移动则缩小。', example:'3.5→35（右移一位，×10），3.5→350（右移两位，×100）。', tip:'易错：移动位数数清楚，不够补0。' },
+  '英语-一般现在时': { explanation:'一般现在时表示经常发生的动作。第三人称单数动词加-s/-es。', example:'She goes to school every day. 否定：She doesn\'t go on Sunday.', tip:'易错：第三人称单数变化规则。' },
+  '科学-振动发声': { explanation:'声音是由物体振动产生的。振动停止，声音停止。声音传播需要介质。', example:'敲鼓时鼓面振动发声，按住鼓面声音就停了。', tip:'易错：真空不能传声。' },
+  '道法-垃圾分类': { explanation:'垃圾分类：可回收物、厨余垃圾、有害垃圾、其他垃圾。', example:'废旧电池是有害垃圾，废纸塑料是可回收物。', tip:'易错：废旧电池不能和普通垃圾一起扔。' },
 };
 
 // ============================================================
-// 二、参数化题目生成器
+// 三、参数化题目生成器（5个科目）
 // ============================================================
 
-// 数学题生成器
-function generateMathQuestion(difficulty) {
+// 数学生成器
+function genMathQuestion(grade, unit, kp, difficulty) {
   const d = difficulty || 1;
-  const type = Math.random() > 0.5 ? 'single' : 'judge';
-  let q, options, answer, explanation, kp;
+  const scale = grade * 10; // 年级越高数字越大
+  let q, options, answer, explanation;
 
-  // 生成大数认识题
-  if (Math.random() < 0.3) {
-    kp = '大数认识';
-    const digits = d + 3;
+  // 四则运算
+  if (kp.includes('四则') || kp.includes('运算') || kp.includes('乘法') || kp.includes('除法')) {
+    const a = Math.floor(Math.random() * 90 * (grade/4)) + 10;
+    const b = Math.floor(Math.random() * 20 * (grade/4)) + 5;
+    const result = a * b;
+    q = `计算：${a} × ${b} = ?`;
+    options = [result, result + b, result - a, result + a].map((o, i) => `${String.fromCharCode(65+i)}. ${o}`);
+    answer = 0;
+    explanation = `${a} × ${b} = ${result}。`;
+  }
+  // 大数认识
+  else if (kp.includes('大数') || kp.includes('数位') || kp.includes('读写')) {
+    const digits = 6 + grade;
     const num = Math.floor(Math.random() * Math.pow(10, digits));
-    const str = num.toString();
-    if (Math.random() < 0.5) {
-      // 读作
-      const pos = Math.floor(Math.random() * Math.min(3, str.length));
-      const target = str[str.length - 1 - pos];
-      q = `数字 ${num} 中，从右数第${pos + 1}位上的数字是几？`;
-      options = [target, String((parseInt(target) + 1) % 10), String((parseInt(target) + 2) % 10), String((parseInt(target) + 3) % 10)];
-      options = options.map((o, i) => `${String.fromCharCode(65 + i)}. ${o}`);
-      answer = 0;
-      explanation = `${num} 从右数第${pos + 1}位是 ${target}。`;
-    } else {
-      // 组成数
-      const w1 = Math.floor(Math.random() * 9) + 1;
-      const w2 = Math.floor(Math.random() * 9);
-      const w3 = Math.floor(Math.random() * 9);
-      const val = w1 * 1000000 + w2 * 10000 + w3 * 100;
-      q = `一个数由${w1}个百万、${w2}个万和${w3}个百组成，这个数是？`;
-      options = [
-        `${w1}0${w2}0${w3}00`.replace(/^0+/, '') || '0',
-        `${w1}${w2}${w3}0000`,
-        `${w1}00${w2}00${w3}`,
-        `${w1}${w2}00${w3}00`,
-      ];
-      options = options.map((o, i) => `${String.fromCharCode(65 + i)}. ${o}`);
-      answer = 0;
-      explanation = `${w1}百万=${w1}000000，${w2}万=${w2}0000，${w3}百=${w3}00，合起来是${val}。`;
-    }
-  }
-  // 四则运算题
-  else if (Math.random() < 0.5) {
-    kp = '四则运算';
-    const a = Math.floor(Math.random() * 50) + 10;
-    const b = Math.floor(Math.random() * 20) + 5;
-    const c = Math.floor(Math.random() * 10) + 2;
-    const result = a * b + c * 10;
-    q = `计算：${a} × ${b} + ${c} × 10 = ?`;
-    options = [result, result + b, result - c, result + a].map((o, i) => `${String.fromCharCode(65 + i)}. ${o}`);
+    q = `${num} 是几位数？`;
+    const actualDigits = num.toString().length;
+    options = [`${actualDigits}位数`, `${actualDigits-1}位数`, `${actualDigits+1}位数`, `${actualDigits+2}位数`].map((o, i) => `${String.fromCharCode(65+i)}. ${o}`);
     answer = 0;
-    explanation = `先算乘法：${a}×${b}=${a*b}，${c}×10=${c*10}，再相加：${a*b}+${c*10}=${result}。`;
+    explanation = `${num} 是 ${actualDigits} 位数。`;
   }
-  // 小数题
-  else {
-    kp = '小数认识';
+  // 小数
+  else if (kp.includes('小数') || kp.includes('小数点')) {
     const n = (Math.random() * 10).toFixed(1);
-    const decimals = Math.floor(Math.random() * 90) + 10;
     q = `${n} 里面有多少个 0.01？`;
-    options = [Math.round(n * 100), Math.round(n * 10), Math.round(n * 1000), Math.round(n)].map((o, i) => `${String.fromCharCode(65 + i)}. ${o}`);
+    const ans = Math.round(n * 100);
+    options = [ans, Math.round(n*10), Math.round(n*1000), Math.round(n)].map((o, i) => `${String.fromCharCode(65+i)}. ${o}`);
     answer = 0;
-    explanation = `${n} = ${n.toFixed(2)}，所以有 ${Math.round(n*100)} 个 0.01。`;
+    explanation = `${n} = ${n.toFixed(2)}，所以有 ${ans} 个 0.01。`;
+  }
+  // 几何
+  else if (kp.includes('三角形') || kp.includes('角') || kp.includes('图形')) {
+    const a = Math.floor(Math.random() * 60) + 30;
+    const b = Math.floor(Math.random() * 60) + 30;
+    const c = 180 - a - b;
+    q = `三角形两个内角分别是 ${a}° 和 ${b}°，第三个角是多少度？`;
+    options = [`${c}°`, `${a+b}°`, `${180-a}°`, `${180-b}°`].map((o, i) => `${String.fromCharCode(65+i)}. ${o}`);
+    answer = 0;
+    explanation = `三角形内角和180°，第三个角=180°-${a}°-${b}°=${c}°。`;
+  }
+  // 默认：简单计算
+  else {
+    const a = Math.floor(Math.random() * 50) + 10;
+    const b = Math.floor(Math.random() * 30) + 5;
+    const result = a + b;
+    q = `计算：${a} + ${b} = ?`;
+    options = [result, result + 1, result - 1, result + 2].map((o, i) => `${String.fromCharCode(65+i)}. ${o}`);
+    answer = 0;
+    explanation = `${a} + ${b} = ${result}。`;
   }
 
   return {
-    id: 'gen_math_' + Date.now() + '_' + Math.floor(Math.random() * 1000),
-    subject: '数学', unit: Object.keys(SUBJECT_META['数学'].units).find(u => SUBJECT_META['数学'].units[u].kps.includes(kp)) || 1,
-    kp: kp, type: type, difficulty: d,
-    question: q, options: options, answer: answer, explanation: explanation,
-    generated: true,
+    id: 'gen_math_' + Date.now() + '_' + Math.floor(Math.random()*10000),
+    subject: '数学', grade: grade, term: '上册', unit: unit, kp: kp,
+    type: 'single', difficulty: d, question: q, options: options,
+    answer: answer, explanation: explanation, generated: true,
   };
 }
 
-// 语文题生成器
-function generateChineseQuestion(difficulty) {
-  const d = difficulty || 1;
-  const idioms = ['画蛇添足', '胸有成竹', '亡羊补牢', '守株待兔', '拔苗助长', '刻舟求剑', '掩耳盗铃', '狐假虎威'];
-  const idiomIdx = Math.floor(Math.random() * idioms.length);
-  const idiom = idioms[idiomIdx];
-  const kps = ['字词基础', '成语积累', '古诗诵读'];
-  const kp = kps[Math.floor(Math.random() * kps.length)];
+// 语文生成器
+function genChineseQuestion(grade, unit, kp, difficulty) {
+  const idioms = ['画蛇添足','胸有成竹','亡羊补牢','守株待兔','拔苗助长','刻舟求剑','掩耳盗铃','狐假虎威','对牛弹琴','井底之蛙'];
+  const meanings = {
+    '画蛇添足':'做多余的事反而不好', '胸有成竹':'做事前已有周全考虑',
+    '亡羊补牢':'出了问题及时补救', '守株待兔':'不主动努力妄想侥幸',
+    '拔苗助长':'违反规律急于求成', '刻舟求剑':'办事刻板不知变通',
+    '掩耳盗铃':'自己欺骗自己', '狐假虎威':'依仗别人势力欺压人',
+    '对牛弹琴':'对不懂道理的人讲道理', '井底之蛙':'见识短浅的人',
+  };
+  const idiom = idioms[Math.floor(Math.random() * idioms.length)];
+  const correct = meanings[idiom];
 
   let q, options, answer, explanation;
 
-  if (kp === '成语积累') {
+  if (kp.includes('成语') || kp.includes('字词')) {
     q = `成语"${idiom}"的意思最接近下列哪一项？`;
-    const meanings = {
-      '画蛇添足': '做多余的事反而不好', '胸有成竹': '做事前已有周全考虑',
-      '亡羊补牢': '出了问题及时补救', '守株待兔': '不主动努力，妄想侥幸得到',
-      '拔苗助长': '违反规律急于求成', '刻舟求剑': '办事刻板不知变通',
-      '掩耳盗铃': '自己欺骗自己', '狐假虎威': '依仗别人的势力欺压人',
-    };
-    const correct = meanings[idiom];
-    options = [correct, '努力拼搏向上', '认真仔细做事', '团结友爱互助'];
-    options = options.sort(() => Math.random() - 0.5).map((o, i) => `${String.fromCharCode(65 + i)}. ${o}`);
+    options = [correct, '努力拼搏向上', '认真仔细做事', '团结友爱互助'].map((o, i) => `${String.fromCharCode(65+i)}. ${o}`);
+    options = shuffle(options);
     answer = options.findIndex(o => o.includes(correct));
     explanation = `"${idiom}"：${correct}。`;
-  } else if (kp === '字词基础') {
-    const words = ['美丽', '高兴', '认真', '勇敢', '聪明'];
-    const antonyms = { '美丽':'丑陋', '高兴':'难过', '认真':'马虎', '勇敢':'胆小', '聪明':'愚蠢' };
-    const word = words[Math.floor(Math.random() * words.length)];
-    q = `"${word}"的反义词是？`;
-    const correct = antonyms[word];
-    options = [correct, '开心', '漂亮', '努力'].map((o, i) => `${String.fromCharCode(65 + i)}. ${o}`);
+  } else if (kp.includes('比喻') || kp.includes('修辞') || kp.includes('拟人')) {
+    q = '"桂子花开，十里飘香。"这句话用了什么修辞手法？';
+    options = ['A. 夸张', 'B. 比喻', 'C. 拟人', 'D. 排比'];
     answer = 0;
-    explanation = `"${word}"的反义词是"${correct}"。`;
+    explanation = '"十里飘香"夸大了香味传播距离，是夸张。';
   } else {
-    q = '下列哪句诗出自苏轼的作品？';
-    options = [
-      'A. 不识庐山真面目，只缘身在此山中',
-      'B. 床前明月光，疑是地上霜',
-      'C. 春眠不觉晓，处处闻啼鸟',
-      'D. 白日依山尽，黄河入海流',
-    ];
+    q = '下列哪个词语是描写秋天的？';
+    options = ['A. 秋高气爽', 'B. 烈日炎炎', 'C. 春暖花开', 'D. 冰天雪地'];
     answer = 0;
-    explanation = 'A出自苏轼《题西林壁》；B出自李白《静夜思》；C出自孟浩然《春晓》；D出自王之涣《登鹳雀楼》。';
+    explanation = '秋高气爽形容秋天晴朗凉爽的天气。';
   }
 
   return {
-    id: 'gen_chinese_' + Date.now() + '_' + Math.floor(Math.random() * 1000),
-    subject: '语文', unit: 1, kp: kp, type: 'single', difficulty: d,
-    question: q, options: options, answer: answer, explanation: explanation,
-    generated: true,
+    id: 'gen_chinese_' + Date.now() + '_' + Math.floor(Math.random()*10000),
+    subject: '语文', grade: grade, term: '上册', unit: unit, kp: kp,
+    type: 'single', difficulty: difficulty || 1, question: q, options: options,
+    answer: answer, explanation: explanation, generated: true,
   };
 }
 
-// 英语题生成器
-function generateEnglishQuestion(difficulty) {
-  const d = difficulty || 1;
-  const subjects = ['He', 'She', 'The cat', 'My friend', 'Tom'];
-  const verbs = ['like', 'play', 'go', 'watch', 'read'];
-  const objects = ['apples', 'football', 'to school', 'TV', 'books'];
-  const kps = ['基础词汇', '日常对话', '一般现在时'];
-  const kp = kps[Math.floor(Math.random() * kps.length)];
+// 英语生成器
+function genEnglishQuestion(grade, unit, kp, difficulty) {
+  const words = [
+    { en: 'apple', cn: '苹果' }, { en: 'book', cn: '书' }, { en: 'cat', cn: '猫' },
+    { en: 'dog', cn: '狗' }, { en: 'sun', cn: '太阳' }, { en: 'water', cn: '水' },
+    { en: 'school', cn: '学校' }, { en: 'teacher', cn: '老师' },
+  ];
+  const w = words[Math.floor(Math.random() * words.length)];
 
   let q, options, answer, explanation;
 
-  if (kp === '一般现在时') {
-    const s = subjects[Math.floor(Math.random() * subjects.length)];
-    const v = verbs[Math.floor(Math.random() * verbs.length)];
-    const o = objects[verbs.indexOf(v)] || 'apples';
-    const vForm = (v === 'go') ? 'goes' : (v + (v.endsWith('s') ? 'es' : 's'));
-    q = `${s} ___ to school every day.`;
-    options = [
-      'A. go', 'B. goes', 'C. going', 'D. went'
-    ];
-    answer = 1;
-    explanation = `主语${s}是第三人称单数，动词用第三人称单数形式${vForm}。`;
-  } else if (kp === '基础词汇') {
-    const words = [
-      { en: 'apple', cn: '苹果' }, { en: 'book', cn: '书' }, { en: 'cat', cn: '猫' },
-      { en: 'dog', cn: '狗' }, { en: 'sun', cn: '太阳' },
-    ];
-    const w = words[Math.floor(Math.random() * words.length)];
+  if (kp.includes('词汇') || kp.includes('单词')) {
     q = `What is the meaning of "${w.en}"?`;
     options = [`A. ${w.cn}`, 'B. 香蕉', 'C. 书本', 'D. 桌子'];
     answer = 0;
     explanation = `"${w.en}" 的意思是 "${w.cn}"。`;
-  } else {
-    q = '— How old are you? — ___';
-    options = ['A. I am ten.', 'B. I am fine.', 'C. Thank you.', 'D. Goodbye.'];
+  } else if (kp.includes('时态') || kp.includes('一般现在')) {
+    q = 'She ___ to school every day.';
+    options = ['A. goes', 'B. go', 'C. going', 'D. went'];
     answer = 0;
-    explanation = '"How old are you?"问年龄，回答用"I am + 数字"。';
+    explanation = '第三人称单数she，动词用第三人称单数形式goes。';
+  } else {
+    q = '— How are you? — ___';
+    options = ["A. I'm fine, thank you.", 'B. Goodbye.', 'C. Hello.', 'D. Good night.'];
+    answer = 0;
+    explanation = '"How are you?"回答常用"I\'m fine, thank you."' ;
   }
 
   return {
-    id: 'gen_english_' + Date.now() + '_' + Math.floor(Math.random() * 1000),
-    subject: '英语', unit: 1, kp: kp, type: 'single', difficulty: d,
-    question: q, options: options, answer: answer, explanation: explanation,
-    generated: true,
+    id: 'gen_english_' + Date.now() + '_' + Math.floor(Math.random()*10000),
+    subject: '英语', grade: grade, term: '上册', unit: unit, kp: kp,
+    type: 'single', difficulty: difficulty || 1, question: q, options: options,
+    answer: answer, explanation: explanation, generated: true,
   };
 }
 
-// ============================================================
-// 三、状态管理
-// ============================================================
+// 科学生成器
+function genScienceQuestion(grade, unit, kp, difficulty) {
+  let q, options, answer, explanation;
 
-const STORAGE_KEY = 'grade4_learning_park_v2';
+  if (kp.includes('光') || kp.includes('传播')) {
+    q = '光在空气中是怎样传播的？';
+    options = ['A. 沿直线传播', 'B. 沿曲线传播', 'C. 向四面八方发散', 'D. 不确定'];
+    answer = 0;
+    explanation = '光在同种均匀介质中沿直线传播。';
+  } else if (kp.includes('电') || kp.includes('电路')) {
+    q = '下列物体中，属于导体的是？';
+    options = ['A. 铁钉', 'B. 塑料尺', 'C. 橡胶', 'D. 玻璃'];
+    answer = 0;
+    explanation = '金属是导体，塑料橡胶玻璃是绝缘体。';
+  } else if (kp.includes('力') || kp.includes('摩擦')) {
+    q = '苹果落地是因为受到了什么力？';
+    options = ['A. 重力', 'B. 弹力', 'C. 摩擦力', 'D. 浮力'];
+    answer = 0;
+    explanation = '地球上的物体都受重力作用，方向竖直向下。';
+  } else if (kp.includes('植物') || kp.includes('种子')) {
+    q = '植物进行光合作用需要的条件不包括？';
+    options = ['A. 氧气', 'B. 阳光', 'C. 二氧化碳', 'D. 水'];
+    answer = 0;
+    explanation = '光合作用需要阳光、二氧化碳和水，产生氧气。';
+  } else {
+    q = '下列哪种是可再生资源？';
+    options = ['A. 太阳能', 'B. 煤炭', 'C. 石油', 'D. 天然气'];
+    answer = 0;
+    explanation = '太阳能是可再生资源，煤炭石油天然气是不可再生资源。';
+  }
 
-let appState = {
-  stars: 0, coins: 0, totalScore: 0, totalQuestions: 0, totalCorrect: 0,
-  streakDays: 0, lastPlayDate: null, badges: [],
-  mastery: {}, // "语文-字词基础": 50
-  exposure: {}, // 题目曝光记录: { id: { count: 0, lastShown: 0 } }
-  history: [], wrongQuestions: [],
-  // 家长设置
-  settings: {
-    subjects: { '语文': true, '数学': true, '英语': true, '科学': true, '道法': true },
-    allowAhead: false,
-    onlyCurrent: false,
-    soundEnabled: true,
-  },
-  // 学习进度
-  progress: {
-    '语文': { currentUnit: 1, masteredKPs: [], unlockedKPs: [] },
-    '数学': { currentUnit: 1, masteredKPs: [], unlockedKPs: [] },
-    '英语': { currentUnit: 1, masteredKPs: [], unlockedKPs: [] },
-    '科学': { currentUnit: 1, masteredKPs: [], unlockedKPs: [] },
-    '道法': { currentUnit: 1, masteredKPs: [], unlockedKPs: [] },
-  },
-  dailyQuestionsGenerated: null,
-};
+  return {
+    id: 'gen_science_' + Date.now() + '_' + Math.floor(Math.random()*10000),
+    subject: '科学', grade: grade, term: '上册', unit: unit, kp: kp,
+    type: 'single', difficulty: difficulty || 1, question: q, options: options,
+    answer: answer, explanation: explanation, generated: true,
+  };
+}
 
-// 答题中状态
-let quizState = {
-  mode: 'smart', // smart / full / single / practice
-  questions: [], currentIndex: 0, answers: [],
-  startTime: null, endTime: null, timerInterval: null,
-  timeLeft: 30 * 60, // 秒
-  eyeReminderInterval: null,
-  selectedOption: null, submitted: false,
-  consecutiveCorrect: 0, consecutiveWrong: 0,
-  difficulty: 1, // 1简单 2中等 3困难
-  subjectFilter: null, // 单科模式的科目
-  practiceConfig: null, // 练习模式配置
-};
+// 道发生成器
+function genDaoFaQuestion(grade, unit, kp, difficulty) {
+  let q, options, answer, explanation;
+
+  if (kp.includes('安全') || kp.includes('自护')) {
+    q = '过马路时，应该怎么做？';
+    options = ['A. 红灯停，绿灯行，走斑马线', 'B. 直接跑过去', 'C. 红灯也可以走', 'D. 看心情走'];
+    answer = 0;
+    explanation = '红灯停绿灯行，过马路走斑马线，一停二看三通过。';
+  } else if (kp.includes('环保') || kp.includes('环境') || kp.includes('垃圾')) {
+    q = '下列哪种行为是环保的？';
+    options = ['A. 随手关灯', 'B. 乱扔垃圾', 'C. 浪费纸张', 'D. 用一次性筷子'];
+    answer = 0;
+    explanation = '随手关灯节约用电，是环保行为。';
+  } else if (kp.includes('诚信') || kp.includes('诚实守信')) {
+    q = '不小心打碎了教室玻璃，应该怎么做？';
+    options = ['A. 主动承认错误，告诉老师', 'B. 偷偷跑掉', 'C. 说是别人打碎的', 'D. 装作不知道'];
+    answer = 0;
+    explanation = '做错事要勇于承认，主动承担责任。';
+  } else if (kp.includes('规则') || kp.includes('班级') || kp.includes('校园')) {
+    q = '在课堂上，下列哪种行为是正确的？';
+    options = ['A. 举手发言', 'B. 随便讲话', 'C. 做小动作', 'D. 吃零食'];
+    answer = 0;
+    explanation = '课堂上举手发言是正确的做法。';
+  } else {
+    q = '爸爸妈妈工作很辛苦，我们应该怎么做？';
+    options = ['A. 体谅父母，做力所能及的家务', 'B. 什么都让父母做', 'C. 只想着自己玩', 'D. 跟父母发脾气'];
+    answer = 0;
+    explanation = '要体谅父母辛苦，主动做家务。';
+  }
+
+  return {
+    id: 'gen_daofa_' + Date.now() + '_' + Math.floor(Math.random()*10000),
+    subject: '道法', grade: grade, term: '上册', unit: unit, kp: kp,
+    type: 'single', difficulty: difficulty || 1, question: q, options: options,
+    answer: answer, explanation: explanation, generated: true,
+  };
+}
 
 // ============================================================
 // 四、工具函数
 // ============================================================
 
 function shuffle(arr) {
-  for (let i = arr.length - 1; i > 0; i--) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
-    [arr[i], arr[j]] = [arr[j], arr[i]];
+    [a[i], a[j]] = [a[j], a[i]];
   }
-  return arr;
+  return a;
 }
 
-function getKpKey(subject, kp) { return subject + '-' + kp; }
-
-function getMastery(subject, kp) {
-  const key = getKpKey(subject, kp);
-  return appState.mastery[key] !== undefined ? appState.mastery[key] : 50;
+function getSubjectColor(s) {
+  const map = { '语文':'#FF6B6B', '数学':'#4A9FF5', '英语':'#A855F7', '科学':'#2ED573', '道法':'#FF9F43' };
+  return map[s] || '#4A9FF5';
 }
 
-function updateMastery(subject, kp, isCorrect) {
-  const key = getKpKey(subject, kp);
-  if (appState.mastery[key] === undefined) appState.mastery[key] = 50;
-  if (isCorrect) appState.mastery[key] = Math.min(100, appState.mastery[key] + 8);
-  else appState.mastery[key] = Math.max(0, appState.mastery[key] - 10);
-  saveData();
-}
-
-function loadData() {
+function playSound(type) {
   try {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    if (saved) {
-      const data = JSON.parse(saved);
-      Object.assign(appState, data);
-      if (data.settings) appState.settings = { ...appState.settings, ...data.settings };
-      if (data.progress) appState.progress = { ...appState.progress, ...data.progress };
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.connect(gain); gain.connect(ctx.destination);
+    if (type === 'correct') {
+      osc.frequency.value = 600; osc.type = 'sine';
+      gain.gain.setValueAtTime(0.1, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.3);
+      osc.start(ctx.currentTime); osc.stop(ctx.currentTime + 0.3);
+    } else if (type === 'wrong') {
+      osc.frequency.value = 200; osc.type = 'sawtooth';
+      gain.gain.setValueAtTime(0.1, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.4);
+      osc.start(ctx.currentTime); osc.stop(ctx.currentTime + 0.4);
+    } else if (type === 'reward') {
+      osc.frequency.value = 800; osc.type = 'sine';
+      gain.gain.setValueAtTime(0.1, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.5);
+      osc.start(ctx.currentTime); osc.stop(ctx.currentTime + 0.5);
     }
-  } catch (e) { console.error('加载失败', e); }
-
-  // 初始化所有知识点掌握度
-  Object.keys(SUBJECT_META).forEach(subject => {
-    SUBJECT_META[subject].units.forEach(unit => {
-      unit.kps.forEach(kp => {
-        const key = getKpKey(subject, kp);
-        if (appState.mastery[key] === undefined) appState.mastery[key] = 50;
-        // 初始化已解锁知识点（默认当前单元及以前）
-        if (!appState.progress[subject].unlockedKPs) appState.progress[subject].unlockedKPs = [];
-      });
-    });
-  });
-
-  // 初始化默认解锁：第一单元所有知识点
-  Object.keys(appState.progress).forEach(subject => {
-    if (appState.progress[subject].unlockedKPs.length === 0) {
-      SUBJECT_META[subject].units[0].kps.forEach(kp => {
-        appState.progress[subject].unlockedKPs.push(kp);
-      });
-    }
-  });
+  } catch(e) {}
 }
 
-function saveData() {
-  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(appState)); }
-  catch (e) { console.error('保存失败', e); }
+function showConfetti() {
+  const colors = ['#FF6B6B','#4A9FF5','#FFD93D','#2ED573','#A855F7','#FF9F43'];
+  for (let i = 0; i < 30; i++) {
+    const c = document.createElement('div');
+    c.className = 'confetti';
+    c.style.left = Math.random() * 100 + 'vw';
+    c.style.background = colors[Math.floor(Math.random() * colors.length)];
+    c.style.animationDelay = Math.random() * 0.5 + 's';
+    c.style.animationDuration = (2 + Math.random() * 2) + 's';
+    document.body.appendChild(c);
+    setTimeout(() => c.remove(), 4000);
+  }
 }
 
 // ============================================================
-// 五、视图切换
+// 五、状态管理与数据持久化
+// ============================================================
+
+const STORAGE_KEY = 'grade4_learning_park_v2';
+
+let appState = {
+  grade: 4,
+  term: '上册',
+  subjects: {
+    '语文': { enabled: true, currentUnit: 3, allowAhead: false },
+    '数学': { enabled: true, currentUnit: 4, allowAhead: false },
+    '英语': { enabled: true, currentUnit: 2, allowAhead: false },
+    '科学': { enabled: true, currentUnit: 1, allowAhead: false },
+    '道法': { enabled: true, currentUnit: 1, allowAhead: false },
+  },
+  stars: 0,
+  coins: 0,
+  totalScore: 0,
+  badges: [],
+  history: [],
+  wrongBook: [],
+  mastery: {}, // subject-kp: 0-100
+  exposures: {}, // qid: count
+  qbank: [], // 本地题库（含生成题）
+  qbankVersion: 'v1.0',
+  lastRegenDate: null,
+  title: '学习小达人',
+};
+
+let quizState = null; // 答题进行中的状态
+
+function loadData() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) {
+      const data = JSON.parse(raw);
+      appState = { ...appState, ...data };
+      // 合并科目设置
+      if (data.subjects) {
+        Object.keys(data.subjects).forEach(k => {
+          appState.subjects[k] = { ...appState.subjects[k], ...data.subjects[k] };
+        });
+      }
+    }
+  } catch(e) { console.warn('loadData error', e); }
+}
+
+function saveData() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
+  } catch(e) { console.warn('saveData error', e); }
+}
+
+// ============================================================
+// 六、视图切换
 // ============================================================
 
 function showView(name) {
   document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-  const view = document.getElementById('view-' + name);
-  if (view) view.classList.add('active');
-  document.getElementById('topBar').classList.toggle('show', name !== 'home');
-  window.scrollTo(0, 0);
-
-  if (name === 'home') renderProgressOverview();
+  const el = document.getElementById('view-' + name);
+  if (el) el.classList.add('active');
+  const topBar = document.getElementById('topBar');
+  if (['home','history','wrongbook','rewards','qbank','settings','review'].includes(name)) {
+    topBar.classList.add('show');
+  } else {
+    topBar.classList.remove('show');
+  }
+  if (name === 'home') renderHome();
   if (name === 'history') renderHistory();
   if (name === 'wrongbook') renderWrongBook();
   if (name === 'rewards') renderRewards();
-  if (name === 'settings') renderSettings();
   if (name === 'qbank') renderQBank();
+  if (name === 'settings') renderSettings();
+  window.scrollTo(0, 0);
 }
 
 function goHome() {
   stopTimer();
+  quizState = null;
   showView('home');
-  updateTopBar();
 }
 
-function updateTopBar() {
+function renderHome() {
+  document.getElementById('heroGrade').textContent = `${appState.grade}年级 · ${appState.term}`;
   document.getElementById('starCount').textContent = appState.stars;
   document.getElementById('coinCount').textContent = appState.coins;
   document.getElementById('totalScore').textContent = appState.totalScore;
+  renderProgressOverview();
 }
-
-// ============================================================
-// 六、首页进度总览
-// ============================================================
 
 function renderProgressOverview() {
   const container = document.getElementById('progressOverview');
-  container.innerHTML = '';
-  const colors = { '语文':'#EF5350', '数学':'#42A5F5', '英语':'#66BB6A', '科学':'#AB47BC', '道法':'#FFA726' };
-
-  Object.keys(SUBJECT_META).forEach(subject => {
-    if (!appState.settings.subjects[subject]) return;
-    const prog = appState.progress[subject];
-    const allKps = [];
-    SUBJECT_META[subject].units.forEach(u => u.kps.forEach(k => allKps.push(k)));
-    const masteredCount = prog.masteredKPs ? prog.masteredKPs.length : 0;
-    const percent = allKps.length > 0 ? Math.round((masteredCount / allKps.length) * 100) : 0;
-
-    const div = document.createElement('div');
-    div.className = 'progress-subject';
-    div.innerHTML = `
-      <div class="ps-head">
-        <span>${subject}（第${prog.currentUnit}单元）</span>
-        <span>${masteredCount}/${allKps.length} 已掌握</span>
-      </div>
-      <div class="progress-bar">
-        <div class="progress-fill" style="width:${percent}%;background:${colors[subject]}"></div>
-      </div>
-    `;
-    container.appendChild(div);
-  });
+  const subjects = Object.keys(appState.subjects);
+  container.innerHTML = subjects.map(s => {
+    const subj = appState.subjects[s];
+    if (!subj.enabled) return '';
+    const gradeData = GRADE_DATA[appState.grade];
+    const termData = gradeData[s] ? gradeData[s][appState.term] : [];
+    const totalUnits = termData.length;
+    const pct = Math.min(100, Math.round((subj.currentUnit / Math.max(totalUnits,1)) * 100));
+    return `<div class="progress-subject">
+      <div class="ps-head"><span>${s}</span><span>第${subj.currentUnit}单元 / 共${totalUnits}单元</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width:${pct}%;background:${getSubjectColor(s)}"></div></div>
+    </div>`;
+  }).join('');
 }
 
 // ============================================================
 // 七、出题引擎
 // ============================================================
 
-// 获取可用题库（静态 + 生成器生成的）
-function getFullQuestionPool() {
-  let pool = [...STATIC_QUESTIONS];
-  // 加入已生成的每日新题
-  if (appState.dailyQuestions) pool = pool.concat(appState.dailyQuestions);
-  return pool;
-}
-
-// 按科目和进度过滤题目
-function filterByProgress(pool, subjectFilter) {
-  let filtered = pool.filter(q => appState.settings.subjects[q.subject]);
-  if (subjectFilter) filtered = filtered.filter(q => q.subject === subjectFilter);
-
-  // 按进度过滤：只出已解锁知识点的题
-  filtered = filtered.filter(q => {
-    const prog = appState.progress[q.subject];
-    if (!prog) return false;
-    // 已解锁的知识点
-    if (prog.unlockedKPs && prog.unlockedKPs.includes(q.kp)) return true;
-    // 当前单元的知识点
-    const currentUnit = SUBJECT_META[q.subject].units[prog.currentUnit - 1];
-    if (currentUnit && currentUnit.kps.includes(q.kp)) return true;
-    // 允许超前的话，下一单元也可以出
-    if (appState.settings.allowAhead && prog.currentUnit < SUBJECT_META[q.subject].units.length) {
-      const nextUnit = SUBJECT_META[q.subject].units[prog.currentUnit];
-      if (nextUnit && nextUnit.kps.includes(q.kp)) return Math.random() < 0.1; // 10%概率
-    }
-    return false;
-  });
-
-  return filtered;
-}
-
-// 智能模式出题
-function pickSmartQuestions(pool, count) {
-  // 按掌握度排序：薄弱的优先
-  const withMastery = pool.map(q => ({
-    ...q,
-    mastery: getMastery(q.subject, q.kp),
-    exposure: (appState.exposure[q.id] || { count: 0 }).count,
-  }));
-
-  // 60-70% 薄弱题（掌握度<60）
-  const weak = withMastery.filter(q => q.mastery < 60).sort((a, b) => a.mastery - b.mastery);
-  // 20-30% 已掌握但需巩固（掌握度80-95）
-  const medium = withMastery.filter(q => q.mastery >= 80 && q.mastery <= 95).sort((a, b) => b.mastery - a.mastery);
-  // 10-20% 新学（掌握度50左右）
-  const newOnes = withMastery.filter(q => q.mastery >= 45 && q.mastery < 60);
-
+// 获取某科当前进度内的所有知识点
+function getKPsForSubject(subject) {
+  const gradeData = GRADE_DATA[appState.grade];
+  if (!gradeData || !gradeData[subject]) return [];
+  const termData = gradeData[subject][appState.term] || [];
+  const subj = appState.subjects[subject];
   const result = [];
-  const weakCount = Math.round(count * 0.65);
-  const mediumCount = Math.round(count * 0.25);
-  const newCount = count - weakCount - mediumCount;
-
-  result.push(...shuffle(weak).slice(0, weakCount));
-  result.push(...shuffle(medium).slice(0, mediumCount));
-  result.push(...shuffle(newOnes).slice(0, newCount));
-
-  // 不足的补充
-  if (result.length < count) {
-    const remaining = shuffle(withMastery.filter(q => !result.find(r => r.id === q.id)));
-    result.push(...remaining.slice(0, count - result.length));
-  }
-
-  return shuffle(result.slice(0, count));
+  termData.forEach((u, idx) => {
+    if (idx < subj.currentUnit - 1 || (idx === subj.currentUnit - 1)) {
+      u.kps.forEach(kp => {
+        result.push({ unit: u.unit, kp: kp });
+      });
+    }
+  });
+  return result;
 }
 
-// 全科模式出题
-function pickFullModeQuestions(pool, count) {
-  const subjects = Object.keys(appState.settings.subjects).filter(s => appState.settings.subjects[s]);
-  const perSubject = Math.ceil(count / subjects.length);
-  let result = [];
+// 获取掌握度
+function getMastery(subject, kp) {
+  const key = subject + '|' + kp;
+  return appState.mastery[key] !== undefined ? appState.mastery[key] : 50;
+}
+
+function setMastery(subject, kp, val) {
+  const key = subject + '|' + kp;
+  appState.mastery[key] = Math.max(0, Math.min(100, val));
+}
+
+// 智能重出题算法
+function smartRegenerate() {
+  const subjects = Object.keys(appState.subjects).filter(s => appState.subjects[s].enabled);
+  const newQuestions = [];
+  const genCountPerSubject = Math.max(3, Math.floor(20 / subjects.length));
 
   subjects.forEach(subject => {
-    const subjPool = shuffle(pool.filter(q => q.subject === subject));
-    result.push(...subjPool.slice(0, perSubject));
+    const kps = getKPsForSubject(subject);
+    if (kps.length === 0) return;
+
+    // 计算每个知识点的优先级分数
+    const scoredKPs = kps.map(k => {
+      const mastery = getMastery(subject, k.kp);
+      const weakQs = appState.wrongBook.filter(w => w.subject === subject && w.kp === k.kp);
+      const errorRate = weakQs.length / Math.max(1, (weakQs.length + 5));
+      const priority = (100 - mastery) * 0.4 + errorRate * 30 + 10;
+      return { ...k, priority, mastery };
+    });
+
+    // 按优先级排序
+    scoredKPs.sort((a, b) => b.priority - a.priority);
+
+    // 为前几个高优先级知识点生成新题
+    scoredKPs.slice(0, genCountPerSubject).forEach(k => {
+      const difficulty = k.mastery < 40 ? 1 : (k.mastery < 70 ? 2 : 3);
+      let q;
+      if (subject === '数学') q = genMathQuestion(appState.grade, k.unit, k.kp, difficulty);
+      else if (subject === '语文') q = genChineseQuestion(appState.grade, k.unit, k.kp, difficulty);
+      else if (subject === '英语') q = genEnglishQuestion(appState.grade, k.unit, k.kp, difficulty);
+      else if (subject === '科学') q = genScienceQuestion(appState.grade, k.unit, k.kp, difficulty);
+      else q = genDaoFaQuestion(appState.grade, k.unit, k.kp, difficulty);
+      newQuestions.push(q);
+    });
   });
 
-  // 打乱但避免连续同科
-  result = shuffle(result);
-  return result.slice(0, count);
-}
-
-// 单科模式出题
-function pickSingleModeQuestions(pool, subject, count) {
-  const subjPool = filterByProgress(pool, subject);
-  return shuffle(subjPool).slice(0, count);
-}
-
-// 练习模式出题
-function pickPracticeQuestions(pool, config, count) {
-  let filtered = pool;
-  if (config.subject) filtered = filtered.filter(q => q.subject === config.subject);
-  if (config.kp) filtered = filtered.filter(q => q.kp === config.kp);
-  if (config.type === 'wrong') {
-    const wrongIds = appState.wrongQuestions.map(w => w.id);
-    filtered = filtered.filter(q => wrongIds.includes(q.id));
-  }
-  if (config.type === 'weak') {
-    filtered = filtered.filter(q => getMastery(q.subject, q.kp) < 60);
-  }
-  return shuffle(filtered).slice(0, count);
-}
-
-// 生成每日新题
-function generateDailyQuestions() {
-  const today = new Date().toDateString();
-  if (appState.dailyQuestionsGenerated === today) {
-    showModal('⏰', '今日已生成', '今天的新题已经生成过啦，明天再来吧！');
-    return;
-  }
-
-  const newQuestions = [];
-  // 每科生成2-3道新题
-  const generators = {
-    '数学': generateMathQuestion,
-    '语文': generateChineseQuestion,
-    '英语': generateEnglishQuestion,
-  };
-
-  Object.keys(generators).forEach(subject => {
-    for (let i = 0; i < 3; i++) {
-      newQuestions.push(generators[subject](1 + Math.floor(Math.random() * 2)));
+  // 加入本地题库（去重）
+  const existingIds = new Set([...STATIC_QUESTIONS, ...appState.qbank].map(q => q.id));
+  newQuestions.forEach(q => {
+    if (!existingIds.has(q.id)) {
+      appState.qbank.push(q);
+      existingIds.add(q.id);
     }
   });
 
-  appState.dailyQuestions = newQuestions;
-  appState.dailyQuestionsGenerated = today;
+  appState.qbankVersion = 'v' + new Date().toISOString().slice(0,10).replace(/-/g,'') + '_' + Math.floor(Math.random()*1000);
+  appState.lastRegenDate = new Date().toDateString();
   saveData();
-  showModal('🎉', '新题生成成功！', `生成了 ${newQuestions.length} 道新题，快去试试吧！`);
-  renderQBank();
+
+  showModal('🎯', '智能重出题完成！', `本次生成了 ${newQuestions.length} 道新题，已加入题库。`);
+  return newQuestions.length;
+}
+
+// 按模式抽题
+function pickQuestions(mode, options = {}) {
+  const allQuestions = [...STATIC_QUESTIONS, ...appState.qbank];
+  const enabledSubjects = Object.keys(appState.subjects).filter(s => appState.subjects[s].enabled);
+  const result = [];
+  const seenIds = new Set();
+
+  if (mode === 'smart') {
+    // 智能模式：60%薄弱，30%已掌握，10%新学
+    const targetCount = options.count || 20;
+    const weakPool = [], goodPool = [], newPool = [];
+
+    enabledSubjects.forEach(s => {
+      const kps = getKPsForSubject(s);
+      kps.forEach(k => {
+        const qs = allQuestions.filter(q => q.subject === s && q.unit === k.unit && q.kp === k.kp && !seenIds.has(q.id));
+        if (qs.length === 0) {
+          // 题库不足，生成
+          const m = getMastery(s, k.kp);
+          let genQ;
+          if (s === '数学') genQ = genMathQuestion(appState.grade, k.unit, k.kp, m<40?1:2);
+          else if (s === '语文') genQ = genChineseQuestion(appState.grade, k.unit, k.kp, m<40?1:2);
+          else if (s === '英语') genQ = genEnglishQuestion(appState.grade, k.unit, k.kp, m<40?1:2);
+          else if (s === '科学') genQ = genScienceQuestion(appState.grade, k.unit, k.kp, m<40?1:2);
+          else genQ = genDaoFaQuestion(appState.grade, k.unit, k.kp, m<40?1:2);
+          qs.push(genQ);
+        }
+        qs.forEach(q => {
+          const m = getMastery(s, k.kp);
+          if (m < 70) weakPool.push(q);
+          else if (m >= 80 && m <= 95) goodPool.push(q);
+          else newPool.push(q);
+        });
+      });
+    });
+
+    const weakCount = Math.floor(targetCount * 0.6);
+    const goodCount = Math.floor(targetCount * 0.3);
+    const newCount = targetCount - weakCount - goodCount;
+
+    shuffle(weakPool).slice(0, weakCount).forEach(q => { result.push(q); seenIds.add(q.id); });
+    shuffle(goodPool).slice(0, goodCount).forEach(q => { if(!seenIds.has(q.id)){result.push(q); seenIds.add(q.id);} });
+    shuffle(newPool).slice(0, newCount).forEach(q => { if(!seenIds.has(q.id)){result.push(q); seenIds.add(q.id);} });
+
+    // 补齐
+    while (result.length < targetCount) {
+      const pool = shuffle(allQuestions.filter(q => !seenIds.has(q.id) && enabledSubjects.includes(q.subject)));
+      if (pool.length === 0) break;
+      result.push(pool[0]);
+      seenIds.add(pool[0].id);
+    }
+  }
+  else if (mode === 'full') {
+    // 全科模式：每科至少1题，不连续同科
+    const targetCount = options.count || 20;
+    const perSubject = Math.ceil(targetCount / enabledSubjects.length);
+    enabledSubjects.forEach(s => {
+      const pool = shuffle(allQuestions.filter(q => q.subject === s && !seenIds.has(q.id)));
+      pool.slice(0, perSubject).forEach(q => { result.push(q); seenIds.add(q.id); });
+    });
+    // 打乱
+    result.sort(() => Math.random() - 0.5);
+  }
+  else if (mode === 'single') {
+    // 单科模式
+    const subject = options.subject;
+    const targetCount = options.count || 15;
+    const pool = shuffle(allQuestions.filter(q => q.subject === subject && !seenIds.has(q.id)));
+    pool.slice(0, targetCount).forEach(q => result.push(q));
+    // 不足则生成
+    while (result.length < targetCount) {
+      const kps = getKPsForSubject(subject);
+      const k = kps[Math.floor(Math.random() * kps.length)];
+      let genQ;
+      if (subject === '数学') genQ = genMathQuestion(appState.grade, k.unit, k.kp, 2);
+      else if (subject === '语文') genQ = genChineseQuestion(appState.grade, k.unit, k.kp, 2);
+      else if (subject === '英语') genQ = genEnglishQuestion(appState.grade, k.unit, k.kp, 2);
+      else if (subject === '科学') genQ = genScienceQuestion(appState.grade, k.unit, k.kp, 2);
+      else genQ = genDaoFaQuestion(appState.grade, k.unit, k.kp, 2);
+      result.push(genQ);
+    }
+  }
+  else if (mode === 'practice') {
+    // 练习模式
+    const targetCount = options.count || 10;
+    let pool = allQuestions.filter(q => !seenIds.has(q.id));
+    if (options.subject) pool = pool.filter(q => q.subject === options.subject);
+    if (options.kp) pool = pool.filter(q => q.kp === options.kp);
+    if (options.wrongOnly) pool = pool.filter(q => appState.wrongBook.some(w => w.id === q.id));
+    pool = shuffle(pool);
+    pool.slice(0, targetCount).forEach(q => result.push(q));
+    // 不足则生成
+    while (result.length < targetCount) {
+      const subj = options.subject || enabledSubjects[0];
+      const kps = getKPsForSubject(subj);
+      const k = kps[Math.floor(Math.random() * kps.length)];
+      let genQ;
+      if (subj === '数学') genQ = genMathQuestion(appState.grade, k.unit, k.kp, 2);
+      else if (subj === '语文') genQ = genChineseQuestion(appState.grade, k.unit, k.kp, 2);
+      else if (subj === '英语') genQ = genEnglishQuestion(appState.grade, k.unit, k.kp, 2);
+      else if (subj === '科学') genQ = genScienceQuestion(appState.grade, k.unit, k.kp, 2);
+      else genQ = genDaoFaQuestion(appState.grade, k.unit, k.kp, 2);
+      result.push(genQ);
+    }
+  }
+
+  return result.slice(0, options.count || result.length);
 }
 
 // ============================================================
-// 八、模式选择与开始
+// 八、模式选择与开始答题
 // ============================================================
 
 function startModeSelect(mode) {
-  quizState.mode = mode;
+  quizState = { mode: mode };
+  const container = document.getElementById('modeSelectContent');
+  const title = document.getElementById('modeSelectTitle');
 
-  if (mode === 'smart' || mode === 'full') {
-    // 直接开始
-    startQuizWithMode(mode);
-  } else if (mode === 'single') {
-    // 选择科目
-    const container = document.getElementById('modeSelectContent');
-    document.getElementById('modeSelectTitle').textContent = '选择科目';
-    const subjects = Object.keys(appState.settings.subjects).filter(s => appState.settings.subjects[s]);
-    container.innerHTML = '<div class="mode-select-grid">' + subjects.map(s => `
-      <div class="mode-option" onclick="selectSingleSubject('${s}')">
-        <div class="mo-icon">${{ '语文':'📖', '数学':'🔢', '英语':'🔤', '科学':'🔬', '道法':'⚖️' }[s]}</div>
+  if (mode === 'single') {
+    title.textContent = '单科模式 - 选择科目';
+    const subjects = Object.keys(appState.subjects).filter(s => appState.subjects[s].enabled);
+    container.innerHTML = `<div class="mode-select-grid">` +
+      subjects.map(s => `<div class="mode-option" onclick="startSingleMode('${s}')">
+        <div class="mo-icon" style="color:${getSubjectColor(s)}">📚</div>
         <div class="mo-name">${s}</div>
-      </div>
-    `).join('') + '</div>';
-    showView('modeSelect');
+        <div class="mo-desc">第${appState.subjects[s].currentUnit}单元</div>
+      </div>`).join('') + `</div>`;
   } else if (mode === 'practice') {
-    // 练习模式选择
-    const container = document.getElementById('modeSelectContent');
-    document.getElementById('modeSelectTitle').textContent = '选择练习方式';
+    title.textContent = '练习模式 - 选择范围';
     container.innerHTML = `
       <div class="mode-select-grid">
-        <div class="mode-option" onclick="selectPracticeType('subject')">
-          <div class="mo-icon">📚</div><div class="mo-name">按科目练习</div>
-          <div class="mo-desc">选择一个科目专项练习</div>
+        <div class="mode-option" onclick="startPractice('all')">
+          <div class="mo-icon">🌐</div><div class="mo-name">全科练习</div><div class="mo-desc">所有科目随机</div>
         </div>
-        <div class="mode-option" onclick="selectPracticeType('kp')">
-          <div class="mo-icon">🎯</div><div class="mo-name">按知识点练习</div>
-          <div class="mo-desc">针对薄弱知识点突破</div>
+        <div class="mode-option" onclick="startPractice('wrong')">
+          <div class="mo-icon">📝</div><div class="mo-name">错题重做</div><div class="mo-desc">重做错题本</div>
         </div>
-        <div class="mode-option" onclick="selectPracticeType('wrong')">
-          <div class="mo-icon">📝</div><div class="mo-name">错题重做</div>
-          <div class="mo-desc">把错题本里的题再做一遍</div>
-        </div>
-        <div class="mode-option" onclick="selectPracticeType('weak')">
-          <div class="mo-icon">💪</div><div class="mo-name">薄弱点练习</div>
-          <div class="mo-desc">自动找出掌握度低的知识点</div>
+        <div class="mode-option" onclick="startPractice('weak')">
+          <div class="mo-icon">💪</div><div class="mo-name">薄弱点突破</div><div class="mo-desc">针对薄弱知识点</div>
         </div>
       </div>
-    `;
-    showView('modeSelect');
-  }
-}
-
-function selectSingleSubject(subject) {
-  quizState.subjectFilter = subject;
-  startQuizWithMode('single', subject);
-}
-
-function selectPracticeType(type) {
-  if (type === 'wrong') {
-    if (appState.wrongQuestions.length === 0) {
-      showModal('📭', '错题本是空的', '先去做一些题，错题会自动加入错题本哦！');
-      return;
-    }
-    quizState.practiceConfig = { type: 'wrong' };
-    startQuizWithMode('practice', null, { questionCount: 10, unlimited: true });
-  } else if (type === 'weak') {
-    // 找出薄弱知识点
-    const weakKps = Object.keys(appState.mastery).filter(k => appState.mastery[k] < 60);
-    if (weakKps.length === 0) {
-      showModal('🎉', '太棒了！', '你目前没有薄弱知识点，继续保持！');
-      return;
-    }
-    quizState.practiceConfig = { type: 'weak' };
-    startQuizWithMode('practice', null, { questionCount: 10, unlimited: true });
-  } else if (type === 'subject') {
-    const subjects = Object.keys(appState.settings.subjects).filter(s => appState.settings.subjects[s]);
-    const container = document.getElementById('modeSelectContent');
-    document.getElementById('modeSelectTitle').textContent = '选择科目';
-    container.innerHTML = '<div class="mode-select-grid">' + subjects.map(s => `
-      <div class="mode-option" onclick="selectPracticeSubject('${s}')">
-        <div class="mo-icon">${{ '语文':'📖', '数学':'🔢', '英语':'🔤', '科学':'🔬', '道法':'⚖️' }[s]}</div>
-        <div class="mo-name">${s}</div>
-      </div>
-    `).join('') + '</div>';
-  }
-}
-
-function selectPracticeSubject(subject) {
-  quizState.practiceConfig = { type: 'subject', subject: subject };
-  startQuizWithMode('practice', null, { questionCount: 10, unlimited: true });
-}
-
-// 统一开始答题
-function startQuizWithMode(mode, subjectFilter, practiceOpts) {
-  const pool = getFullQuestionPool();
-  let filtered = filterByProgress(pool, subjectFilter);
-
-  let questions = [];
-  const questionCount = practiceOpts?.questionCount || 20; // 默认20题
-
-  if (mode === 'smart') {
-    questions = pickSmartQuestions(filtered, questionCount);
-  } else if (mode === 'full') {
-    questions = pickFullModeQuestions(filtered, questionCount);
-  } else if (mode === 'single') {
-    questions = pickSingleModeQuestions(filtered, subjectFilter, questionCount);
-  } else if (mode === 'practice') {
-    questions = pickPracticeQuestions(filtered, quizState.practiceConfig || {}, questionCount);
-  }
-
-  if (questions.length === 0) {
-    showModal('😅', '题目不足', '当前进度范围内没有足够的题目，请先在家长设置中解锁更多单元，或生成新题。');
+      <div class="card">
+        <h4 style="margin-bottom:10px;">选择题量</h4>
+        <div class="filter-bar">
+          <div class="filter-chip" onclick="setPracticeCount(5)">5题</div>
+          <div class="filter-chip active" onclick="setPracticeCount(10)">10题</div>
+          <div class="filter-chip" onclick="setPracticeCount(15)">15题</div>
+        </div>
+      </div>`;
+    practiceCount = 10;
+  } else {
+    // smart / full 直接开始
+    const label = mode === 'smart' ? '智能模式' : '全科模式';
+    startQuiz(mode, { count: 20, duration: 30 });
     return;
   }
+  showView('modeSelect');
+}
 
-  quizState.mode = mode;
-  quizState.questions = questions;
-  quizState.currentIndex = 0;
-  quizState.answers = [];
-  quizState.startTime = Date.now();
-  quizState.timeLeft = 30 * 60;
-  quizState.selectedOption = null;
-  quizState.submitted = false;
-  quizState.consecutiveCorrect = 0;
-  quizState.consecutiveWrong = 0;
-  quizState.difficulty = 1;
+let practiceCount = 10;
+function setPracticeCount(n) {
+  practiceCount = n;
+  document.querySelectorAll('#modeSelectContent .filter-chip').forEach(c => c.classList.remove('active'));
+  event.target.classList.add('active');
+}
 
-  // 更新模式标签
-  const modeNames = { smart: '🧠 智能模式', full: '🌐 全科模式', single: '📚 单科模式', practice: '✏️ 练习模式' };
-  document.getElementById('modeTag').textContent = modeNames[mode] || '';
+function startSingleMode(subject) {
+  startQuiz('single', { subject: subject, count: 15, duration: 30 });
+}
 
-  showView('quiz');
-  renderQuestion();
-  startTimer();
-  startEyeReminder();
+function startPractice(type) {
+  const opts = { count: practiceCount, duration: 0 }; // 练习模式不限时
+  if (type === 'wrong') opts.wrongOnly = true;
+  else if (type === 'weak') opts.weakOnly = true;
+  startQuiz('practice', opts);
 }
 
 // ============================================================
 // 九、答题流程
 // ============================================================
 
+let timerInterval = null;
+let timerEndTime = null;
+let lastEyeReminder = 0;
+
+function startQuiz(mode, options) {
+  const questions = pickQuestions(mode, options);
+  if (questions.length === 0) {
+    showModal('⚠️', '没有题目', '当前范围内暂无题目，请先在家长设置中调整进度或生成新题。');
+    return;
+  }
+
+  quizState = {
+    mode: mode,
+    questions: questions,
+    currentIndex: 0,
+    score: 0,
+    correctCount: 0,
+    wrongIds: [],
+    startTime: Date.now(),
+    duration: options.duration || 30,
+    subjectScores: {},
+    consecutiveCorrect: 0,
+    consecutiveWrong: 0,
+    selectedOption: null,
+    subject: options.subject,
+  };
+
+  document.getElementById('modeTag').textContent =
+    mode === 'smart' ? '🧠 智能模式' :
+    mode === 'full' ? '🌐 全科模式' :
+    mode === 'single' ? '📚 单科模式' : '✏️ 练习模式';
+
+  showView('quiz');
+  renderQuestion();
+  startTimer(quizState.duration);
+}
+
 function renderQuestion() {
   const q = quizState.questions[quizState.currentIndex];
   quizState.selectedOption = null;
-  quizState.submitted = false;
 
   document.getElementById('qIndex').textContent = quizState.currentIndex + 1;
   document.getElementById('qTotal').textContent = quizState.questions.length;
   document.getElementById('qSubject').textContent = q.subject;
+  document.getElementById('qSubject').style.background = getSubjectColor(q.subject) + '20';
+  document.getElementById('qSubject').style.color = getSubjectColor(q.subject);
   document.getElementById('qKP').textContent = q.kp;
   document.getElementById('qType').textContent = q.type === 'judge' ? '判断题' : '单选题';
   document.getElementById('qText').textContent = q.question;
 
-  const progress = (quizState.currentIndex / quizState.questions.length) * 100;
-  document.getElementById('progressFill').style.width = progress + '%';
-
   const optionsEl = document.getElementById('qOptions');
-  optionsEl.innerHTML = '';
-  q.options.forEach((opt, i) => {
-    const div = document.createElement('div');
-    div.className = 'option-item';
-    div.innerHTML = `<div class="option-letter">${String.fromCharCode(65 + i)}</div><div>${opt}</div>`;
-    div.onclick = () => selectOption(i);
-    optionsEl.appendChild(div);
-  });
+  optionsEl.innerHTML = q.options.map((o, i) =>
+    `<div class="option-item" data-idx="${i}" onclick="selectOption(${i})">
+      <div class="option-letter">${String.fromCharCode(65+i)}</div>
+      <div>${o.replace(/^[A-D]\.\s*/, '')}</div>
+    </div>`
+  ).join('');
 
+  document.getElementById('feedbackPanel').className = 'feedback-panel';
   document.getElementById('submitBtn').classList.remove('hidden');
   document.getElementById('nextBtn').classList.add('hidden');
-  document.getElementById('feedbackPanel').classList.remove('show', 'correct', 'wrong');
+
+  // 进度条
+  const pct = ((quizState.currentIndex) / quizState.questions.length) * 100;
+  document.getElementById('progressFill').style.width = pct + '%';
 }
 
-function selectOption(index) {
-  if (quizState.submitted) return;
-  quizState.selectedOption = index;
+function selectOption(idx) {
+  quizState.selectedOption = idx;
   document.querySelectorAll('.option-item').forEach((el, i) => {
-    el.classList.toggle('selected', i === index);
+    el.classList.toggle('selected', i === idx);
   });
 }
 
 function submitAnswer() {
   if (quizState.selectedOption === null) {
-    alert('请先选择答案');
+    showModal('💡', '提示', '请先选择一个答案哦！');
     return;
   }
-  if (quizState.submitted) return;
-
-  quizState.submitted = true;
   const q = quizState.questions[quizState.currentIndex];
   const isCorrect = quizState.selectedOption === q.answer;
 
-  // 记录答案
-  quizState.answers.push({
-    questionId: q.id, selected: quizState.selectedOption, correct: isCorrect,
-    subject: q.subject, kp: q.kp,
-  });
-
-  // 记录曝光
-  if (!appState.exposure[q.id]) appState.exposure[q.id] = { count: 0, lastShown: 0 };
-  appState.exposure[q.id].count++;
-  appState.exposure[q.id].lastShown = Date.now();
-
-  // 更新掌握度
-  updateMastery(q.subject, q.kp, isCorrect);
-
-  // 连续对错统计（难度自适应）
-  if (isCorrect) {
-    quizState.consecutiveCorrect++;
-    quizState.consecutiveWrong = 0;
-    if (quizState.consecutiveCorrect >= 3 && quizState.difficulty < 3) {
-      quizState.difficulty++;
-      quizState.consecutiveCorrect = 0;
-    }
-  } else {
-    quizState.consecutiveWrong++;
-    quizState.consecutiveCorrect = 0;
-    if (quizState.consecutiveWrong >= 2 && quizState.difficulty > 1) {
-      quizState.difficulty--;
-      quizState.consecutiveWrong = 0;
-    }
-  }
-
-  // 更新UI
+  // 显示对错
   document.querySelectorAll('.option-item').forEach((el, i) => {
     el.classList.remove('selected');
     if (i === q.answer) el.classList.add('correct');
     if (i === quizState.selectedOption && !isCorrect) el.classList.add('wrong');
   });
 
+  // 反馈
   const panel = document.getElementById('feedbackPanel');
-  panel.classList.add('show', isCorrect ? 'correct' : 'wrong');
-  document.getElementById('feedbackTitle').textContent = isCorrect ? '回答正确！太棒了！' : '回答错误，再想想~';
+  panel.className = 'feedback-panel show ' + (isCorrect ? 'correct' : 'wrong');
+  document.getElementById('feedbackTitle').textContent = isCorrect ? '✅ 回答正确！' : '❌ 回答错误';
   document.getElementById('feedbackExplanation').textContent = q.explanation;
 
-  // 错题加入错题本
-  if (!isCorrect) addToWrongBook(q);
+  // 更新得分
+  if (isCorrect) {
+    quizState.score += 10;
+    quizState.correctCount++;
+    quizState.consecutiveCorrect++;
+    quizState.consecutiveWrong = 0;
+    playSound('correct');
+    // 更新掌握度
+    const m = getMastery(q.subject, q.kp);
+    setMastery(q.subject, q.kp, m + 5);
+  } else {
+    quizState.consecutiveWrong++;
+    quizState.consecutiveCorrect = 0;
+    playSound('wrong');
+    // 错题加入错题本
+    if (!appState.wrongBook.some(w => w.id === q.id)) {
+      appState.wrongBook.push({
+        id: q.id, subject: q.subject, kp: q.kp,
+        question: q.question, options: q.options, answer: q.answer,
+        explanation: q.explanation, time: new Date().toISOString(),
+      });
+    }
+    // 降低掌握度
+    const m = getMastery(q.subject, q.kp);
+    setMastery(q.subject, q.kp, m - 8);
+  }
 
-  // 音效
-  if (appState.settings.soundEnabled) playSound(isCorrect ? 'success' : 'error');
+  // 科目得分统计
+  if (!quizState.subjectScores[q.subject]) quizState.subjectScores[q.subject] = { correct: 0, total: 0 };
+  quizState.subjectScores[q.subject].total++;
+  if (isCorrect) quizState.subjectScores[q.subject].correct++;
 
+  // 题目曝光
+  appState.exposures[q.id] = (appState.exposures[q.id] || 0) + 1;
+
+  // 按钮切换
   document.getElementById('submitBtn').classList.add('hidden');
   document.getElementById('nextBtn').classList.remove('hidden');
-
-  saveData();
 }
 
 function nextQuestion() {
@@ -1540,384 +1494,352 @@ function nextQuestion() {
     endQuiz();
   } else {
     renderQuestion();
+    // 检查休息提醒（每5分钟）
+    const elapsed = (Date.now() - quizState.startTime) / 60000;
+    if (elapsed - lastEyeReminder >= 5 && elapsed >= 5) {
+      lastEyeReminder = elapsed;
+      setTimeout(showEyeReminder, 500);
+    }
   }
 }
 
-// ============================================================
-// 十、倒计时与休息提醒
-// ============================================================
-
-function startTimer() {
+// 倒计时
+function startTimer(minutes) {
+  stopTimer();
+  if (!minutes || minutes <= 0) {
+    document.getElementById('timerText').textContent = '不限时';
+    document.getElementById('timerCircle').style.background = 'conic-gradient(#2ED573, #2ED573)';
+    return;
+  }
+  timerEndTime = Date.now() + minutes * 60 * 1000;
   updateTimerDisplay();
-  quizState.timerInterval = setInterval(() => {
-    quizState.timeLeft--;
-    updateTimerDisplay();
-    if (quizState.timeLeft === 5 * 60) {
-      showModal('⏰', '时间提醒', '还剩5分钟啦，继续加油！');
-    }
-    if (quizState.timeLeft <= 0) endQuiz();
-  }, 1000);
+  timerInterval = setInterval(updateTimerDisplay, 1000);
 }
 
 function stopTimer() {
-  if (quizState.timerInterval) { clearInterval(quizState.timerInterval); quizState.timerInterval = null; }
-  if (quizState.eyeReminderInterval) { clearInterval(quizState.eyeReminderInterval); quizState.eyeReminderInterval = null; }
+  if (timerInterval) { clearInterval(timerInterval); timerInterval = null; }
 }
 
 function updateTimerDisplay() {
-  const m = Math.floor(quizState.timeLeft / 60);
-  const s = quizState.timeLeft % 60;
-  document.getElementById('timerText').textContent = `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
-  const total = 30 * 60;
-  const percent = quizState.timeLeft / total;
-  const deg = percent * 360;
-  const circle = document.getElementById('timerCircle');
-  circle.style.background = `-webkit-conic-gradient(#4A9FF5 ${deg}deg, #E0E0E0 0deg)`;
-  circle.style.background = `conic-gradient(#4A9FF5 ${deg}deg, #E0E0E0 0deg)`;
-  const textEl = circle.querySelector('.timer-text');
-  if (quizState.timeLeft <= 5 * 60) {
-    textEl.style.color = 'var(--danger)';
-    circle.classList.add('timer-warning');
-  } else {
-    textEl.style.color = 'var(--text)';
-    circle.classList.remove('timer-warning');
+  if (!timerEndTime) return;
+  const remain = Math.max(0, timerEndTime - Date.now());
+  const mins = Math.floor(remain / 60000);
+  const secs = Math.floor((remain % 60000) / 1000);
+  document.getElementById('timerText').textContent = `${mins}:${secs.toString().padStart(2,'0')}`;
+
+  const totalSec = quizState.duration * 60;
+  const remainSec = Math.floor(remain / 1000);
+  const pct = remainSec / totalSec;
+  const color = pct > 0.2 ? '#4A9FF5' : '#FF6B6B';
+  document.getElementById('timerCircle').style.background = `conic-gradient(${color} ${pct*360}deg, #E0E0E0 0deg)`;
+
+  if (remain <= 300000 && remain > 295000) {
+    // 最后5分钟提醒
+    showModal('⏰', '时间提醒', '还剩5分钟啦，加油！');
+  }
+  if (remain <= 0) {
+    endQuiz();
   }
 }
 
-function startEyeReminder() {
-  quizState.eyeReminderInterval = setInterval(() => {
-    document.getElementById('eyeReminder').classList.add('show');
-  }, 5 * 60 * 1000);
+function showEyeReminder() {
+  document.getElementById('eyeReminder').classList.add('show');
 }
-
 function dismissEyeReminder() {
   document.getElementById('eyeReminder').classList.remove('show');
 }
 
 // ============================================================
-// 十一、结束答题与报告
+// 十、结束答题与学习报告
 // ============================================================
 
 function endQuiz() {
   stopTimer();
-  quizState.endTime = Date.now();
+  if (!quizState) return;
 
-  const totalQ = quizState.answers.length;
-  const correctQ = quizState.answers.filter(a => a.correct).length;
-  const accuracy = totalQ > 0 ? Math.round((correctQ / totalQ) * 100) : 0;
-  const score = correctQ * 10;
-  const minutes = Math.max(1, Math.round((quizState.endTime - quizState.startTime) / 60000));
+  const totalQs = quizState.currentIndex;
+  const accuracy = totalQs > 0 ? Math.round((quizState.correctCount / totalQs) * 100) : 0;
+  const timeUsed = Math.round((Date.now() - quizState.startTime) / 60000 * 10) / 10;
 
-  // 各科统计
-  const subjectStats = {};
-  quizState.answers.forEach(a => {
-    if (!subjectStats[a.subject]) subjectStats[a.subject] = { total: 0, correct: 0 };
-    subjectStats[a.subject].total++;
-    if (a.correct) subjectStats[a.subject].correct++;
-  });
-
-  // 薄弱点
+  // 识别薄弱点
   const weakPoints = identifyWeakPoints();
 
-  // 奖励
-  let earnedStars = 0, earnedCoins = 0;
-  if (quizState.mode !== 'practice') {
-    if (minutes >= 28) earnedStars++;
-    if (accuracy >= 80) earnedStars++;
-    earnedCoins += correctQ * 2;
-  } else {
-    if (accuracy >= 90) earnedCoins += 10;
-  }
+  // 计算奖励
+  let starsEarned = 0;
+  let coinsEarned = 0;
+  if (quizState.mode !== 'practice' && timeUsed >= 25) starsEarned++; // 完成30分钟
+  if (accuracy >= 80) starsEarned++;
+  if (weakPoints.length > 0) coinsEarned += 10;
+  if (quizState.mode === 'practice' && accuracy >= 90) coinsEarned += 20;
 
-  appState.stars += earnedStars;
-  appState.coins += earnedCoins;
-  appState.totalScore += score;
-  appState.totalQuestions += totalQ;
-  appState.totalCorrect += correctQ;
+  appState.stars += starsEarned;
+  appState.coins += coinsEarned;
+  appState.totalScore += quizState.score;
 
-  // 历史记录
+  // 记录历史
   const record = {
-    date: new Date().toLocaleString('zh-CN'), timestamp: Date.now(),
-    mode: quizState.mode, score: score, accuracy: accuracy,
-    questions: totalQ, correct: correctQ, minutes: minutes,
-    subjects: subjectStats, weakPoints: weakPoints,
-    earnedStars: earnedStars, earnedCoins: earnedCoins,
+    date: new Date().toISOString(),
+    mode: quizState.mode,
+    score: quizState.score,
+    accuracy: accuracy,
+    questions: totalQs,
+    timeUsed: timeUsed,
+    subjectScores: quizState.subjectScores,
+    weakPoints: weakPoints,
+    starsEarned: starsEarned,
+    coinsEarned: coinsEarned,
   };
   appState.history.unshift(record);
   if (appState.history.length > 50) appState.history = appState.history.slice(0, 50);
 
   saveData();
-  renderReport(record, weakPoints);
-  showView('report');
 
-  if (earnedStars > 0 || earnedCoins > 0) {
-    setTimeout(() => {
-      showModal('🎉', '获得奖励！', `本次获得 ${earnedStars} 颗星星，${earnedCoins} 枚金币！`);
-      launchConfetti();
-    }, 500);
+  // 渲染报告
+  showView('report');
+  document.getElementById('reportScore').textContent = quizState.score;
+  document.getElementById('statAccuracy').textContent = accuracy + '%';
+  document.getElementById('statQuestions').textContent = totalQs;
+  document.getElementById('statTime').textContent = timeUsed;
+  document.getElementById('statStars').textContent = starsEarned;
+  document.getElementById('reportMode').textContent =
+    (quizState.mode === 'smart' ? '智能模式' : quizState.mode === 'full' ? '全科模式' : quizState.mode === 'single' ? '单科模式' : '练习模式') +
+    (quizState.subject ? ' · ' + quizState.subject : '');
+
+  // 各科表现
+  const sbContainer = document.getElementById('subjectBars');
+  const subjects = Object.keys(quizState.subjectScores);
+  if (subjects.length === 0) {
+    sbContainer.innerHTML = '<p style="color:var(--text-light);">暂无数据</p>';
+  } else {
+    sbContainer.innerHTML = subjects.map(s => {
+      const ss = quizState.subjectScores[s];
+      const acc = Math.round((ss.correct / ss.total) * 100);
+      return `<div class="subject-bar">
+        <div class="sb-name">${s}</div>
+        <div class="sb-track"><div class="sb-fill" style="width:${acc}%;background:${getSubjectColor(s)}">${acc}%</div></div>
+      </div>`;
+    }).join('');
   }
+
+  // 薄弱点
+  const wpContainer = document.getElementById('weakPointsList');
+  if (weakPoints.length === 0) {
+    wpContainer.innerHTML = '<p style="color:var(--text-light);">太棒了！本次没有明显薄弱点，继续保持！</p>';
+  } else {
+    wpContainer.innerHTML = weakPoints.map(wp => {
+      const m = getMastery(wp.subject, wp.kp);
+      return `<div class="weak-point-item">
+        <div class="wp-subject">${wp.subject} · ${wp.kp}</div>
+        <div style="font-size:.85rem;color:var(--text-light);margin-bottom:6px;">正确率：${wp.accuracy}% · 错题${wp.wrongCount}次</div>
+        <div class="mastery-bar"><div class="mastery-fill" style="width:${m}%"></div></div>
+        <div style="font-size:.8rem;">掌握度：${m}%</div>
+      </div>`;
+    }).join('');
+  }
+
+  // 推荐复习
+  const rrContainer = document.getElementById('reviewRecommendList');
+  if (weakPoints.length === 0) {
+    rrContainer.innerHTML = '<p style="color:var(--text-light);">继续挑战更高难度吧！</p>';
+  } else {
+    rrContainer.innerHTML = weakPoints.slice(0, 3).map(wp =>
+      `<button class="btn btn-outline btn-sm" style="margin:4px;" onclick="startReview('${wp.subject}','${wp.kp}')">📖 复习：${wp.subject}-${wp.kp}</button>`
+    ).join('');
+  }
+
+  // 奖励动画
+  if (starsEarned > 0 || coinsEarned > 0) {
+    setTimeout(() => {
+      showConfetti();
+      setTimeout(() => showModal('🎊', '获得奖励！', `本次获得 ${starsEarned} 颗星星 ⭐ 和 ${coinsEarned} 金币 🪙！`), 500);
+    }, 800);
+  }
+
+  quizState = null;
 }
 
+// 识别薄弱点
 function identifyWeakPoints() {
-  const kpStats = {};
-  quizState.answers.forEach(a => {
-    const kp = getKpKey(a.subject, a.kp);
-    if (!kpStats[kp]) kpStats[kp] = { subject: a.subject, kp: a.kp, total: 0, correct: 0, wrongCount: 0 };
-    kpStats[kp].total++;
-    if (a.correct) kpStats[kp].correct++;
-    else kpStats[kp].wrongCount++;
+  const weakMap = {};
+  // 统计错题本中的薄弱知识点
+  appState.wrongBook.forEach(w => {
+    const key = w.subject + '|' + w.kp;
+    if (!weakMap[key]) weakMap[key] = { subject: w.subject, kp: w.kp, wrongCount: 0, accuracy: 100 };
+    weakMap[key].wrongCount++;
   });
-
-  const weakPoints = [];
-  Object.keys(kpStats).forEach(kp => {
-    const s = kpStats[kp];
-    const acc = s.total > 0 ? (s.correct / s.total) * 100 : 0;
-    const mastery = getMastery(s.subject, s.kp);
-    if (acc < 70 || s.wrongCount >= 2 || mastery < 60) {
-      weakPoints.push({ subject: s.subject, kp: s.kp, accuracy: Math.round(acc), mastery: mastery });
+  // 结合掌握度
+  Object.keys(appState.mastery).forEach(key => {
+    const m = appState.mastery[key];
+    if (m < 70) {
+      const [subject, kp] = key.split('|');
+      if (!weakMap[key]) weakMap[key] = { subject, kp, wrongCount: 0, accuracy: Math.round(m) };
+      weakMap[key].accuracy = Math.round(m);
     }
   });
-  return weakPoints.sort((a, b) => a.mastery - b.mastery);
-}
-
-function renderReport(record, weakPoints) {
-  document.getElementById('reportScore').textContent = record.score;
-  document.getElementById('reportMsg').textContent =
-    record.accuracy >= 90 ? '太棒了！你是学习小天才！' :
-    record.accuracy >= 80 ? '非常优秀！继续保持！' :
-    record.accuracy >= 60 ? '不错哦，再接再厉！' : '继续加油，你会更棒的！';
-  document.getElementById('reportMode').textContent =
-    '本次模式：' + ({ smart: '智能模式', full: '全科模式', single: '单科模式', practice: '练习模式' })[record.mode];
-
-  document.getElementById('statAccuracy').textContent = record.accuracy + '%';
-  document.getElementById('statQuestions').textContent = record.questions;
-  document.getElementById('statTime').textContent = record.minutes;
-  document.getElementById('statStars').textContent = record.earnedStars;
-
-  const colors = { '语文':'#EF5350', '数学':'#42A5F5', '英语':'#66BB6A', '科学':'#AB47BC', '道法':'#FFA726' };
-  const barsEl = document.getElementById('subjectBars');
-  barsEl.innerHTML = '';
-  Object.keys(record.subjects).forEach(subject => {
-    const s = record.subjects[subject];
-    const acc = Math.round((s.correct / s.total) * 100);
-    const bar = document.createElement('div');
-    bar.className = 'subject-bar';
-    bar.innerHTML = `
-      <div class="sb-name">${subject}</div>
-      <div class="sb-track"><div class="sb-fill" style="width:${acc}%;background:${colors[subject] || '#4A9FF5'}">${acc}%</div></div>
-    `;
-    barsEl.appendChild(bar);
-  });
-
-  const wpEl = document.getElementById('weakPointsList');
-  if (weakPoints.length === 0) {
-    wpEl.innerHTML = '<p style="color:var(--text-light);">暂无薄弱点，继续保持！</p>';
-  } else {
-    wpEl.innerHTML = '';
-    weakPoints.forEach(wp => {
-      const div = document.createElement('div');
-      div.className = 'weak-point-item';
-      div.innerHTML = `
-        <div class="wp-subject">${wp.subject} · ${wp.kp}</div>
-        <div style="font-size:.85rem;color:var(--text-light);margin-bottom:6px;">掌握度 ${wp.mastery}%</div>
-        <div class="mastery-bar"><div class="mastery-fill" style="width:${wp.mastery}%"></div></div>
-      `;
-      wpEl.appendChild(div);
-    });
-  }
-
-  const reviewEl = document.getElementById('reviewRecommendList');
-  reviewEl.innerHTML = '';
-  if (weakPoints.length > 0) {
-    weakPoints.slice(0, 3).forEach(wp => {
-      const key = getKpKey(wp.subject, wp.kp);
-      if (REVIEW_DATA[key]) {
-        const div = document.createElement('div');
-        div.style.cssText = 'background:#F5F9FF;border-radius:10px;padding:14px;margin-bottom:10px;';
-        div.innerHTML = `
-          <h4 style="margin-bottom:6px;">${wp.subject} · ${wp.kp}</h4>
-          <p style="color:var(--text-light);font-size:.9rem;margin-bottom:10px;">${REVIEW_DATA[key].explanation.substring(0, 50)}...</p>
-          <div style="display:flex;gap:8px;flex-wrap:wrap;">
-            <button class="btn btn-primary btn-sm" onclick="openReview('${wp.subject}','${wp.kp}')">去复习</button>
-          </div>
-        `;
-        reviewEl.appendChild(div);
-      }
-    });
-  } else {
-    reviewEl.innerHTML = '<p style="color:var(--text-light);">没有需要复习的知识点，继续挑战新科目吧！</p>';
-  }
+  // 筛选薄弱点：掌握度<70 或 错题>=2
+  const result = Object.values(weakMap).filter(wp =>
+    getMastery(wp.subject, wp.kp) < 70 || wp.wrongCount >= 2
+  );
+  return result.slice(0, 5);
 }
 
 // ============================================================
-// 十二、复习与练习
+// 十一、复习页
 // ============================================================
 
-function openReview(subject, kp) {
-  const key = getKpKey(subject, kp);
+let reviewTarget = null;
+
+function startReview(subject, kp) {
+  reviewTarget = { subject, kp };
+  const content = document.getElementById('reviewContent');
+  const key = subject + '-' + kp;
   const data = REVIEW_DATA[key];
-  if (!data) { showModal('📖', '暂无复习资料', '该知识点暂无复习讲解内容。'); return; }
 
-  document.getElementById('reviewTitle').textContent = `${subject} · ${kp} 复习`;
-  document.getElementById('reviewContent').innerHTML = `
-    <div class="review-card">
-      <div class="review-section"><h4>📖 知识讲解</h4><p>${data.explanation}</p></div>
-      <div class="review-section"><h4>💡 典型例题</h4><div class="review-example">${data.example}</div></div>
+  document.getElementById('reviewTitle').textContent = `📖 ${subject} - ${kp}`;
+
+  let html = '';
+  if (data) {
+    html = `<div class="review-card">
+      <div class="review-section"><h4>📝 知识点讲解</h4><p>${data.explanation}</p></div>
+      <div class="review-section"><h4>💡 例题</h4><div class="review-example">${data.example}</div></div>
       <div class="review-section"><h4>⚠️ 易错提醒</h4><div class="review-tip">${data.tip}</div></div>
-    </div>
-  `;
-  quizState.practiceConfig = { type: 'kp', subject: subject, kp: kp };
+    </div>`;
+  } else {
+    // 通用复习内容
+    const m = getMastery(subject, kp);
+    html = `<div class="review-card">
+      <div class="review-section"><h4>📝 知识点：${kp}</h4>
+        <p>这是你目前掌握度为 ${m}% 的知识点。通过练习可以提升掌握度。</p>
+        <div class="mastery-bar" style="margin-top:10px;"><div class="mastery-fill" style="width:${m}%"></div></div>
+      </div>
+      <div class="review-section"><h4>💪 提升方法</h4>
+        <ul style="padding-left:20px;line-height:2;">
+          <li>先阅读课本相关内容</li>
+          <li>完成下面的练习题</li>
+          <li>错题反复练习直到掌握</li>
+        </ul>
+      </div>
+    </div>`;
+  }
+  content.innerHTML = html;
   showView('review');
 }
 
 function startPracticeFromReview() {
-  startQuizWithMode('practice', null, { questionCount: 5, unlimited: true });
+  if (!reviewTarget) return;
+  startQuiz('practice', {
+    subject: reviewTarget.subject,
+    kp: reviewTarget.kp,
+    count: 10,
+    duration: 0,
+  });
 }
 
 // ============================================================
-// 十三、历史页
+// 十二、历史成绩、错题本、奖励背包渲染
 // ============================================================
 
 function renderHistory() {
-  const history = appState.history.slice(0, 7);
-  const chartEl = document.getElementById('chartContainer');
-  const listEl = document.getElementById('historyList');
+  const records = appState.history.slice(0, 7);
+  const chart = document.getElementById('chartContainer');
+  const list = document.getElementById('historyList');
 
-  if (history.length === 0) {
-    chartEl.innerHTML = '<p style="color:var(--text-light);">暂无数据</p>';
-    listEl.innerHTML = '<p style="color:var(--text-light);text-align:center;">暂无历史记录</p>';
+  if (records.length === 0) {
+    chart.innerHTML = '<p style="color:var(--text-light);">暂无数据</p>';
+    list.innerHTML = '<p style="color:var(--text-light);text-align:center;">还没有学习记录，快去闯关吧！</p>';
     return;
   }
 
-  chartEl.innerHTML = '';
-  const maxScore = Math.max(...history.map(h => h.score), 100);
-  history.forEach(h => {
-    const heightPercent = (h.score / maxScore) * 100;
-    const barWrap = document.createElement('div');
-    barWrap.className = 'chart-bar-wrap';
-    const date = new Date(h.timestamp);
-    const label = `${date.getMonth() + 1}/${date.getDate()}`;
-    barWrap.innerHTML = `
-      <div class="chart-bar" style="height:${heightPercent}%;"><div class="bar-value">${h.score}</div></div>
-      <div class="chart-label">${label}</div>
-    `;
-    chartEl.appendChild(barWrap);
-  });
-
-  listEl.innerHTML = '';
-  appState.history.slice(0, 10).forEach(h => {
-    const date = new Date(h.timestamp);
-    const item = document.createElement('div');
-    item.className = 'history-item';
-    const modeName = { smart: '智能', full: '全科', single: '单科', practice: '练习' }[h.mode] || '';
-    item.innerHTML = `
-      <div>
-        <div class="hi-date">${date.getMonth() + 1}月${date.getDate()}日 · ${modeName}</div>
-        <div class="hi-detail">正确率 ${h.accuracy}% · ${h.questions}题 · ${h.minutes}分钟</div>
+  // 柱状图
+  chart.innerHTML = records.map((r, i) => {
+    const date = new Date(r.date);
+    const label = `${date.getMonth()+1}/${date.getDate()}`;
+    return `<div class="chart-bar-wrap">
+      <div class="chart-bar" style="height:${Math.min(100, r.score)}%">
+        <span class="bar-value">${r.score}</span>
       </div>
-      <div class="hi-score">${h.score}</div>
-    `;
-    listEl.appendChild(item);
-  });
-}
+      <div class="chart-label">${label}</div>
+    </div>`;
+  }).join('');
 
-// ============================================================
-// 十四、错题本
-// ============================================================
-
-function addToWrongBook(q) {
-  if (appState.wrongQuestions.find(w => w.id === q.id)) return;
-  appState.wrongQuestions.unshift({ ...q, addedAt: Date.now(), wrongCount: 1 });
-  saveData();
+  // 列表
+  list.innerHTML = records.map(r => {
+    const date = new Date(r.date);
+    const modeText = r.mode === 'smart' ? '智能' : r.mode === 'full' ? '全科' : r.mode === 'single' ? '单科' : '练习';
+    return `<div class="history-item">
+      <div>
+        <div class="hi-date">${date.getFullYear()}-${(date.getMonth()+1).toString().padStart(2,'0')}-${date.getDate().toString().padStart(2,'0')}</div>
+        <div class="hi-detail">${modeText}模式 · 正确率${r.accuracy}% · ${r.questions}题 · ${r.timeUsed}分钟</div>
+      </div>
+      <div class="hi-score">${r.score}分</div>
+    </div>`;
+  }).join('');
 }
 
 function renderWrongBook() {
-  const listEl = document.getElementById('wrongList');
-  const wrongs = appState.wrongQuestions;
-  if (wrongs.length === 0) {
-    listEl.innerHTML = '<p style="color:var(--text-light);text-align:center;padding:40px;">错题本是空的，快去闯关吧！</p>';
+  const container = document.getElementById('wrongList');
+  if (appState.wrongBook.length === 0) {
+    container.innerHTML = '<p style="color:var(--text-light);text-align:center;padding:40px;">错题本是空的，快去闯关吧！</p>';
     return;
   }
-  listEl.innerHTML = '';
-  wrongs.forEach(q => {
-    const div = document.createElement('div');
-    div.className = 'wrong-item';
-    div.innerHTML = `
-      <div class="question-meta" style="margin-bottom:8px;">
-        <span class="badge badge-blue">${q.subject}</span>
-        <span class="badge badge-purple">${q.kp}</span>
-      </div>
-      <div class="wi-question">${q.question}</div>
-      <div class="wi-answer">正确答案：${q.options[q.answer]}</div>
-      <div class="wi-explanation">解析：${q.explanation}</div>
-    `;
-    listEl.appendChild(div);
-  });
+  container.innerHTML = appState.wrongBook.map(w =>
+    `<div class="wrong-item">
+      <div class="wi-question">【${w.subject}】${w.question}</div>
+      <div class="wi-answer">✅ 正确答案：${w.options[w.answer]}</div>
+      <div class="wi-explanation">💡 ${w.explanation}</div>
+    </div>`
+  ).join('');
 }
 
 function filterWrong(subject) {
-  document.querySelectorAll('.filter-chip').forEach(chip => {
-    chip.classList.toggle('active', chip.dataset.subject === subject);
-  });
-  const listEl = document.getElementById('wrongList');
-  let wrongs = appState.wrongQuestions;
-  if (subject !== 'all') wrongs = wrongs.filter(q => q.subject === subject);
-  if (wrongs.length === 0) {
-    listEl.innerHTML = '<p style="color:var(--text-light);text-align:center;padding:40px;">该科目暂无错题</p>';
-    return;
+  document.querySelectorAll('#wrongFilterBar .filter-chip').forEach(c => c.classList.remove('active'));
+  event.target.classList.add('active');
+  const container = document.getElementById('wrongList');
+  let list = appState.wrongBook;
+  if (subject !== 'all') list = list.filter(w => w.subject === subject);
+  if (list.length === 0) {
+    container.innerHTML = '<p style="color:var(--text-light);text-align:center;padding:40px;">暂无错题</p>';
+  } else {
+    container.innerHTML = list.map(w =>
+      `<div class="wrong-item">
+        <div class="wi-question">【${w.subject}】${w.question}</div>
+        <div class="wi-answer">✅ 正确答案：${w.options[w.answer]}</div>
+        <div class="wi-explanation">💡 ${w.explanation}</div>
+      </div>`
+    ).join('');
   }
-  listEl.innerHTML = '';
-  wrongs.forEach(q => {
-    const div = document.createElement('div');
-    div.className = 'wrong-item';
-    div.innerHTML = `
-      <div class="question-meta" style="margin-bottom:8px;">
-        <span class="badge badge-blue">${q.subject}</span>
-        <span class="badge badge-purple">${q.kp}</span>
-      </div>
-      <div class="wi-question">${q.question}</div>
-      <div class="wi-answer">正确答案：${q.options[q.answer]}</div>
-      <div class="wi-explanation">解析：${q.explanation}</div>
-    `;
-    listEl.appendChild(div);
-  });
 }
-
-// ============================================================
-// 十五、奖励背包
-// ============================================================
 
 function renderRewards() {
   document.getElementById('rwStars').textContent = appState.stars;
   document.getElementById('rwCoins').textContent = appState.coins;
+  document.getElementById('rwTitle').textContent = appState.title;
 
-  const badgesEl = document.getElementById('badgesGrid');
-  const allBadges = [
-    { id: 'first', name: '初出茅庐', icon: '🌱', cond: h => h.totalQuestions >= 1 },
-    { id: 'star5', name: '五星学员', icon: '⭐', cond: h => h.stars >= 5 },
-    { id: 'star10', name: '十星学霸', icon: '🌟', cond: h => h.stars >= 10 },
-    { id: 'streak3', name: '坚持之星', icon: '🔥', cond: h => h.streakDays >= 3 },
-    { id: 'score100', name: '百分达人', icon: '💯', cond: h => h.history.some(r => r.accuracy >= 100) },
-    { id: 'coin50', name: '小富翁', icon: '💰', cond: h => h.coins >= 50 },
+  const badges = [
+    { icon: '⭐', name: '初露锋芒', condition: '完成首次学习' },
+    { icon: '🌟', name: '学习之星', condition: '累计10颗星星' },
+    { icon: '🏅', name: '坚持之星', condition: '连续3天打卡' },
+    { icon: '🎯', name: '百发百中', condition: '正确率100%' },
+    { icon: '💪', name: '错题克星', condition: '重做20道错题' },
+    { icon: '📚', name: '博学多才', condition: '五科都学过' },
   ];
-  badgesEl.innerHTML = '';
-  allBadges.forEach(b => {
-    const unlocked = b.cond(appState);
-    const div = document.createElement('div');
-    div.className = 'badge-card' + (unlocked ? ' unlocked' : '');
-    div.innerHTML = `<div class="badge-icon">${b.icon}</div><div class="badge-name">${b.name}</div>`;
-    badgesEl.appendChild(div);
-  });
+  const grid = document.getElementById('badgesGrid');
+  grid.innerHTML = badges.map((b, i) => {
+    const unlocked = appState.stars >= (i+1) * 2;
+    return `<div class="badge-card ${unlocked?'unlocked':''}">
+      <div class="badge-icon">${b.icon}</div>
+      <div class="badge-name">${b.name}</div>
+    </div>`;
+  }).join('');
 }
 
 // ============================================================
-// 十六、家长设置
+// 十三、家长设置与题库管理
 // ============================================================
 
 function openParentSettings() {
-  document.getElementById('parentModal').classList.add('show');
   document.getElementById('parentConfirmInput').value = '';
-  document.getElementById('parentConfirmInput').focus();
+  document.getElementById('parentModal').classList.add('show');
 }
 
 function checkParentConfirm() {
@@ -1926,7 +1848,7 @@ function checkParentConfirm() {
     closeParentModal();
     showView('settings');
   } else {
-    alert('答案不对哦，再算算~');
+    showModal('❌', '答案错误', '7×8=56哦，再想想~');
   }
 }
 
@@ -1935,131 +1857,89 @@ function closeParentModal() {
 }
 
 function renderSettings() {
+  document.getElementById('gradeSelect').value = appState.grade;
+  document.getElementById('termSelect').value = appState.term;
+
   // 科目开关
-  const subjEl = document.getElementById('subjectSettings');
-  subjEl.innerHTML = '';
-  Object.keys(SUBJECT_META).forEach(subj => {
-    const enabled = appState.settings.subjects[subj];
-    const row = document.createElement('div');
-    row.className = 'setting-row';
-    row.innerHTML = `
-      <div><div class="setting-label">${subj}</div><div class="setting-desc">${enabled ? '已开启' : '已关闭'}</div></div>
-      <div class="switch ${enabled ? 'on' : ''}" onclick="toggleSubject('${subj}')"></div>
-    `;
-    subjEl.appendChild(row);
-  });
+  const subjContainer = document.getElementById('subjectSettings');
+  subjContainer.innerHTML = Object.keys(appState.subjects).map(s => {
+    const subj = appState.subjects[s];
+    return `<div class="setting-row">
+      <div><div class="setting-label">${s}</div><div class="setting-desc">第${subj.currentUnit}单元</div></div>
+      <div class="switch ${subj.enabled?'on':''}" onclick="toggleSubject('${s}')"></div>
+    </div>`;
+  }).join('');
 
   // 学习进度
-  const progEl = document.getElementById('progressSettings');
-  progEl.innerHTML = '';
-  Object.keys(SUBJECT_META).forEach(subject => {
-    const prog = appState.progress[subject];
-    const unitOptions = SUBJECT_META[subject].units.map((u, i) => `<option value="${i + 1}" ${prog.currentUnit === i + 1 ? 'selected' : ''}>第${i + 1}单元</option>`).join('');
-    const div = document.createElement('div');
-    div.className = 'progress-setting';
-    div.innerHTML = `
-      <div style="font-weight:600;margin-bottom:8px;">${subject}</div>
-      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
-        <span style="font-size:.9rem;">当前单元：</span>
-        <select style="padding:6px 12px;border:2px solid #E0E0E0;border-radius:8px;" onchange="setCurrentUnit('${subject}', this.value)">${unitOptions}</select>
+  const progContainer = document.getElementById('progressSettings');
+  progContainer.innerHTML = Object.keys(appState.subjects).map(s => {
+    const subj = appState.subjects[s];
+    if (!subj.enabled) return '';
+    const gradeData = GRADE_DATA[appState.grade];
+    const termData = gradeData[s] ? gradeData[s][appState.term] : [];
+    return `<div class="progress-setting">
+      <div style="font-weight:700;margin-bottom:8px;color:${getSubjectColor(s)}">${s}</div>
+      <div class="setting-row">
+        <div class="setting-label">当前单元</div>
+        <select class="select-input" onchange="changeUnit('${s}', this.value)">
+          ${termData.map((u, i) => `<option value="${i+1}" ${i+1===subj.currentUnit?'selected':''}>第${u.unit}单元 ${u.name}</option>`).join('')}
+        </select>
       </div>
-      <div style="font-size:.85rem;color:var(--text-light);margin-top:6px;">已解锁知识点：${prog.unlockedKPs ? prog.unlockedKPs.length : 0} 个</div>
-    `;
-    progEl.appendChild(div);
-  });
+    </div>`;
+  }).join('');
 
-  // 出题规则开关
-  document.getElementById('allowAheadSwitch').classList.toggle('on', appState.settings.allowAhead);
-  document.getElementById('onlyCurrentSwitch').classList.toggle('on', appState.settings.onlyCurrent);
+  // 允许超前
+  const allowAhead = appState.subjects['数学'].allowAhead;
+  document.getElementById('allowAheadSwitch').className = 'switch ' + (allowAhead ? 'on' : '');
 }
 
 function toggleSubject(subject) {
-  appState.settings.subjects[subject] = !appState.settings.subjects[subject];
+  appState.subjects[subject].enabled = !appState.subjects[subject].enabled;
   saveData();
   renderSettings();
 }
 
-function setCurrentUnit(subject, unit) {
-  appState.progress[subject].currentUnit = parseInt(unit);
-  // 自动解锁该单元知识点
-  const unitData = SUBJECT_META[subject].units[parseInt(unit) - 1];
-  if (unitData) {
-    unitData.kps.forEach(kp => {
-      if (!appState.progress[subject].unlockedKPs.includes(kp)) {
-        appState.progress[subject].unlockedKPs.push(kp);
-      }
-    });
-  }
+function changeUnit(subject, unit) {
+  appState.subjects[subject].currentUnit = parseInt(unit);
   saveData();
-  renderSettings();
 }
 
 function toggleAllowAhead() {
-  appState.settings.allowAhead = !appState.settings.allowAhead;
+  Object.keys(appState.subjects).forEach(s => {
+    appState.subjects[s].allowAhead = !appState.subjects[s].allowAhead;
+  });
   saveData();
   renderSettings();
 }
 
-function toggleOnlyCurrent() {
-  appState.settings.onlyCurrent = !appState.settings.onlyCurrent;
+function changeGrade(g) {
+  appState.grade = parseInt(g);
   saveData();
   renderSettings();
 }
 
-function exportData() {
-  const dataStr = JSON.stringify(appState, null, 2);
-  const blob = new Blob([dataStr], { type: 'application/json' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = '学习数据_' + new Date().toISOString().slice(0, 10) + '.json';
-  a.click();
-  URL.revokeObjectURL(url);
+function changeTerm(t) {
+  appState.term = t;
+  saveData();
+  renderSettings();
 }
-
-function importData(event) {
-  const file = event.target.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = (e) => {
-    try {
-      const data = JSON.parse(e.target.result);
-      Object.assign(appState, data);
-      saveData();
-      alert('导入成功！');
-      goHome();
-    } catch (err) { alert('导入失败：文件格式不正确'); }
-  };
-  reader.readAsText(file);
-}
-
-function resetAllData() {
-  if (confirm('确定要重置所有数据吗？此操作不可恢复！')) {
-    localStorage.removeItem(STORAGE_KEY);
-    location.reload();
-  }
-}
-
-// ============================================================
-// 十七、题库管理
-// ============================================================
 
 function renderQBank() {
-  const pool = getFullQuestionPool();
-  const seenCount = Object.keys(appState.exposure).filter(id => appState.exposure[id].count > 0).length;
-  document.getElementById('qbTotal').textContent = pool.length;
-  document.getElementById('qbSeen').textContent = seenCount;
-  document.getElementById('qbNew').textContent = pool.length - seenCount;
+  const total = STATIC_QUESTIONS.length + appState.qbank.length;
+  const seen = Object.keys(appState.exposures).length;
+  document.getElementById('qbTotal').textContent = total;
+  document.getElementById('qbSeen').textContent = seen;
+  document.getElementById('qbNew').textContent = total - seen;
+  document.getElementById('qbVer').textContent = appState.qbankVersion;
 }
 
 function exportQuestionBank() {
-  const data = { static: STATIC_QUESTIONS, daily: appState.dailyQuestions || [] };
-  const dataStr = JSON.stringify(data, null, 2);
-  const blob = new Blob([dataStr], { type: 'application/json' });
+  const data = { bank: [...STATIC_QUESTIONS, ...appState.qbank], version: appState.qbankVersion };
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
-  a.download = '题库_' + new Date().toISOString().slice(0, 10) + '.json';
+  a.download = 'question_bank.json';
   a.click();
   URL.revokeObjectURL(url);
 }
@@ -2068,38 +1948,67 @@ function importQuestionBank(event) {
   const file = event.target.files[0];
   if (!file) return;
   const reader = new FileReader();
-  reader.onload = (e) => {
+  reader.onload = function(e) {
     try {
       const data = JSON.parse(e.target.result);
-      if (Array.isArray(data)) {
-        if (!appState.dailyQuestions) appState.dailyQuestions = [];
-        appState.dailyQuestions = appState.dailyQuestions.concat(data);
+      if (data.bank && Array.isArray(data.bank)) {
+        const existingIds = new Set(appState.qbank.map(q => q.id));
+        let added = 0;
+        data.bank.forEach(q => {
+          if (!existingIds.has(q.id)) {
+            appState.qbank.push(q);
+            added++;
+          }
+        });
         saveData();
-        alert(`成功导入 ${data.length} 道题目！`);
-        renderQBank();
+        showModal('✅', '导入成功', `成功导入 ${added} 道新题！`);
       }
-    } catch (err) { alert('导入失败：文件格式不正确'); }
+    } catch(err) {
+      showModal('❌', '导入失败', '文件格式不正确，请检查JSON格式。');
+    }
   };
   reader.readAsText(file);
+  event.target.value = '';
 }
 
-// ============================================================
-// 十八、每日打卡
-// ============================================================
+function exportData() {
+  const blob = new Blob([JSON.stringify(appState, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'learning_data.json';
+  a.click();
+  URL.revokeObjectURL(url);
+}
 
-function checkDailyStreak() {
-  const today = new Date().toDateString();
-  if (appState.lastPlayDate !== today) {
-    const yesterday = new Date(Date.now() - 86400000).toDateString();
-    if (appState.lastPlayDate === yesterday) appState.streakDays++;
-    else appState.streakDays = 1;
-    appState.lastPlayDate = today;
-    saveData();
+function importData(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const data = JSON.parse(e.target.result);
+      appState = { ...appState, ...data };
+      saveData();
+      showModal('✅', '导入成功', '学习数据已恢复！');
+      renderHome();
+    } catch(err) {
+      showModal('❌', '导入失败', '文件格式不正确。');
+    }
+  };
+  reader.readAsText(file);
+  event.target.value = '';
+}
+
+function resetAllData() {
+  if (confirm('确定要重置所有数据吗？这将清除全部成绩、错题和奖励！')) {
+    localStorage.removeItem(STORAGE_KEY);
+    location.reload();
   }
 }
 
 // ============================================================
-// 十九、弹窗与动画
+// 十四、弹窗与初始化
 // ============================================================
 
 function showModal(icon, title, text) {
@@ -2113,61 +2022,22 @@ function closeModal() {
   document.getElementById('modalOverlay').classList.remove('show');
 }
 
-function launchConfetti() {
-  const colors = ['#FF6B6B', '#FFD93D', '#2ED573', '#4A9FF5', '#A855F7', '#FF9F43'];
-  for (let i = 0; i < 50; i++) {
-    const c = document.createElement('div');
-    c.className = 'confetti';
-    c.style.left = Math.random() * 100 + 'vw';
-    c.style.background = colors[Math.floor(Math.random() * colors.length)];
-    c.style.animationDelay = Math.random() * 0.5 + 's';
-    c.style.width = (Math.random() * 8 + 6) + 'px';
-    c.style.height = (Math.random() * 8 + 6) + 'px';
-    document.body.appendChild(c);
-    setTimeout(() => c.remove(), 3500);
-  }
-}
-
-// ============================================================
-// 二十、音效
-// ============================================================
-
-let audioCtx = null;
-function playSound(type) {
-  try {
-    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    const osc = audioCtx.createOscillator();
-    const gain = audioCtx.createGain();
-    osc.connect(gain); gain.connect(audioCtx.destination);
-    if (type === 'success') {
-      osc.frequency.setValueAtTime(523, audioCtx.currentTime);
-      osc.frequency.setValueAtTime(659, audioCtx.currentTime + 0.1);
-      osc.frequency.setValueAtTime(784, audioCtx.currentTime + 0.2);
-      gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.4);
-      osc.start(audioCtx.currentTime); osc.stop(audioCtx.currentTime + 0.4);
-    } else {
-      osc.frequency.setValueAtTime(200, audioCtx.currentTime);
-      osc.frequency.setValueAtTime(150, audioCtx.currentTime + 0.15);
-      gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.3);
-      osc.start(audioCtx.currentTime); osc.stop(audioCtx.currentTime + 0.3);
-    }
-  } catch (e) {}
-}
-
-// ============================================================
-// 二十一、初始化
-// ============================================================
-
 function init() {
   loadData();
-  updateTopBar();
-  checkDailyStreak();
+
+  // 每日首次自动重出题
+  const today = new Date().toDateString();
+  if (appState.lastRegenDate !== today) {
+    smartRegenerate();
+  }
+
+  renderHome();
   showView('home');
 }
 
+// 启动
 init();
+
 </script>
 </body>
 </html>
