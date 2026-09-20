@@ -393,6 +393,10 @@ input,select,textarea{font-family:inherit;outline:none}
     </div>
   </div>
   <div class="card">
+    <h3 style="margin-bottom:12px;">📚 教材版本（按科目设置）</h3>
+    <div id="editionSettings"></div>
+  </div>
+  <div class="card">
     <h3 style="margin-bottom:12px;">科目开关</h3>
     <div id="subjectSettings"></div>
   </div>
@@ -520,12 +524,58 @@ const SUBJECT_COLORS = {
   '艺术':'#FF9F43','健康':'#2ED573','社会':'#A855F7'
 };
 
-// 年级单元目录（简化版，每科至少4个单元）
-function getUnits(grade, subject) {
+// 各科目支持的教材版本
+const SUBJECT_VERSIONS = {
+  '语文': ['统编版'],
+  '数学': ['人教版', '北师大版', '苏教版'],
+  '英语': ['人教PEP', '外研版', '译林版'],
+  '科学': ['教科版', '苏教版'],
+  '道法': ['统编版'],
+};
+
+const DEFAULT_EDITIONS = {
+  '语文': '统编版',
+  '数学': '人教版',
+  '英语': '人教PEP',
+  '科学': '教科版',
+  '道法': '统编版',
+};
+
+// 不同版本+科目的单元目录
+const EDITION_UNITS = {
+  '统编版': {
+    '语文': ['自然之美','提问策略','连续观察','神话故事','把事情写清楚','童年成长','家国情怀','历史人物'],
+    '道法': ['与班级共成长','为父母分担','信息万花筒','让生活多一些绿色','同伴与交往','做聪明的消费者','美好生活哪里来','感受家乡文化'],
+  },
+  '人教版': {
+    '数学': ['大数的认识','公顷和平方千米','角的度量','三位数乘两位数','平行四边形和梯形','除数是两位数的除法','条形统计图','数学广角'],
+  },
+  '北师大版': {
+    '数学': ['认识更大的数','线与角','乘法','运算律','方向与位置','除法','生活中的负数','可能性'],
+  },
+  '苏教版': {
+    '数学': ['升和毫升','两三位数除以两位数','观察物体','统计表和条形统计图','解决问题的策略','可能性','整数四则混合运算','垂线与平行线'],
+    '科学': ['动物大家族','物体的运动','常见的力','简单电路','地球'],
+  },
+  '人教PEP': {
+    '英语': ['My classroom','My schoolbag','My friends','My home','Dinner is ready','Meet my family'],
+  },
+  '外研版': {
+    '英语': ['Module1 Greetings','Module2 Family','Module3 School','Module4 Activities','Module5 Food','Module6 Weather','Module7 Clothes','Module8 Shopping','Module9 Animals','Module10 Review'],
+  },
+  '译林版': {
+    '英语': ['Unit1 I like dogs','Unit2 Let\'s make a fruit salad','Unit3 How many?','Unit4 I can play basketball','Unit5 Our new home','Unit6 At the snack bar','Unit7 How much?','Unit8 Dolls'],
+  },
+  '教科版': {
+    '科学': ['声音','呼吸与消化','运动和力','地球与宇宙','植物的生长变化','电路','岩石与土壤','动物的一生'],
+  },
+};
+
+// 年级单元目录（按科目+版本获取）
+function getUnits(grade, subject, edition) {
   const isK = grade.includes('幼儿园');
   const units = [];
   if (isK) {
-    // 幼儿园：每科4个单元
     const kUnits = {
       '语言': ['儿歌启蒙','故事欣赏','看图说话','识字游戏'],
       '数学启蒙': ['数数游戏','比较大小','图形认知','分类排序'],
@@ -539,16 +589,17 @@ function getUnits(grade, subject) {
       units.push({ unit: i+1, name: name, kps: [name+'-基础', name+'-练习'] });
     });
   } else {
-    // 小学：每科6-8个单元（简化）
-    const gNum = parseInt(grade.replace('小学','').replace('年级',''));
-    const numUnits = gNum <= 2 ? 6 : 8;
-    for (let i = 1; i <= numUnits; i++) {
+    // 小学：根据版本+科目获取单元
+    const ed = edition || DEFAULT_EDITIONS[subject] || '人教版';
+    const edData = EDITION_UNITS[ed] || {};
+    const unitNames = edData[subject] || ['第一单元','第二单元','第三单元','第四单元','第五单元','第六单元','第七单元','第八单元'];
+    unitNames.forEach((name, i) => {
       units.push({
-        unit: i,
-        name: `第${i}单元`,
-        kps: [`知识点A-${i}`, `知识点B-${i}`, `知识点C-${i}`]
+        unit: i+1,
+        name: name,
+        kps: [`${name}-知识点A`, `${name}-知识点B`, `${name}-知识点C`]
       });
-    }
+    });
   }
   return units;
 }
@@ -567,6 +618,7 @@ let appData = {
   questionBankVersion: 'v1.0',
   lastRegenDate: null,
   parentPassword: null,
+  textbookVersion: '人教版',
 };
 
 let quizState = null;
@@ -614,9 +666,14 @@ function addUser(name, avatar, grade) {
     exposure: {},
     createdAt: new Date().toISOString(),
   };
-  // 初始化科目设置
+  // 初始化科目设置（含教材版本）
   GRADE_SUBJECTS[user.grade].forEach(s => {
-    user.subjects[s] = { enabled: true, currentUnit: 1, allowAhead: false };
+    user.subjects[s] = {
+      enabled: true,
+      edition: DEFAULT_EDITIONS[s] || '人教版',
+      currentUnit: 1,
+      allowAhead: false
+    };
   });
   appData.users.push(user);
   appData.currentUserId = user.id;
@@ -794,15 +851,19 @@ function generateFullBank() {
     const subjects = GRADE_SUBJECTS[grade];
     const perSubject = Math.ceil(perGrade / subjects.length);
     subjects.forEach(subject => {
-      const units = getUnits(grade, subject);
-      units.forEach(unit => {
-        unit.kps.forEach(kp => {
-          // 每个知识点生成5-8道题
-          const count = 5 + Math.floor(Math.random() * 4);
-          for (let i = 0; i < count && bank.length < target; i++) {
-            const q = genQuestion(grade, subject, unit.unit, kp, Math.floor(Math.random()*3)+1);
-            bank.push(q);
-          }
+      // 为该科目的每个版本生成题
+      const versions = SUBJECT_VERSIONS[subject] || [DEFAULT_EDITIONS[subject] || '人教版'];
+      versions.forEach(edition => {
+        const units = getUnits(grade, subject, edition);
+        units.forEach(unit => {
+          unit.kps.forEach(kp => {
+            const count = Math.max(1, Math.floor(perSubject / versions.length / units.length / unit.kps.length));
+            for (let i = 0; i < count && bank.length < target; i++) {
+              const q = genQuestion(grade, subject, unit.unit, kp, Math.floor(Math.random()*3)+1);
+              q.edition = edition;
+              bank.push(q);
+            }
+          });
         });
       });
     });
@@ -812,10 +873,14 @@ function generateFullBank() {
   while (bank.length < target) {
     const grade = GRADES[Math.floor(Math.random() * GRADES.length)];
     const subject = GRADE_SUBJECTS[grade][Math.floor(Math.random() * GRADE_SUBJECTS[grade].length)];
-    const units = getUnits(grade, subject);
+    const versions = SUBJECT_VERSIONS[subject] || [DEFAULT_EDITIONS[subject] || '人教版'];
+    const edition = versions[Math.floor(Math.random() * versions.length)];
+    const units = getUnits(grade, subject, edition);
     const unit = units[Math.floor(Math.random() * units.length)];
     const kp = unit.kps[Math.floor(Math.random() * unit.kps.length)];
-    bank.push(genQuestion(grade, subject, unit.unit, kp, Math.floor(Math.random()*3)+1));
+    const q = genQuestion(grade, subject, unit.unit, kp, Math.floor(Math.random()*3)+1);
+    q.edition = edition;
+    bank.push(q);
   }
 
   return bank;
@@ -866,11 +931,11 @@ function renderHome() {
   container.innerHTML = subjects.map(s => {
     const subj = user.subjects[s];
     if (!subj.enabled) return '';
-    const units = getUnits(user.grade, s);
+    const units = getUnits(user.grade, s, subj.edition);
     const totalUnits = units.length;
     const pct = Math.min(100, Math.round((subj.currentUnit / Math.max(totalUnits,1)) * 100));
     return `<div class="progress-subject">
-      <div class="ps-head"><span>${s}</span><span>第${subj.currentUnit}单元 / 共${totalUnits}单元</span></div>
+      <div class="ps-head"><span>${s} · ${subj.edition || '人教版'}</span><span>第${subj.currentUnit}单元 / 共${totalUnits}单元</span></div>
       <div class="progress-bar"><div class="progress-fill" style="width:${pct}%;background:${SUBJECT_COLORS[s]||'#4A9FF5'}"></div></div>
     </div>`;
   }).join('');
@@ -950,10 +1015,11 @@ function pickQuestions(mode, options = {}) {
   const seenIds = new Set();
   const targetCount = options.count || 20;
 
-  // 筛选当前年级科目的题目
+  // 筛选当前年级、科目、版本的题目
   let pool = bank.filter(q =>
     q.grade === user.grade &&
     enabledSubjects.includes(q.subject) &&
+    (q.edition === undefined || q.edition === user.subjects[q.subject].edition) &&
     user.subjects[q.subject].currentUnit >= q.unit
   );
 
@@ -994,10 +1060,12 @@ function pickQuestions(mode, options = {}) {
   // 如果题库不足，生成新题
   while (result.length < targetCount) {
     const subject = enabledSubjects[Math.floor(Math.random() * enabledSubjects.length)];
-    const units = getUnits(user.grade, subject);
+    const edition = user.subjects[subject].edition;
+    const units = getUnits(user.grade, subject, edition);
     const unit = units[Math.floor(Math.random() * units.length)];
     const kp = unit.kps[Math.floor(Math.random() * unit.kps.length)];
     const q = genQuestion(user.grade, subject, unit.unit, kp, Math.floor(Math.random()*3)+1);
+    q.edition = edition;
     result.push(q);
     appData.globalQuestionBank.push(q);
   }
@@ -1013,7 +1081,8 @@ function smartRegenerate() {
   let newCount = 0;
 
   enabledSubjects.forEach(subject => {
-    const units = getUnits(user.grade, subject);
+    const edition = user.subjects[subject].edition;
+    const units = getUnits(user.grade, subject, edition);
     units.forEach(unit => {
       unit.kps.forEach(kp => {
         const mastery = getMastery(user, subject, kp);
@@ -1021,6 +1090,7 @@ function smartRegenerate() {
         if (mastery < 70) {
           for (let i = 0; i < 2; i++) {
             const q = genQuestion(user.grade, subject, unit.unit, kp, mastery < 40 ? 1 : 2);
+            q.edition = edition;
             appData.globalQuestionBank.push(q);
             newCount++;
           }
@@ -1645,12 +1715,32 @@ function renderSettings() {
     </div>
   `).join('');
 
+  // 教材版本设置（按科目）
+  const edContainer = document.getElementById('editionSettings');
+  edContainer.innerHTML = Object.keys(user.subjects).map(s => {
+    const subj = user.subjects[s];
+    const versions = SUBJECT_VERSIONS[s] || [];
+    if (versions.length <= 1) {
+      // 只有一个版本，显示但不可选
+      return `<div class="setting-row">
+        <div><div class="setting-label">${s}</div><div class="setting-desc">${versions[0] || '通用'}</div></div>
+        <span class="badge badge-blue">${versions[0] || '通用'}</span>
+      </div>`;
+    }
+    return `<div class="setting-row">
+      <div><div class="setting-label">${s}</div><div class="setting-desc">选择教材版本</div></div>
+      <select class="select-input" onchange="changeEdition('${s}', this.value)">
+        ${versions.map(v => `<option value="${v}" ${subj.edition===v?'selected':''}>${v}</option>`).join('')}
+      </select>
+    </div>`;
+  }).join('');
+
   // 科目开关
   const subjContainer = document.getElementById('subjectSettings');
   subjContainer.innerHTML = Object.keys(user.subjects).map(s => {
     const subj = user.subjects[s];
     return `<div class="setting-row">
-      <div><div class="setting-label">${s}</div><div class="setting-desc">第${subj.currentUnit}单元</div></div>
+      <div><div class="setting-label">${s}</div><div class="setting-desc">第${subj.currentUnit}单元 · ${subj.edition || '人教版'}</div></div>
       <div class="switch ${subj.enabled?'on':''}" onclick="toggleSubject('${s}')"></div>
     </div>`;
   }).join('');
@@ -1660,9 +1750,9 @@ function renderSettings() {
   progContainer.innerHTML = Object.keys(user.subjects).map(s => {
     const subj = user.subjects[s];
     if (!subj.enabled) return '';
-    const units = getUnits(user.grade, s);
+    const units = getUnits(user.grade, s, subj.edition);
     return `<div class="progress-setting">
-      <div style="font-weight:700;margin-bottom:8px;color:${SUBJECT_COLORS[s]||'#4A9FF5'}">${s}</div>
+      <div style="font-weight:700;margin-bottom:8px;color:${SUBJECT_COLORS[s]||'#4A9FF5'}">${s} · ${subj.edition || '人教版'}</div>
       <div class="setting-row">
         <div class="setting-label">当前单元</div>
         <select class="select-input" onchange="changeUnit('${s}', this.value)">
@@ -1671,6 +1761,16 @@ function renderSettings() {
       </div>
     </div>`;
   }).join('');
+}
+
+function changeEdition(subject, edition) {
+  const user = getCurrentUser();
+  user.subjects[subject].edition = edition;
+  // 切换版本后，当前单元重置为1（版本不同单元数可能不同）
+  user.subjects[subject].currentUnit = 1;
+  saveData();
+  renderSettings();
+  showModal('✅', '版本已切换', `${subject} 已切换为 ${edition}，单元目录和题目已更新。`);
 }
 
 function toggleSubject(subject) {
