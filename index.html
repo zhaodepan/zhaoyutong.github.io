@@ -684,7 +684,12 @@ function addUser(name, avatar, grade) {
 function switchUser(userId) {
   appData.currentUserId = userId;
   saveData();
-  renderHome();
+  const user = getCurrentUser();
+  // 更新顶部显示
+  document.getElementById('topAvatar').textContent = user.avatar;
+  document.getElementById('topUserName').textContent = user.name;
+  // 回到首页
+  showView('home');
 }
 
 function deleteUser(userId) {
