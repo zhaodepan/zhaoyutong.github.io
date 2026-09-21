@@ -1154,8 +1154,10 @@ function pickQuestions(mode, options = {}) {
     shuffle(pool).forEach(q => { if (result.length < targetCount) addQuestion(q); });
   }
 
-  // 如果题库不足，生成新题
-  while (result.length < targetCount) {
+  // 如果题库不足，生成新题（避免死循环，最多尝试100次）
+  let generateAttempts = 0;
+  while (result.length < targetCount && generateAttempts < 100) {
+    generateAttempts++;
     // 确定要生成哪个科目的题
     let subject;
     if (mode === 'single' && options.subject) {
@@ -1174,10 +1176,12 @@ function pickQuestions(mode, options = {}) {
     const kp = unit.kps[Math.floor(Math.random() * unit.kps.length)];
     const q = genQuestion(user.grade, subject, unit.unit, kp, Math.floor(Math.random()*3)+1);
     q.edition = edition;
-    if (!isDuplicate(q)) {
+    // 尝试3次后强制加入，避免死循环
+    const isDup = isDuplicate(q);
+    if (!isDup || generateAttempts > 30) {
       result.push(q);
       seenQuestions.add(q.subject + '|' + q.kp + '|' + q.question);
-      appData.globalQuestionBank.push(q);
+      if (!isDup) appData.globalQuestionBank.push(q);
     }
   }
 
@@ -2063,7 +2067,7 @@ function init() {
   loadData();
 
   // 题库版本检查：版本号不匹配则重建题库
-  const BANK_VERSION = 'v20260921_fix2';
+  const BANK_VERSION = 'v20260921_deadlock_fix';
   if (appData.questionBankVersion !== BANK_VERSION || !appData.globalQuestionBank || appData.globalQuestionBank.length < 3000) {
     appData.globalQuestionBank = generateFullBank();
     appData.questionBankVersion = BANK_VERSION;
