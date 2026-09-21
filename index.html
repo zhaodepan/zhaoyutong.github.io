@@ -1285,7 +1285,7 @@ function submitAnswer() {
   quizState.subjectScores[q.subject].total++;
   if (isCorrect) quizState.subjectScores[q.subject].correct++;
 
-  appData.exposure[q.id] = (appData.exposure[q.id] || 0) + 1;
+  user.exposure[q.id] = (user.exposure[q.id] || 0) + 1;
 
   document.getElementById('submitBtn').classList.add('hidden');
   document.getElementById('nextBtn').classList.remove('hidden');
@@ -1806,9 +1806,11 @@ function changeTerm(t) {
 }
 
 function renderQBank() {
+  const user = getCurrentUser();
+  const seenCount = user && user.exposure ? Object.keys(user.exposure).length : 0;
   document.getElementById('qbTotal').textContent = appData.globalQuestionBank.length;
-  document.getElementById('qbSeen').textContent = Object.keys(appData.exposure).length;
-  document.getElementById('qbNew').textContent = appData.globalQuestionBank.length - Object.keys(appData.exposure).length;
+  document.getElementById('qbSeen').textContent = seenCount;
+  document.getElementById('qbNew').textContent = appData.globalQuestionBank.length - seenCount;
   document.getElementById('qbVer').textContent = appData.questionBankVersion;
 }
 
