@@ -1093,16 +1093,56 @@ function genQuestion(grade, subject, unit, kp, difficulty) {
   else if (subject === '道法' || subject === '社会' || subject === '健康' || subject === '艺术') q = genDaoFaQ(grade, unit, kp, difficulty);
   else q = genMathQ(grade, unit, kp, difficulty);
 
-  // 30%概率把单选题转换成判断题（增加题型多样性）
-  if (q.type === 'single' && Math.random() < 0.3) {
+  // 题型随机：60%单选，40%判断
+  // 判断题需要合理的陈述性题干，不能直接把计算题转成判断
+  const typeRoll = Math.random();
+  if (typeRoll < 0.4) {
+    // 判断题：把单选题的正确选项融入题干，变成陈述
     q.type = 'judge';
-    // 判断题：正确答案是0（正确）或1（错误），随机
-    q.answer = Math.random() < 0.5 ? 0 : 1;
-    // 修改题干：加上判断前缀
-    q.question = '判断：' + q.question;
-    // 判断题不需要options，渲染时自动生成对/错
+    // 随机决定是正确陈述还是错误陈述
+    const isCorrect = Math.random() < 0.5;
+    // 提取题干核心内容
+    let statement;
+    if (subject.includes('数学')) {
+      // 数学题：计算结果判断
+      const correctAnswer = q.options[q.answer].replace(/^[A-D]\.\s*/, '');
+      // 从题干中提取算式
+      const match = q.question.match(/计算：(.+?)=/);
+      if (match) {
+        const expr = match[1].trim();
+        if (isCorrect) {
+          statement = `${expr} = ${correctAnswer}`;
+        } else {
+          // 错误陈述：随便写个错误答案
+          const wrongAns = parseInt(correctAnswer) + Math.floor(Math.random()*5)+1;
+          statement = `${expr} = ${wrongAns}`;
+        }
+      } else {
+        statement = q.question.replace(/[=?？]\s*$/, '') + (isCorrect ? ' 是对的' : ' 是错的');
+      }
+    } else {
+      // 其他科目：单词意思判断、成语意思判断等
+      const correctAnswer = q.options[q.answer].replace(/^[A-D]\.\s*/, '');
+      const questionText = q.question;
+      if (subject.includes('英语')) {
+        // 英语题：单词意思判断
+        const wordMatch = questionText.match(/"(\w+)"/);
+        if (wordMatch) {
+          const word = wordMatch[1];
+          statement = isCorrect ? `"${word}" 的意思是"${correctAnswer}"` : `"${word}" 的意思是"错误答案"`;
+        } else {
+          statement = isCorrect ? `${questionText} 是正确的` : `${questionText} 是错误的`;
+        }
+      } else {
+        statement = isCorrect ? `${questionText} 这个说法是正确的` : `${questionText} 这个说法是错误的`;
+      }
+    }
+    q.question = '判断对错：' + statement;
+    q.answer = isCorrect ? 0 : 1; // 0=正确，1=错误
     q.options = [];
+    q.emoji = null; // 判断题不需要图片
   }
+  // 60%概率保持单选题
   return q;
 }
 
@@ -1614,7 +1654,7 @@ function renderQuestion() {
         <div>错误</div>
       </div>`;
   } else {
-    // 单选题
+    // 单选题 / 填空题
     optionsEl.innerHTML = q.options.map((o, i) =>
       `<div class="option-item" data-idx="${i}" onclick="selectOption(${i})">
         <div class="option-letter">${String.fromCharCode(65+i)}</div>
@@ -2336,7 +2376,7 @@ function init() {
   loadData();
 
   // 题库版本检查：版本号不匹配则重建题库
-  const BANK_VERSION = 'v20260921_multi_type';
+  const BANK_VERSION = 'v20260921_judge_fix';
   if (appData.questionBankVersion !== BANK_VERSION || !appData.globalQuestionBank || appData.globalQuestionBank.length < 5000) {
     appData.globalQuestionBank = generateFullBank();
     appData.questionBankVersion = BANK_VERSION;
