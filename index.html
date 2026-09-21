@@ -719,22 +719,23 @@ function shuffle(arr) {
   return a;
 }
 
-// 生成一道数学题
+// 生成一道数学题（参数化生成，理论上无限变化）
 function genMathQ(grade, unit, kp, difficulty) {
   const isK = grade.includes('幼儿');
   const gNum = parseInt(grade.replace('小学','').replace('年级','')) || 2;
   const maxNum = isK ? 5 : Math.pow(10, Math.min(gNum, 4));
   const a = Math.floor(Math.random() * maxNum) + 1;
   const b = Math.floor(Math.random() * maxNum) + 1;
-  const ops = isK ? ['+','-'] : ['+','-','×'];
-  const op = ops[Math.floor(Math.random() * ops.length)];
   let result, question, emoji = null;
 
-  // 幼儿园用水果emoji看图数数
+  // 题目类型随机
+  const qType = isK ? Math.floor(Math.random() * 2) : Math.floor(Math.random() * 8);
+
+  // 幼儿园：看图数数
   if (isK) {
-    const fruits = ['🍎','🍌','🍊','🍇','🍓'];
+    const fruits = ['🍎','🍌','🍊','🍇','🍓','🍉','🍑','🍒','🍍','🥝','🍋','🥭','🍐','🥥','🍅'];
     const fruit = fruits[Math.floor(Math.random() * fruits.length)];
-    if (op === '+') {
+    if (qType === 0) {
       result = a + b;
       question = `一共有多少个水果？`;
       emoji = fruit.repeat(a) + ' + ' + fruit.repeat(b);
@@ -743,16 +744,100 @@ function genMathQ(grade, unit, kp, difficulty) {
       const small = Math.min(a, b);
       result = big - small;
       question = `原来有 ${big} 个水果，拿走了 ${small} 个，还剩多少个？`;
-      // 显示总数，被拿走的用删除线表示
       emoji = fruit.repeat(big - small) + ' ~~' + fruit.repeat(small) + '~~';
     }
   } else {
-    if (op === '+') { result = a + b; question = `计算：${a} + ${b} = ?`; }
-    else if (op === '-') { result = Math.max(a, b) - Math.min(a, b); question = `计算：${Math.max(a, b)} - ${Math.min(a, b)} = ?`; }
-    else { result = a * b; question = `计算：${a} × ${b} = ?`; }
+    // 小学：8种题型
+    if (qType === 0) {
+      // 计算题：加减乘
+      const ops = ['+','-','×'];
+      const op = ops[Math.floor(Math.random() * ops.length)];
+      if (op === '+') { result = a + b; question = `计算：${a} + ${b} = ?`; }
+      else if (op === '-') { result = Math.max(a,b) - Math.min(a,b); question = `计算：${Math.max(a,b)} - ${Math.min(a,b)} = ?`; }
+      else { result = a * b; question = `计算：${a} × ${b} = ?`; }
+    } else if (qType === 1) {
+      // 应用题：加法
+      const contexts = [
+        `小明有${a}个苹果，妈妈又买了${b}个，现在一共有多少个？`,
+        `教室里有${a}个男生，${b}个女生，一共有多少个同学？`,
+        `停车场原来有${a}辆车，又开来了${b}辆，现在有多少辆？`,
+        `小红有${a}支铅笔，爸爸又给了她${b}支，她现在有多少支？`,
+        `第一组有${a}朵花，第二组有${b}朵花，两组一共有多少朵？`,
+        `书架上层有${a}本书，下层有${b}本书，一共有多少本？`,
+      ];
+      question = contexts[Math.floor(Math.random() * contexts.length)];
+      result = a + b;
+    } else if (qType === 2) {
+      // 应用题：减法
+      const contexts = [
+        `一本书有${a}页，小红看了${b}页，还剩多少页没看？`,
+        `商店里有${a}个篮球，卖出了${b}个，还剩多少个？`,
+        `树上有${a}只鸟，飞走了${b}只，还剩多少只？`,
+        `妈妈买了${a}个鸡蛋，用了${b}个，还剩多少个？`,
+        `小明有${a}元钱，买文具用了${b}元，还剩多少元？`,
+        `停车场有${a}辆车，开走了${b}辆，还剩多少辆？`,
+      ];
+      question = contexts[Math.floor(Math.random() * contexts.length)];
+      result = Math.max(a,b) - Math.min(a,b);
+    } else if (qType === 3) {
+      // 应用题：乘法
+      const contexts = [
+        `每行有${a}棵树，一共有${b}行，总共有多少棵树？`,
+        `一盒铅笔有${a}支，${b}盒一共有多少支？`,
+        `每排有${a}个座位，${b}排一共有多少个座位？`,
+        `一本故事书${a}元，买${b}本需要多少元？`,
+        `每个小组有${a}人，${b}个小组一共有多少人？`,
+        `一张桌子有${a}条腿，${b}张桌子一共有多少条腿？`,
+      ];
+      question = contexts[Math.floor(Math.random() * contexts.length)];
+      result = a * b;
+    } else if (qType === 4) {
+      // 比较大小
+      const nums = [a, b, Math.max(a,b) + Math.floor(Math.random()*10) + 1];
+      nums.sort(() => Math.random() - 0.5);
+      question = `下列哪个数最大？`;
+      const options = nums.map((v, i) => `${String.fromCharCode(65+i)}. ${v}`);
+      return {
+        id: 'math_' + Date.now() + '_' + Math.floor(Math.random()*99999),
+        subject: '数学', grade: grade, unit: unit, kp: kp, type: 'single', difficulty: difficulty,
+        question: question,
+        options: options,
+        answer: nums.indexOf(Math.max(...nums)),
+        explanation: `${Math.max(...nums)} 是最大的数。`, generated: true,
+      };
+    } else if (qType === 5) {
+      // 找规律
+      const start = Math.floor(Math.random() * 50) + 1;
+      const step = Math.floor(Math.random() * 9) + 1;
+      result = start + step * 3;
+      question = `找规律：${start}, ${start+step}, ${start+step*2}, ?`;
+    } else if (qType === 6) {
+      // 填空题
+      const op = ['+','-','×'][Math.floor(Math.random()*3)];
+      if (op === '+') { result = b; question = `${a} + ? = ${a + b}`; }
+      else if (op === '-') { result = Math.max(a,b) - Math.min(a,b); question = `${Math.max(a,b)} - ? = ${result}`; }
+      else { result = b; question = `${a} × ? = ${a * b}`; }
+    } else {
+      // 价格问题
+      const price = Math.floor(Math.random() * 50) + 5;
+      const count = Math.floor(Math.random() * 10) + 2;
+      result = price * count;
+      question = `一支钢笔${price}元，买${count}支需要多少元？`;
+    }
   }
 
-  const wrong = shuffle([result + 1, result - 1, result + Math.floor(result/2) + 1]).slice(0, 3).filter((v,i,arr) => arr.indexOf(v) === i && v !== result && v > 0);
+  // 生成错误选项
+  const wrongPool = new Set();
+  let attempts = 0;
+  while (wrongPool.size < 3 && attempts < 20) {
+    attempts++;
+    const delta = Math.floor(Math.random() * 20) - 10;
+    const wrongVal = result + delta;
+    if (wrongVal !== result && wrongVal >= 0 && !wrongPool.has(wrongVal)) {
+      wrongPool.add(wrongVal);
+    }
+  }
+  const wrong = Array.from(wrongPool);
   while (wrong.length < 3) wrong.push(result + wrong.length + 1);
   const options = shuffle([result, ...wrong]).map((v, i) => `${String.fromCharCode(65+i)}. ${v}`);
   const answer = options.findIndex(o => o.includes(result));
@@ -770,7 +855,7 @@ function genMathQ(grade, unit, kp, difficulty) {
 function genChineseQ(grade, unit, kp, difficulty) {
   const isK = grade.includes('幼儿');
 
-  // 幼儿园：看图识物
+  // 幼儿园：看图识物（扩充到30个物品）
   if (isK) {
     const items = [
       { word: '苹果', emoji: '🍎', wrong: ['香蕉','桌子','椅子'] },
@@ -779,6 +864,20 @@ function genChineseQ(grade, unit, kp, difficulty) {
       { word: '花朵', emoji: '🌸', wrong: ['小草','树叶','泥土'] },
       { word: '汽车', emoji: '🚗', wrong: ['自行车','飞机','轮船'] },
       { word: '蛋糕', emoji: '🍰', wrong: ['面包','饼干','糖果'] },
+      { word: '小猫', emoji: '🐱', wrong: ['小狗','兔子','松鼠'] },
+      { word: '月亮', emoji: '🌙', wrong: ['太阳','星星','地球'] },
+      { word: '大树', emoji: '🌳', wrong: ['小草','花朵','竹子'] },
+      { word: '飞机', emoji: '✈️', wrong: ['汽车','火车','轮船'] },
+      { word: '雨伞', emoji: '☂️', wrong: ['帽子','书包','鞋子'] },
+      { word: '书本', emoji: '📖', wrong: ['铅笔','橡皮','尺子'] },
+      { word: '足球', emoji: '⚽', wrong: ['篮球','排球','乒乓球'] },
+      { word: '香蕉', emoji: '🍌', wrong: ['苹果','葡萄','西瓜'] },
+      { word: '小鸟', emoji: '🐦', wrong: ['小猫','小狗','小鱼'] },
+      { word: '兔子', emoji: '🐰', wrong: ['小猫','小狗','松鼠'] },
+      { word: '彩虹', emoji: '🌈', wrong: ['云朵','太阳','月亮'] },
+      { word: '雪人', emoji: '⛄', wrong: ['娃娃','小熊','机器人'] },
+      { word: '房子', emoji: '🏠', wrong: ['学校','医院','商店'] },
+      { word: '火车', emoji: '🚂', wrong: ['汽车','飞机','轮船'] },
     ];
     const item = items[Math.floor(Math.random() * items.length)];
     const options = shuffle([item.word, ...item.wrong]).map((v, i) => `${String.fromCharCode(65+i)}. ${v}`);
@@ -794,25 +893,82 @@ function genChineseQ(grade, unit, kp, difficulty) {
     };
   }
 
-  // 小学：成语题
-  const idioms = ['画蛇添足','亡羊补牢','守株待兔','拔苗助长','刻舟求剑','掩耳盗铃','狐假虎威','对牛弹琴','井底之蛙','胸有成竹'];
-  const idiom = idioms[Math.floor(Math.random() * idioms.length)];
-  const meanings = {
-    '画蛇添足':'做多余的事反而不好','亡羊补牢':'出了问题及时补救','守株待兔':'不主动努力妄想侥幸',
-    '拔苗助长':'违反规律急于求成','刻舟求剑':'办事刻板不知变通','掩耳盗铃':'自己欺骗自己',
-    '狐假虎威':'依仗别人势力欺压人','对牛弹琴':'对不懂道理的人讲道理','井底之蛙':'见识短浅的人','胸有成竹':'做事前已有周全考虑',
-  };
-  const correct = meanings[idiom];
-  const options = shuffle([correct, '努力拼搏向上', '认真仔细做事', '团结友爱互助']).map((v, i) => `${String.fromCharCode(65+i)}. ${v}`);
-  const answer = options.findIndex(o => o.includes(correct));
-  return {
-    id: 'chn_' + Date.now() + '_' + Math.floor(Math.random()*99999),
-    subject: '语文',
-    grade: grade, unit: unit, kp: kp, type: 'single', difficulty: difficulty,
-    question: `成语"${idiom}"的意思最接近下列哪一项？`,
-    options: options, answer: answer,
-    explanation: `"${idiom}"：${correct}。`, generated: true,
-  };
+  // 小学：多种题型
+  const qType = Math.floor(Math.random() * 3);
+
+  if (qType === 0) {
+    // 成语题（扩充到30个）
+    const idioms = ['画蛇添足','亡羊补牢','守株待兔','拔苗助长','刻舟求剑','掩耳盗铃','狐假虎威','对牛弹琴','井底之蛙','胸有成竹',
+      '揠苗助长','叶公好龙','南辕北辙','杯弓蛇影','杞人忧天','滥竽充数','邯郸学步','东施效颦','班门弄斧','愚公移山',
+      '塞翁失马','锦上添花','一帆风顺','二龙戏珠','三顾茅庐','四面楚歌','五光十色','六神无主','七上八下','八仙过海'];
+    const meanings = {
+      '画蛇添足':'做多余的事反而不好','亡羊补牢':'出了问题及时补救','守株待兔':'不主动努力妄想侥幸',
+      '拔苗助长':'违反规律急于求成','刻舟求剑':'办事刻板不知变通','掩耳盗铃':'自己欺骗自己',
+      '狐假虎威':'依仗别人势力欺压人','对牛弹琴':'对不懂道理的人讲道理','井底之蛙':'见识短浅的人','胸有成竹':'做事前已有周全考虑',
+      '揠苗助长':'违反规律急于求成','叶公好龙':'表面爱好实际并不真爱好','南辕北辙':'行动和目的相反','杯弓蛇影':'疑神疑鬼自相惊扰',
+      '杞人忧天':'不必要的忧虑','滥竽充数':'无本领的冒充有本领','邯郸学步':'模仿不成反失去原有的本领','东施效颦':'盲目模仿效果更坏',
+      '班门弄斧':'在行家面前卖弄本领','愚公移山':'有毅力不怕困难','塞翁失马':'坏事可能变成好事','锦上添花':'好上加好',
+      '一帆风顺':'非常顺利没有阻碍','二龙戏珠':'一种喜庆的场面','三顾茅庐':'诚心诚意邀请','四面楚歌':'四面受敌孤立无援',
+      '五光十色':'色彩鲜艳花样繁多','六神无主':'惊慌失措没有主意','七上八下':'心神不安','八仙过海':'各自拿出本领比赛',
+    };
+    const idiom = idioms[Math.floor(Math.random() * idioms.length)];
+    const correct = meanings[idiom];
+    const wrongOpts = ['努力拼搏向上','认真仔细做事','团结友爱互助','勇敢面对困难','谦虚使人进步'];
+    const options = shuffle([correct, ...shuffle(wrongOpts).slice(0,3)]).map((v, i) => `${String.fromCharCode(65+i)}. ${v}`);
+    const answer = options.findIndex(o => o.includes(correct));
+    return {
+      id: 'chn_' + Date.now() + '_' + Math.floor(Math.random()*99999),
+      subject: '语文', grade: grade, unit: unit, kp: kp, type: 'single', difficulty: difficulty,
+      question: `成语"${idiom}"的意思最接近下列哪一项？`,
+      options: options, answer: answer,
+      explanation: `"${idiom}"：${correct}。`, generated: true,
+    };
+  } else if (qType === 1) {
+    // 近义词/反义词
+    const words = [
+      { word: '美丽', type: '近', answer: '漂亮', wrong: ['丑陋','高大','矮小'] },
+      { word: '高兴', type: '近', answer: '快乐', wrong: ['悲伤','生气','难过'] },
+      { word: '迅速', type: '近', answer: '快速', wrong: ['缓慢','沉稳','急忙'] },
+      { word: '寒冷', type: '近', answer: '严寒', wrong: ['炎热','温暖','凉快'] },
+      { word: '勇敢', type: '反', answer: '胆小', wrong: ['坚强','顽强','英勇'] },
+      { word: '黑暗', type: '反', answer: '光明', wrong: ['昏暗','漆黑','阴暗'] },
+      { word: '认真', type: '反', answer: '马虎', wrong: ['仔细','专心','用心'] },
+      { word: '简单', type: '反', answer: '复杂', wrong: ['容易','容易','简易'] },
+      { word: '安静', type: '近', answer: '宁静', wrong: ['热闹','喧闹','喧哗'] },
+      { word: '富裕', type: '反', answer: '贫穷', wrong: ['富有','富足','充裕'] },
+    ];
+    const item = words[Math.floor(Math.random() * words.length)];
+    const qText = item.type === '近' ? `"${item.word}"的近义词是` : `"${item.word}"的反义词是`;
+    const options = shuffle([item.answer, ...item.wrong.slice(0,3)]).map((v, i) => `${String.fromCharCode(65+i)}. ${v}`);
+    const answer = options.findIndex(o => o.includes(item.answer));
+    return {
+      id: 'chn_' + Date.now() + '_' + Math.floor(Math.random()*99999),
+      subject: '语文', grade: grade, unit: unit, kp: kp, type: 'single', difficulty: difficulty,
+      question: qText,
+      options: options, answer: answer,
+      explanation: `"${item.word}"的${item.type}义词是"${item.answer}"。`, generated: true,
+    };
+  } else {
+    // 古诗填空题
+    const poems = [
+      { line: '床前明月光', answer: '疑是地上霜', wrong: ['举头望明月','低头思故乡','花开满园香'] },
+      { line: '春眠不觉晓', answer: '处处闻啼鸟', wrong: ['夜来风雨声','花落知多少','处处闻啼鸟'] },
+      { line: '白日依山尽', answer: '黄河入海流', wrong: ['欲穷千里目','更上一层楼','遥看瀑布挂前川'] },
+      { line: '谁知盘中餐', answer: '粒粒皆辛苦', wrong: ['锄禾日当午','汗滴禾下土','谁知盘中餐'] },
+      { line: '遥知不是雪', answer: '为有暗香来', wrong: ['墙角数枝梅','凌寒独自开','凌寒独自开'] },
+      { line: '碧玉妆成一树高', answer: '万条垂下绿丝绦', wrong: ['不知细叶谁裁出','二月春风似剪刀','接天莲叶无穷碧'] },
+    ];
+    const item = poems[Math.floor(Math.random() * poems.length)];
+    const options = shuffle([item.answer, ...item.wrong.slice(0,3)]).map((v, i) => `${String.fromCharCode(65+i)}. ${v}`);
+    const answer = options.findIndex(o => o.includes(item.answer));
+    return {
+      id: 'chn_' + Date.now() + '_' + Math.floor(Math.random()*99999),
+      subject: '语文', grade: grade, unit: unit, kp: kp, type: 'single', difficulty: difficulty,
+      question: `"${item.line}" 的下一句是？`,
+      options: options, answer: answer,
+      explanation: `"${item.line}"，${item.answer}。`, generated: true,
+    };
+  }
 }
 
 // 生成一道英语题
@@ -824,6 +980,25 @@ function genEnglishQ(grade, unit, kp, difficulty) {
     { en: 'book', cn: '书', emoji: '📖' }, { en: 'fish', cn: '鱼', emoji: '🐟' },
     { en: 'car', cn: '汽车', emoji: '🚗' }, { en: 'flower', cn: '花', emoji: '🌸' },
     { en: 'tree', cn: '树', emoji: '🌳' }, { en: 'egg', cn: '鸡蛋', emoji: '🥚' },
+    { en: 'bird', cn: '鸟', emoji: '🐦' }, { en: 'rabbit', cn: '兔子', emoji: '🐰' },
+    { en: 'milk', cn: '牛奶', emoji: '🥛' }, { en: 'bread', cn: '面包', emoji: '🍞' },
+    { en: 'orange', cn: '橙子', emoji: '🍊' }, { en: 'grape', cn: '葡萄', emoji: '🍇' },
+    { en: 'pencil', cn: '铅笔', emoji: '✏️' }, { en: 'ruler', cn: '尺子', emoji: '📏' },
+    { en: 'door', cn: '门', emoji: '🚪' }, { en: 'window', cn: '窗户', emoji: '🪟' },
+    { en: 'school', cn: '学校', emoji: '🏫' }, { en: 'teacher', cn: '老师', emoji: '👩‍🏫' },
+    { en: 'student', cn: '学生', emoji: '👨‍🎓' }, { en: 'friend', cn: '朋友', emoji: '🤝' },
+    { en: 'happy', cn: '高兴的', emoji: '😊' }, { en: 'sad', cn: '伤心的', emoji: '😢' },
+    { en: 'red', cn: '红色', emoji: '🔴' }, { en: 'blue', cn: '蓝色', emoji: '🔵' },
+    { en: 'green', cn: '绿色', emoji: '🟢' }, { en: 'yellow', cn: '黄色', emoji: '🟡' },
+    { en: 'big', cn: '大的', emoji: '🐘' }, { en: 'small', cn: '小的', emoji: '🐭' },
+    { en: 'run', cn: '跑', emoji: '🏃' }, { en: 'jump', cn: '跳', emoji: '🤸' },
+    { en: 'eat', cn: '吃', emoji: '🍽️' }, { en: 'drink', cn: '喝', emoji: '🥤' },
+    { en: 'mother', cn: '妈妈', emoji: '👩' }, { en: 'father', cn: '爸爸', emoji: '👨' },
+    { en: 'brother', cn: '兄弟', emoji: '👦' }, { en: 'sister', cn: '姐妹', emoji: '👧' },
+    { en: 'cloud', cn: '云', emoji: '☁️' }, { en: 'rain', cn: '雨', emoji: '🌧️' },
+    { en: 'snow', cn: '雪', emoji: '❄️' }, { en: 'wind', cn: '风', emoji: '💨' },
+    { en: 'egg', cn: '鸡蛋', emoji: '🥚' }, { en: 'cake', cn: '蛋糕', emoji: '🍰' },
+    { en: 'milk', cn: '牛奶', emoji: '🥛' }, { en: 'juice', cn: '果汁', emoji: '🧃' },
   ];
   const w = words[Math.floor(Math.random() * words.length)];
   const isK = grade.includes('幼儿');
@@ -831,14 +1006,17 @@ function genEnglishQ(grade, unit, kp, difficulty) {
   let options, answer, question, exp;
   if (isK) {
     // 幼儿园：看图选英文单词（英语启蒙）
-    const wrongWords = words.filter(x => x.en !== w.en).slice(0, 3);
-    options = shuffle([w.en, ...wrongWords.map(x => x.en)]).map((v, i) => `${String.fromCharCode(65+i)}. ${v}`);
+    const wrongWords = words.filter(x => x.en !== w.en);
+    const shuffledWrong = shuffle(wrongWords).slice(0, 3);
+    options = shuffle([w.en, ...shuffledWrong.map(x => x.en)]).map((v, i) => `${String.fromCharCode(65+i)}. ${v}`);
     answer = options.findIndex(o => o.includes(w.en));
     question = 'What\'s this? 这是什么？';
     exp = `这是 ${w.en}，中文意思是"${w.cn}"。`;
   } else {
     // 小学：看英文单词选中文意思
-    options = shuffle([w.cn, '香蕉', '桌子', '椅子']).map((v, i) => `${String.fromCharCode(65+i)}. ${v}`);
+    const wrongWords = words.filter(x => x.cn !== w.cn);
+    const shuffledWrong = shuffle(wrongWords).slice(0, 3);
+    options = shuffle([w.cn, ...shuffledWrong.map(x => x.cn)]).map((v, i) => `${String.fromCharCode(65+i)}. ${v}`);
     answer = options.findIndex(o => o.includes(w.cn));
     question = `What is the meaning of "${w.en}"?`;
     exp = `"${w.en}" 的意思是 "${w.cn}"。`;
@@ -907,18 +1085,31 @@ function genDaoFaQ(grade, unit, kp, difficulty) {
 
 // 根据科目生成题目
 function genQuestion(grade, subject, unit, kp, difficulty) {
-  if (subject.includes('数学')) return genMathQ(grade, unit, kp, difficulty);
-  if (subject.includes('语文') || subject === '语言') return genChineseQ(grade, unit, kp, difficulty);
-  if (subject.includes('英语')) return genEnglishQ(grade, unit, kp, difficulty);
-  if (subject.includes('科学')) return genScienceQ(grade, unit, kp, difficulty);
-  if (subject === '道法' || subject === '社会' || subject === '健康' || subject === '艺术') return genDaoFaQ(grade, unit, kp, difficulty);
-  return genMathQ(grade, unit, kp, difficulty);
+  let q;
+  if (subject.includes('数学')) q = genMathQ(grade, unit, kp, difficulty);
+  else if (subject.includes('语文') || subject === '语言') q = genChineseQ(grade, unit, kp, difficulty);
+  else if (subject.includes('英语')) q = genEnglishQ(grade, unit, kp, difficulty);
+  else if (subject.includes('科学')) q = genScienceQ(grade, unit, kp, difficulty);
+  else if (subject === '道法' || subject === '社会' || subject === '健康' || subject === '艺术') q = genDaoFaQ(grade, unit, kp, difficulty);
+  else q = genMathQ(grade, unit, kp, difficulty);
+
+  // 30%概率把单选题转换成判断题（增加题型多样性）
+  if (q.type === 'single' && Math.random() < 0.3) {
+    q.type = 'judge';
+    // 判断题：正确答案是0（正确）或1（错误），随机
+    q.answer = Math.random() < 0.5 ? 0 : 1;
+    // 修改题干：加上判断前缀
+    q.question = '判断：' + q.question;
+    // 判断题不需要options，渲染时自动生成对/错
+    q.options = [];
+  }
+  return q;
 }
 
 // 批量生成题库（确保至少3000题）
 function generateFullBank() {
   const bank = [];
-  const target = 3000;
+  const target = 5000;
   const perGrade = Math.ceil(target / GRADES.length);
 
   GRADES.forEach(grade => {
@@ -1091,15 +1282,26 @@ function pickQuestions(mode, options = {}) {
   const targetCount = options.count || 20;
 
   // 筛选当前年级、科目、版本的题目
+  // 语文、英语允许跨年级复习（字词、词汇需要持续巩固）
+  const REVIEW_SUBJECTS = ['语文', '英语', '语言', '英语启蒙'];
   let pool = bank.filter(q => {
     // 安全检查：确保该科目在用户设置中存在
     if (!user.subjects[q.subject]) return false;
     if (!user.subjects[q.subject].enabled) return false;
-    if (q.grade !== user.grade) return false;
+    // 年级匹配：基础知识科目允许低年级复习，其他科目只考当前年级
+    if (REVIEW_SUBJECTS.includes(q.subject)) {
+      // 语文英语：只抽取当前年级及以下年级的题
+      const gOrder = GRADES.indexOf(q.grade);
+      const uOrder = GRADES.indexOf(user.grade);
+      if (gOrder > uOrder) return false;
+    } else {
+      // 其他科目：只考当前年级
+      if (q.grade !== user.grade) return false;
+    }
     // 版本匹配：题目没有edition字段就匹配，有就必须和用户设置一致
     if (q.edition !== undefined && q.edition !== user.subjects[q.subject].edition) return false;
-    // 进度匹配：题目单元不能超过当前单元
-    if (user.subjects[q.subject].currentUnit < q.unit) return false;
+    // 进度匹配：题目单元不能超过当前单元（当前年级内）
+    if (q.grade === user.grade && user.subjects[q.subject].currentUnit < q.unit) return false;
     return true;
   });
 
@@ -1108,19 +1310,53 @@ function pickQuestions(mode, options = {}) {
     return seenQuestions.has(q.subject + '|' + q.kp + '|' + q.question);
   }
 
-  // 辅助函数：添加题目（去重）
+  // 辅助函数：检查是否连续出现同一知识点超过2次
+  function isConsecutiveKP(subject, kp) {
+    const len = result.length;
+    if (len < 2) return false;
+    const last1 = result[len-1];
+    const last2 = result[len-2];
+    return last1.subject === subject && last1.kp === kp &&
+           last2.subject === subject && last2.kp === kp;
+  }
+
+  // 辅助函数：计算题目优先级分数
+  function getPriority(q) {
+    const mastery = getMastery(user, q.subject, q.kp);
+    const exposure = (user.exposure && user.exposure[q.id]) || 0;
+    // 掌握度越低优先级越高
+    let score = (100 - mastery) * 0.4;
+    // 曝光越少优先级越高
+    score += Math.max(0, 10 - exposure) * 0.3;
+    // 正确率低的优先级高（通过掌握度间接体现）
+    // 当前进度内的题优先级高
+    if (q.grade === user.grade) score += 10;
+    return score;
+  }
+
+  // 辅助函数：根据掌握度匹配难度
+  function getMatchedDifficulty(q) {
+    const mastery = getMastery(user, q.subject, q.kp);
+    if (mastery < 40) return q.difficulty <= 2; // 基础题
+    if (mastery < 70) return q.difficulty >= 2 && q.difficulty <= 3; // 中等题
+    return q.difficulty >= 3; // 提高题
+  }
+
+  // 辅助函数：添加题目（去重+连续知识点检查）
   function addQuestion(q) {
-    if (!isDuplicate(q) && !seenIds.has(q.id)) {
-      result.push(q);
-      seenIds.add(q.id);
-      seenQuestions.add(q.subject + '|' + q.kp + '|' + q.question);
-      return true;
-    }
-    return false;
+    if (isDuplicate(q) || seenIds.has(q.id)) return false;
+    if (isConsecutiveKP(q.subject, q.kp)) return false;
+    result.push(q);
+    seenIds.add(q.id);
+    seenQuestions.add(q.subject + '|' + q.kp + '|' + q.question);
+    return true;
   }
 
   if (mode === 'smart') {
     // 智能模式：60%薄弱，30%已掌握，10%新学
+    // 按优先级排序：掌握度低、曝光少的优先
+    pool.sort((a, b) => getPriority(b) - getPriority(a));
+
     const weakPool = [], goodPool = [], newPool = [];
     pool.forEach(q => {
       const m = getMastery(user, q.subject, q.kp);
@@ -1130,22 +1366,29 @@ function pickQuestions(mode, options = {}) {
     });
     const weakCount = Math.floor(targetCount * 0.6);
     const goodCount = Math.floor(targetCount * 0.3);
-    shuffle(weakPool).forEach(q => { if (result.length < weakCount) addQuestion(q); });
-    shuffle(goodPool).forEach(q => { if (result.length < weakCount + goodCount) addQuestion(q); });
-    shuffle(newPool).forEach(q => { if (result.length < targetCount) addQuestion(q); });
+    // 按优先级排序后依次添加
+    weakPool.forEach(q => { if (result.length < weakCount) addQuestion(q); });
+    goodPool.forEach(q => { if (result.length < weakCount + goodCount) addQuestion(q); });
+    newPool.forEach(q => { if (result.length < targetCount) addQuestion(q); });
   }
   else if (mode === 'full') {
-    // 全科模式
+    // 全科模式：按科目轮换，每科至少1题
+    // 按科目分组，每组内按优先级排序
     enabledSubjects.forEach(s => {
-      const sp = shuffle(pool.filter(q => q.subject === s));
+      const sp = pool.filter(q => q.subject === s);
+      sp.sort((a, b) => getPriority(b) - getPriority(a));
       let added = 0;
-      sp.forEach(q => { if (added < Math.ceil(targetCount / enabledSubjects.length)) { if (addQuestion(q)) added++; } });
+      const perSubject = Math.ceil(targetCount / enabledSubjects.length);
+      sp.forEach(q => { if (added < perSubject) { if (addQuestion(q)) added++; } });
     });
+    // 打乱顺序
     result.sort(() => Math.random() - 0.5);
   }
   else if (mode === 'single') {
     const subject = options.subject;
-    const sp = shuffle(pool.filter(q => q.subject === subject));
+    const sp = pool.filter(q => q.subject === subject);
+    // 按优先级排序：掌握度低、曝光少的优先
+    sp.sort((a, b) => getPriority(b) - getPriority(a));
     sp.forEach(q => { if (result.length < targetCount) addQuestion(q); });
   }
   else if (mode === 'practice') {
@@ -1161,20 +1404,29 @@ function pickQuestions(mode, options = {}) {
     // 确定要生成哪个科目的题
     let subject;
     if (mode === 'single' && options.subject) {
-      // 单科模式：只生成当前科目的题
       subject = options.subject;
     } else if (mode === 'practice' && options.subject) {
-      // 练习模式指定了科目：只生成该科目
       subject = options.subject;
     } else {
-      // 其他模式：随机选已开启的科目
       subject = enabledSubjects[Math.floor(Math.random() * enabledSubjects.length)];
     }
     const edition = user.subjects[subject].edition;
     const units = getUnits(user.grade, subject, edition);
     const unit = units[Math.floor(Math.random() * units.length)];
     const kp = unit.kps[Math.floor(Math.random() * unit.kps.length)];
-    const q = genQuestion(user.grade, subject, unit.unit, kp, Math.floor(Math.random()*3)+1);
+
+    // 根据掌握度匹配难度
+    const mastery = getMastery(user, subject, kp);
+    let difficulty;
+    if (mastery < 40) {
+      difficulty = Math.floor(Math.random() * 2) + 1; // 难度1-2（基础题）
+    } else if (mastery < 70) {
+      difficulty = Math.floor(Math.random() * 2) + 2; // 难度2-3（中等题）
+    } else {
+      difficulty = Math.floor(Math.random() * 2) + 3; // 难度3-4（提高题）
+    }
+
+    const q = genQuestion(user.grade, subject, unit.unit, kp, difficulty);
     q.edition = edition;
     // 尝试3次后强制加入，避免死循环
     const isDup = isDuplicate(q);
@@ -1333,7 +1585,10 @@ function renderQuestion() {
   document.getElementById('qSubject').style.background = (SUBJECT_COLORS[q.subject]||'#4A9FF5') + '20';
   document.getElementById('qSubject').style.color = SUBJECT_COLORS[q.subject] || '#4A9FF5';
   document.getElementById('qKP').textContent = q.kp;
-  document.getElementById('qType').textContent = '单选题';
+
+  // 题型标签
+  const typeMap = { single: '单选题', judge: '判断题', multi: '多选题', fill: '填空题' };
+  document.getElementById('qType').textContent = typeMap[q.type] || '单选题';
 
   // 显示emoji图片（如果有）
   const imgEl = document.getElementById('qImage');
@@ -1347,12 +1602,26 @@ function renderQuestion() {
   document.getElementById('qText').textContent = q.question;
 
   const optionsEl = document.getElementById('qOptions');
-  optionsEl.innerHTML = q.options.map((o, i) =>
-    `<div class="option-item" data-idx="${i}" onclick="selectOption(${i})">
-      <div class="option-letter">${String.fromCharCode(65+i)}</div>
-      <div>${o.replace(/^[A-D]\.\s*/, '')}</div>
-    </div>`
-  ).join('');
+  if (q.type === 'judge') {
+    // 判断题：对/错两个选项
+    optionsEl.innerHTML = `
+      <div class="option-item" data-idx="0" onclick="selectOption(0)">
+        <div class="option-letter">✓</div>
+        <div>正确</div>
+      </div>
+      <div class="option-item" data-idx="1" onclick="selectOption(1)">
+        <div class="option-letter">✗</div>
+        <div>错误</div>
+      </div>`;
+  } else {
+    // 单选题
+    optionsEl.innerHTML = q.options.map((o, i) =>
+      `<div class="option-item" data-idx="${i}" onclick="selectOption(${i})">
+        <div class="option-letter">${String.fromCharCode(65+i)}</div>
+        <div>${o.replace(/^[A-D]\.\s*/, '')}</div>
+      </div>`
+    ).join('');
+  }
 
   document.getElementById('feedbackPanel').className = 'feedback-panel';
   document.getElementById('submitBtn').classList.remove('hidden');
@@ -2067,8 +2336,8 @@ function init() {
   loadData();
 
   // 题库版本检查：版本号不匹配则重建题库
-  const BANK_VERSION = 'v20260921_deadlock_fix';
-  if (appData.questionBankVersion !== BANK_VERSION || !appData.globalQuestionBank || appData.globalQuestionBank.length < 3000) {
+  const BANK_VERSION = 'v20260921_multi_type';
+  if (appData.questionBankVersion !== BANK_VERSION || !appData.globalQuestionBank || appData.globalQuestionBank.length < 5000) {
     appData.globalQuestionBank = generateFullBank();
     appData.questionBankVersion = BANK_VERSION;
     saveData();
