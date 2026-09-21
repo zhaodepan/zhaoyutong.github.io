@@ -723,13 +723,19 @@ function shuffle(arr) {
 function genMathQ(grade, unit, kp, difficulty) {
   const isK = grade.includes('幼儿');
   const gNum = parseInt(grade.replace('小学','').replace('年级','')) || 2;
-  const maxNum = isK ? 5 : Math.pow(10, Math.min(gNum, 4));
+  // 数字范围随年级和难度递增
+  let maxNum;
+  if (isK) maxNum = 5;
+  else {
+    const base = Math.pow(10, Math.min(gNum, 4));
+    maxNum = Math.floor(base * (0.5 + difficulty * 0.3)); // 难度越高数字越大
+  }
   const a = Math.floor(Math.random() * maxNum) + 1;
   const b = Math.floor(Math.random() * maxNum) + 1;
   let result, question, emoji = null;
 
   // 题目类型随机
-  const qType = isK ? Math.floor(Math.random() * 2) : Math.floor(Math.random() * 8);
+  const qType = isK ? Math.floor(Math.random() * 2) : Math.floor(Math.random() * 10);
 
   // 幼儿园：看图数数
   if (isK) {
@@ -817,12 +823,23 @@ function genMathQ(grade, unit, kp, difficulty) {
       if (op === '+') { result = b; question = `${a} + ? = ${a + b}`; }
       else if (op === '-') { result = Math.max(a,b) - Math.min(a,b); question = `${Math.max(a,b)} - ? = ${result}`; }
       else { result = b; question = `${a} × ? = ${a * b}`; }
-    } else {
+    } else if (qType === 7) {
       // 价格问题
       const price = Math.floor(Math.random() * 50) + 5;
       const count = Math.floor(Math.random() * 10) + 2;
       result = price * count;
       question = `一支钢笔${price}元，买${count}支需要多少元？`;
+    } else if (qType === 8) {
+      // 除法题
+      const divisor = Math.floor(Math.random() * 9) + 1;
+      const quotient = Math.floor(Math.random() * 20) + 1;
+      result = quotient;
+      question = `计算：${divisor * quotient} ÷ ${divisor} = ?`;
+    } else {
+      // 混合运算
+      const c = Math.floor(Math.random() * 20) + 1;
+      result = a + b * c;
+      question = `计算：${a} + ${b} × ${c} = ?`;
     }
   }
 
@@ -1129,7 +1146,10 @@ function genQuestion(grade, subject, unit, kp, difficulty) {
         const wordMatch = questionText.match(/"(\w+)"/);
         if (wordMatch) {
           const word = wordMatch[1];
-          statement = isCorrect ? `"${word}" 的意思是"${correctAnswer}"` : `"${word}" 的意思是"错误答案"`;
+          // 从所有选项中随机选一个错误答案
+          const wrongOptions = q.options.map(o => o.replace(/^[A-D]\.\s*/, '')).filter((v,i) => i !== q.answer);
+          const wrongMeaning = wrongOptions[Math.floor(Math.random() * wrongOptions.length)] || '铅笔';
+          statement = isCorrect ? `"${word}" 的意思是"${correctAnswer}"` : `"${word}" 的意思是"${wrongMeaning}"`;
         } else {
           statement = isCorrect ? `${questionText} 是正确的` : `${questionText} 是错误的`;
         }
@@ -2376,7 +2396,7 @@ function init() {
   loadData();
 
   // 题库版本检查：版本号不匹配则重建题库
-  const BANK_VERSION = 'v20260921_judge_fix';
+  const BANK_VERSION = 'v20260921_harder';
   if (appData.questionBankVersion !== BANK_VERSION || !appData.globalQuestionBank || appData.globalQuestionBank.length < 5000) {
     appData.globalQuestionBank = generateFullBank();
     appData.questionBankVersion = BANK_VERSION;
